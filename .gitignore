@@ -1,0 +1,23 @@
+# --- Клоны сайтов: реальная работа живёт в каждом репо отдельно, в хаб не коммитим ---
+/sites/
+
+# --- Рабочие/scratch-файлы (одноразовые генераторы; результат уже в KALENDAR.md) ---
+_scratch/
+_validate_out.txt
+_weeks_block.md
+_gen_weeks.py
+_assemble.py
+_validate.py
+
+# --- Зависимости и сборка ---
+node_modules/
+dist/
+.astro/
+
+# --- Логи ---
+*.log
+
+# --- OS / редактор ---
+.DS_Store
+Thumbs.db
+*.stackdump

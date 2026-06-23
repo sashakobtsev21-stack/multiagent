@@ -1,0 +1,210 @@
+# Контент-календарь Грузия — 24.06.2026 – 13.11.2026 (5 статей/нед · 21 неделя)
+
+Фон: `/news` (сбор → превью владельцу → «ок» → публикация). Замеры GA/GSC — по понедельникам (15 мин: запросы/растущие страницы). План корректируется по GA: растущие денежные страницы получают сателлиты и усиление перелинковки; порядок тем внутри поздних недель меняется по данным трафика. Темп статей: **5/нед — Пн, Вт, Ср, Чт, Пт** (Неделя 1 короткая — Ср/Чт/Пт от старта 24.06.2026). Сб/Вс свободны. Зрелый сайт (**86 опубл. статей** в `src/content/articles` без 3 demo-draft; города есть) — стартового пакета городов нет, план = темы роста и денежные/свежие пробелы. Приоритет тем: **head → mid → long-tail**, EN-трек (корень `/`, Tier-1 Запад) приоритетный. Фото по стандарту: статья ≥5, столица ≥15, город ≥10, маршрут — фото каждой остановки.
+
+> ⚠ **СВЕРЕНО С ОПУБЛИКОВАННЫМ.** Корпус зрелый: бóльшая часть плановых тем уже имеет родительскую опубл. статью. Поэтому плановые слоты помечены **🛰 САТЕЛЛИТ опубл. `/<slug>/`** — это значит: НЕ создавать дубль, а либо узкий сателлит/how-to с `canonical` на родителя, либо **fold** (раздел в родительскую статью) / апдейт. `/content` обязан сверяться с `src/content` перед созданием и НЕ плодить вторую статью на тот же интент.
+> ⚠⚠ **ДУБЛЬ-СИРОТА В РЕПО:** `borjomi.md` (category `dostoprimechatelnosti`) и `borjomi-gorod.md` (category `goroda`) **оба имеют `slug: 'borjomi'`** → конфликт URL `/goroda/borjomi/` ↔ `/dostoprimechatelnosti/borjomi/`. Развести slug или смержить в одну статью (рекомендуется оставить `borjomi-gorod` как goroda, у `borjomi` сменить slug или сделать 301) — отдельной задачей до публикации `borjomi-chto-posmotret` / `borjomi-travel-guide-en`.
+
+## График новостей (НЕ daily) — вписано построчно по неделям
+- **Дни:** Грузия — **Пн + Чт** (2 раза в неделю). Дни новостей продублированы построчно в каждой недельной секции по датам (**Пн совмещён со строкой замера GA/GSC**).
+- **Механика:** сбор → фильтр → **превью владельцу → «ок» → публикация** во все языки (en/ru/uk). НЕ слепой автопостинг.
+- **Правило публикации:** публиковать только если новость прошла фильтр; иначе **пропустить день** (без публикации). Даты/числа — только из источника текущего года.
+
+## Неделя 1 (24.06–26.06)
+- [x] Ср 24.06 — [Статья] Обязательная страховка для въезда в Грузию 2026: какая сумма и что покрывает · `страховка для въезда в грузию 2026` · /strahovka-vezd-gruziya-2026/ · категория strahovka · фото ≥5 · 💰 страховка · перелинк: canonical → kak-vybrat-strahovku, правила въезда (viza-v-gruziyu), бюджет (skolko-stoit-poezdka-v-gruziyu). — ОПУБЛИКОВАНО 2026-06-24 (b1f15c4), пара ru/uk/en, qa=GO. ⚠ Не дублировать общий гайд по выбору страховки — этот слот ТОЛЬКО про сумму/покрытие требования 2026; если интент совпал с опубл. — fold в kak-vybrat-strahovku разделом.
+- Чт 25.06 — [Статья] Правила въезда в Грузию 2026 для россиян и украинцев: безвиз, сроки, документы · `правила въезда в грузию 2026` · /pravila-vezda-gruziya-2026/ · категория planirovanie · фото ≥5 · 💰 страховка · перелинк: canonical → viza-v-gruziyu, страховка 2026, сколько без визы. ⚠ viza-v-gruziyu уже покрывает безвиз+медстраховку; этот слот = узкий угол «для россиян/украинцев» (гражданства, Верхний Ларс). Если интент совпал — fold в viza-v-gruziyu.
+- Пт 26.06 — [Статья] Граница Верхний Ларс 2026: как пройти, очереди, что нужно, работа зимой · `верхний ларс граница 2026` · /verhniy-lars-granica/ · категория practical · фото ≥5 · 💰 страховка · перелинк: правила въезда 2026, Военно-Грузинская дорога зимой
+- Чт 25.06 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+
+## Неделя 2 (29.06–03.07)
+- Пн 29.06 · 📊 Замер GA/GSC — [Статья] Сколько стоит отдых в Грузии 2026: бюджет на 3, 5 и 7 дней на двоих · `сколько стоит отдых в грузии 2026` · /skolko-stoit-otdyh-gruziya-2026/ · категория planirovanie · фото ≥5 · 💰 страховка · перелинк: canonical → skolko-stoit-poezdka-v-gruziyu, страховка, eSIM. ⚠ Опубл. бюджет-статья уже есть (бюджет на день/неделю на двоих). Этот слот = разбивка по 3/5/7 дням; если совпало — fold разделом в skolko-stoit-poezdka-v-gruziyu, не плодить второй бюджет.
+- Вт 30.06 — [Статья] Сколько можно находиться в Грузии без визы и что считается выездом · `сколько можно находиться в грузии без визы` · /skolko-bez-vizy-gruziya/ · категория practical · фото ≥5 · 💰 нет · перелинк: правила въезда 2026, налоговый резидент 183 дня
+- Ср 01.07 — [Статья] Сим-карта или eSIM в Грузии 2026: Magti, Silknet, Cellfie — что выбрать · `сим карта грузия туристу 2026` · /sim-karta-gruziya-2026/ · категория practical · фото ≥5 · 💰 eSIM · перелинк: canonical → internet-sim, бюджет, eSIM-слот. ⚠ internet-sim уже покрывает операторов+eSIM. Этот слот = туристический угол «что выбрать туристу 2026»; если совпало — fold в internet-sim.
+- Чт 02.07 — [Статья] Цены в Грузии 2026: жильё, еда, транспорт, развлечения в лари · `цены в грузии 2026` · /ceny-v-gruzii-2026/ · категория practical · фото ≥5 · 💰 отели · перелинк: бюджет 2026, деньги/обмен валюты
+- Пт 03.07 — [Статья] eSIM для Грузии: как подключить заранее и сколько стоит интернет · `esim для грузии` · /esim-dlya-gruzii/ · категория practical · фото ≥5 · 💰 eSIM · перелинк: canonical → internet-sim, сим-карта-слот, бюджет. ⚠ Близко к sim-karta-слоту и к опубл. internet-sim. Делать ТОЛЬКО если eSIM-подзапрос растёт по GSC отдельно; иначе fold/депри (один eSIM-сателлит, не два).
+- Чт 02.07 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 29.06 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 3 (06.07–10.07)
+- Пн 06.07 · 📊 Замер GA/GSC — [Статья] Деньги в Грузии: обмен валюты, банкоматы, карты, чаевые в 2026 · `обмен валюты в грузии` · /dengi-obmen-valyuty-gruziya/ · категория planirovanie · фото ≥5 · 💰 нет · перелинк: canonical → valyuta-v-gruzii, цены, бюджет. ⚠ valyuta-v-gruzii уже покрывает лари/обмен/карты. Этот слот = добор «банкоматы/чаевые»; если совпало — fold в valyuta-v-gruzii.
+- Вт 07.07 — [Статья] Самостоятельная поездка в Грузию 2026: пошаговый план и чек-лист · `самостоятельная поездка в грузию 2026` · /samostoyatelnaya-poezdka-gruziya/ · категория practical · фото ≥5 · 💰 страховка · перелинк: бюджет 2026, правила въезда 2026 (хаб-якорь на все денежные темы)
+- Ср 08.07 — [Статья] ВНЖ в Грузии 2026: основания, документы, по недвижимости и по бизнесу · `внж в грузии 2026` · /vnzh-gruziya-2026/ · категория relokatsiya · фото ≥5 · 💰 страховка · перелинк: налоги ИП, разрешение на работу 2026, банк (bank). 📌 ЯКОРЬ релокант-хаба: после дедупа (см. ниже) внутрь ВНЖ-статьи fold-разделом подзапрос «183 дня / налоговый резидент».
+- Чт 09.07 — [Статья] Казбеги и церковь Гергети самостоятельно: маршбус из Тбилиси, подъём пешком · `казбеги гергети самостоятельно` · /kazbegi-gergeti-samostoyatelno/ · категория marshruty · фото каждой остановки (≥5) · 💰 туры · перелинк: canonical-родители gergeti/stepantsminda, Военно-Грузинская дорога, Верхний Ларс. ⚠ Гергети и Степанцминда уже описаны как достопримечательность/город. Этот слот оправдан ТОЛЬКО как «самостоятельно/как добраться» how-to, не повторять описание церкви; иначе fold в gergeti.
+- Пт 10.07 — [Статья] Трек Местия — Ушгули за 4 дня: маршрут, ночёвки, карта, бюджет · `трек местия ушгули` · /trek-mestiya-ushguli/ · категория marshruty · фото каждой остановки (≥5) · 💰 туры · перелинк: canonical → svanetiya-mestia-ushguli-3-dnya, mestia, ushguli, Тушетия. ⚠ Пеший ТРЕК ≠ опубл. авто-маршрут «3 дня». Делать только как отдельный треккинг-формат (ночёвки/карта); если интент совпал с авто-маршрутом — fold/депри.
+- Чт 09.07 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 06.07 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 4 (13.07–17.07)
+- Пн 13.07 · 📊 Замер GA/GSC — [Статья] Налоги в Грузии для ИП: режим малый бизнес 1% и микробизнес 0% · `налоги ип грузия 1 процент` · /nalogi-ip-gruziya/ · категория relokatsiya · фото ≥5 · 💰 нет · перелинк: ВНЖ 2026, разрешение на работу. 📌 Внутрь fold-разделом подзапрос «183 дня / налоговый резидент» (см. дедуп ниже).
+- Вт 14.07 — [Маршрут] Грузия за неделю: что посмотреть за 3, 5, 7 и 10 дней (Тбилиси → Гори → Вардзия → Боржоми → Батуми) · `грузия за неделю маршрут` (+`сколько дней нужно на грузию`, `что посмотреть в грузии за 7 дней`) · /gruziya-za-nedelyu-marshrut/ · категория marshruty (itinerary-хаб планирования) · фото каждой остановки (≥5) · 💰 туры/отели/аренда авто · перелинк: Тбилиси, Уплисцихе/Гори, Вардзиа, Боржоми, Батуми, бюджет 2026 + готовые road-trip-маршруты (Тбилиси→Батуми 7 дней, Большое кольцо 13 дней). НОВЫЙ ТОП-ЗАПРОС: duration-хаб «сколько дней / что успеть» отсутствовал в корпусе (были только готовые авто-маршруты, не сравнение по дням). Доп. слот к темпу недели.
+- Ср 15.07 — [Статья] Тушетия самостоятельно 2026: дорога Абано джипом, гестхаусы, что посмотреть · `тушетия как добраться самостоятельно` · /tusheti-samostoyatelno/ · категория routes/marshruty · фото каждой остановки (≥5) · 💰 туры · перелинк: Хевсуретия Шатили-Муцо, Местия–Ушгули
+- Чт 16.07 — [Статья] Хевсуретия: Шатили и Муцо, как добраться, дикая Грузия · `хевсуретия шатили муцо` · /hevsuretiya-shatili-muco/ · категория routes/marshruty · фото каждой остановки (≥5) · 💰 туры · перелинк: Тушетия самостоятельно, Казбеги
+- Пт 17.07 — [Статья] Грузия с детьми 2026: где отдыхать у моря, лучшие курорты и пляжи · `грузия с детьми где отдыхать` · /gruziya-s-detmi/ · категория attractions · фото ≥5 · 💰 отели · перелинк: Уреки, курорты возле Батуми
+- Чт 16.07 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 13.07 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 5 (20.07–24.07)
+- Пн 20.07 · 📊 Замер GA/GSC — [Статья] Уреки: чёрный магнитный песок, мелкое море — отдых с малышами · `уреки магнитный песок отдых` · /ureki-magnitnyy-pesok/ · категория goroda · фото ≥10 (город) · 💰 отели · перелинк: Грузия с детьми, когда ехать на море
+- Вт 21.07 — [Статья] Курорты возле Батуми: Квариати, Гонио, Цихисдзири — где чище и тише · `курорты возле батуми` · /kurorty-vozle-batumi/ · категория attractions · фото ≥5 · 💰 отели · перелинк: Грузия с детьми, когда ехать на море
+- Ср 22.07 — [Статья] Когда лучше ехать на море в Грузию: погода и температура воды по месяцам · `когда лучше ехать в грузию на море` · /kogda-ehat-na-more-gruziya/ · категория practical · фото ≥5 · 💰 отели · перелинк: курорты возле Батуми, Уреки
+- Чт 23.07 — [Статья] Разрешение на работу в Грузии с 1 марта 2026: что меняется для ИП и самозанятых · `разрешение на работу в грузии 2026` · /razreshenie-na-rabotu-gruziya-2026/ · категория relokatsiya · фото ≥5 · 💰 нет · перелинк: ВНЖ 2026, налоги ИП
+- Пт 24.07 — [Статья] Налоговый резидент Грузии: правило 183 дней и что оно даёт · `налоговый резидент грузии 183 дня` · /nalogovyy-rezident-gruziya/ · категория relokatsiya · фото ≥5 · 💰 нет · перелинк: налоги ИП, сколько без визы. ⏸ Кандидат на ДЕПРИ: подзапрос «183 дня / резидент» можно fold-разделом внутрь nalogi-ip-gruziya и vnzh-gruziya-2026; отдельной статьёй делать только если GSC покажет самостоятельный спрос (иначе освободить день под ближайшую тему backlog).
+- Чт 23.07 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 20.07 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 6 (27.07–31.07)
+- Пн 27.07 · 📊 Замер GA/GSC — [Статья] Открыть счёт в грузинском банке россиянину в 2026: какие банки, документы · `открыть счёт в грузинском банке` · /schet-v-gruzinskom-banke/ · категория relokatsiya · фото ≥5 · 💰 нет · перелинк: canonical → bank, ВНЖ, налоги ИП. ⚠ bank.md уже покрывает «как открыть счёт иностранцу». Этот слот = угол «россиянину в 2026 / комплаенс»; если совпало — fold/апдейт bank вместо новой статьи (банк-слот = кандидат на «депри»).
+- Вт 28.07 — [Статья] Вардзиа из Тбилиси самостоятельно: как добраться, цена билета, что внутри · `вардзиа как добраться из тбилиси` · /vardzia-iz-tbilisi/ · категория marshruty · фото каждой остановки (≥5) · 💰 туры · перелинк: canonical → vardzia, vardzia-yug-2-dnya, Рабати, Боржоми. ⚠ vardzia уже описывает «что внутри/как добраться». Этот слот = логистический how-to «из Тбилиси самостоятельно»; если совпало — fold в vardzia.
+- Ср 29.07 — [Статья] Крепость Рабати в Ахалцихе: время работы, билеты, как совместить с Вардзиа · `крепость рабати ахалцихе` · /krepost-rabati-ahalcihe/ · категория dostoprimechatelnosti · фото ≥5 · 💰 туры · перелинк: canonical → rabati, Вардзиа, Боржоми. ⚠ rabati уже опубл. Этот слот = добор «часы/билеты/связка с Вардзиа»; если совпало — fold/апдейт rabati вместо новой статьи.
+- Чт 30.07 — [Статья] Боржоми 2026: парк, минеральная вода, канатка, что посмотреть за день · `боржоми что посмотреть` · /borjomi-chto-posmotret/ · категория goroda · фото ≥10 (город) · 💰 отели · перелинк: canonical → borjomi-gorod, Рабати, Вардзиа. ⚠⚠ ДУБЛЬ-СИРОТА В РЕПО: borjomi.md (dostoprimechatelnosti) И borjomi-gorod.md (goroda) ОБА имеют slug 'borjomi' — конфликт URL, развести/смержить ДО /work (см. примечание в шапке). Новую borjomi-chto-posmotret НЕ создавать, пока дубль не примирён; затем — апдейт существующей, не третья статья.
+- Пт 31.07 — [Статья] Гудаури сезон 2025/2026: цены на ски-пасс, трассы, как добраться из Тбилиси · `гудаури ски-пасс 2026` · /gudauri-ski-pass-2026/ · категория goroda · фото ≥10 (курорт) · 💰 отели · перелинк: canonical-родитель gudauri, горнолыжные курорты, Военно-Грузинская дорога зимой. ⚠ gudauri (dostoprimechatelnosti) уже опубл. — описание курорта есть. Этот слот оправдан как СВЕЖИЙ сезонный лендинг ски-пасс/трассы/цены 2026 (транзакционный), не повтор общего описания; иначе апдейт gudauri.
+- Чт 30.07 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 27.07 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 7 (03.08–07.08)
+- Пн 03.08 · 📊 Замер GA/GSC — [Статья] Уплисцихе и Гори за день: пещерный город и музей Сталина из Тбилиси · `уплисцихе как добраться` · /uplisciche-gori/ · категория marshruty · фото каждой остановки (≥5) · 💰 туры · перелинк: canonical → tbilisi-odnodnevka-mtskheta-gori, uplistsikhe, gori, Боржоми. ⚠ Уплисцихе+Гори уже опубл. и есть однодневный маршрут с ними. Этот слот почти полностью покрыт — депри или строго fold в существующий маршрут.
+- Вт 04.08 — [Статья] Бакуриани 2026: цены, трассы Дидвели и Кохта, отдых с детьми · `бакуриани горнолыжный курорт 2026` · /bakuriani-2026/ · категория goroda · фото ≥10 (курорт) · 💰 отели · перелинк: canonical-родитель bakuriani, Гудаури ски-пасс, Грузия с детьми. ⚠ bakuriani (dostoprimechatelnosti) уже опубл. Оправдан как свежий сезонный ски-лендинг 2026; не повтор общего описания, иначе апдейт bakuriani.
+- Ср 05.08 — [Статья] Горнолыжные курорты Грузии: Гудаури или Бакуриани — что выбрать · `горнолыжные курорты грузии` · /gornolyzhnye-kurorty-gruzii/ · категория attractions · фото ≥5 · 💰 отели · перелинк: Гудаури, Бакуриани (зимний хаб)
+- Чт 06.08 — [Статья] Военно-Грузинская дорога зимой: закрытие, лавины, как ехать в Гудаури · `военно-грузинская дорога зимой` · /voenno-gruzinskaya-doroga-zimoy/ · категория practical · фото ≥5 · 💰 аренда авто · перелинк: Гудаури ски-пасс, Верхний Ларс
+- Пт 07.08 — [Статья] Ртвели в Грузии: когда сбор винограда, куда поехать на праздник урожая · `ртвели сбор винограда грузия` · /rtveli-sbor-vinograda/ · категория food/eda · фото ≥5 · 💰 туры · перелинк: винные туры Кахетия, квеври-вино
+- Чт 06.08 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 03.08 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 8 (10.08–14.08)
+- Пн 10.08 · 📊 Замер GA/GSC — [Статья] Винные туры по Кахетии из Тбилиси 2026: маршруты, винодельни, цены · `винные туры по кахетии из тбилиси` · /vinnye-tury-kahetiya/ · категория marshruty · фото каждой остановки (≥5) · 💰 туры · перелинк: canonical → kahetiya-vino-2-dnya, vino-kahetii, Ртвели. ⚠ vino-kahetii (дегустации/как доехать) + маршрут «Кахетия 2 дня» уже опубл. Этот слот = транзакционный «туры/цены/винодельни»; если совпало — fold в kahetiya-vino-2-dnya.
+- Вт 11.08 — [Статья] Что такое квеври-вино и где попробовать настоящее грузинское вино · `квеври вино грузия где попробовать` · /kvevri-vino-gruziya/ · категория eda · фото ≥5 · 💰 туры · перелинк: canonical → vino-kahetii, винные туры Кахетия, Ртвели. ⚠ vino-kahetii уже описывает квеври/янтарное вино и дегустации. Этот слот сильно пересекается — депри или строго fold в vino-kahetii разделом «что такое квеври»; не вторая вино-статья.
+- Ср 12.08 — [Article] Georgia itinerary: 7 and 10 days (Tbilisi → Kakheti → Kazbegi → Batumi) · `georgia itinerary 7 days` (+`10 day georgia itinerary`, `how many days in georgia`) · /georgia-itinerary-7-10-days/ · категория marshruty · фото каждой остановки (≥5) · 💰 туры/отели/аренда авто · перелинк: EN best time to visit, EN where to stay Tbilisi, gruziya-za-nedelyu-marshrut (RU-аналог)
+- Чт 13.08 — [Article] Best time to visit Georgia: weather and seasons month by month · `best time to visit georgia` · /best-time-to-visit-georgia/ · категория planirovanie · фото ≥5 · 💰 отели · перелинк: canonical-родитель kogda-luchshe-ehat-v-gruziyu (en-версия), EN itinerary, EN budget
+- Пт 14.08 — [Статья] Где остановиться в Тбилиси: в каком районе жить туристу (Старый город, Сололаки, Вера, Ваке) · `где остановиться в тбилиси` (+`в каком районе тбилиси лучше остановиться`) · /gde-ostanovitsya-v-tbilisi/ · категория planirovanie · фото ≥5 · 💰 отели · перелинк: tbilisi, бюджет, аренда авто. ⚠ Пробел: опубл. только dolgosrochnaya-arenda (релокант), туристического «районы Тбилиси» НЕТ.
+- Чт 13.08 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 10.08 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 9 (17.08–21.08)
+- Пн 17.08 · 📊 Замер GA/GSC — [Article] Georgia visa requirements 2026: who needs a visa, visa-free stay, entry rules · `georgia visa requirements 2026` (+`do i need a visa for georgia`) · /georgia-visa-requirements-2026/ · категория planirovanie · фото ≥5 · 💰 страховка · перелинк: canonical-родитель viza-v-gruziyu (en), EN is Georgia safe, EN budget
+- Вт 18.08 — [Article] Is Georgia safe for tourists in 2026? · `is georgia safe` (+`is georgia safe to travel`) · /is-georgia-safe/ · категория planirovanie · фото ≥5 · 💰 страховка · перелинк: EN visa requirements, EN where to stay Tbilisi, EN getting around
+- Ср 19.08 — [Статья] Тбилиси или Батуми: что выбрать для отдыха · `тбилиси или батуми` · /tbilisi-ili-batumi/ · категория planirovanie · фото ≥5 · 💰 отели · перелинк: tbilisi, batumi, где остановиться. ⚠ Пробел, парный к EN tbilisi-vs-batumi.
+- Чт 20.08 — [Статья] Безопасно ли в Грузии сейчас (2026): для туристов, для россиян/украинцев · `безопасно ли в грузии сейчас` · /bezopasno-li-v-gruzii/ · категория planirovanie · фото ≥5 · 💰 страховка · перелинк: viza-v-gruziyu, правила въезда, страховка. ⚠ Пробел, парный к EN is-georgia-safe.
+- Пт 21.08 — [Статья] Georgia travel guide 2026: everything to know before you go · key `georgia travel guide` · /georgia-travel-guide/ · категория planirovanie · фото≥5 · 💰туры/отели · кластер EN practical [head] — корневой EN-пиллар, якорь `/`, линкует весь EN-трек
+- Чт 20.08 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 17.08 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 10 (24.08–28.08)
+- Пн 24.08 · 📊 Замер GA/GSC — [Article] Georgia travel budget 2026: daily and weekly costs for two · `georgia travel budget 2026` (+`how much does georgia cost`) · /georgia-travel-budget-2026/ · категория planirovanie · фото ≥5 · 💰 отели/страховка · перелинк: canonical-родитель skolko-stoit-poezdka-v-gruziyu (en), EN itinerary, EN where to stay
+- Вт 25.08 — [Article] Where to stay in Tbilisi: best areas and neighbourhoods · `where to stay in tbilisi` (+`best area to stay in tbilisi`) · /where-to-stay-in-tbilisi/ · категория planirovanie · фото ≥5 · 💰 отели · перелинк: tbilisi (en), EN itinerary, EN Tbilisi vs Batumi. ⚠ НОВЫЙ интент — нет опубл. родителя (пробел и в RU, см. RU-добор ниже)
+- Ср 26.08 — [Статья] Аренда авто в Грузии 2026: цены, депозит, где брать — транзакционный лендинг · `аренда авто в грузии 2026` · /arenda-avto-gruziya-2026/ · категория arenda-avto · фото ≥5 · 💰 аренда авто · перелинк: canonical/апдейт → kak-arendovat-avto, бюджет, ски-трансфер. ⚠ ФИКСИРОВАННЫЙ транзакционный слот: kak-arendovat-avto уже опубл. — делать как свежий ценовой лендинг 2026 ИЛИ апдейт родителя, не дубль.
+- Чт 27.08 — [Статья] Georgia travel tips: 20 things to know before you go · key `georgia travel tips` · /georgia-travel-tips/ · категория practical · фото≥5 · 💰страховка/eSIM · кластер EN practical [head]
+- Пт 28.08 — [Маршрут] Georgia 3-day and 5-day itinerary from Tbilisi · key `georgia 5 day itinerary` · /georgia-3-5-day-itinerary/ · категория marshruty · фото≥5 · 💰туры/отели · кластер EN itineraries & by-interest [head] — короткие 3/5д, отд. от планового 7/10d
+- Чт 27.08 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 24.08 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 11 (31.08–04.09)
+- Пн 31.08 · 📊 Замер GA/GSC — [Article] Tbilisi vs Batumi: which to choose (and how to combine) · `tbilisi vs batumi` · /tbilisi-vs-batumi/ · категория planirovanie · фото ≥5 · 💰 отели · перелинк: tbilisi (en), batumi (en), EN where to stay, EN getting around
+- Вт 01.09 — [Article] Getting around Georgia: marshrutka, trains, taxi, car rental · `getting around georgia` (+`how to travel around georgia`) · /getting-around-georgia/ · категория transport · фото ≥5 · 💰 аренда авто · перелинк: canonical-родитель kak-arendovat-avto (en), EN itinerary, metro-i-transport-tbilisi (en)
+- Ср 02.09 — [Статья] Things to do in Georgia: 25 best experiences and places · key `things to do in georgia` · /best-things-to-do-in-georgia/ · категория attractions · фото≥5 · 💰туры · кластер EN day trips & POIs [head]
+- Чт 03.09 — [Статья] Best places to visit in Georgia by region (map + guide) · key `best places to visit in georgia` · /best-places-to-visit-in-georgia/ · категория attractions · фото≥5 · 💰туры/отели · кластер EN cities & resorts [head]
+- Пт 04.09 — [Маршрут] Best day trips from Tbilisi: top 12 with how-to-get-there · key `day trips from tbilisi` · /day-trips-from-tbilisi/ · категория marshruty · фото≥5 · 💰туры · кластер EN day trips & POIs [head]
+- Чт 03.09 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 31.08 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 12 (07.09–11.09)
+- Пн 07.09 · 📊 Замер GA/GSC — [Статья] Best things to do in Tbilisi: 2-day itinerary and top sights · key `things to do in tbilisi` · /things-to-do-in-tbilisi/ · категория attractions · фото≥5 · 💰туры/отели · кластер EN cities & resorts [head] — 🛰 сателлит /tbilisi/ (обзор опубл.; things-to-do/2-day — отд. интент)
+- Вт 08.09 — [Статья] Best things to do in Batumi: beaches, fountains and beyond · key `things to do in batumi` · /things-to-do-in-batumi/ · категория attractions · фото≥5 · 💰туры/отели · кластер EN cities & resorts [head] — 🛰 сателлит /batumi/
+- Ср 09.09 — [Статья] Where to stay in Batumi: best areas and beachfront neighbourhoods · key `where to stay in batumi` · /where-to-stay-in-batumi/ · категория planirovanie · фото≥5 · 💰отели · кластер EN where to stay (cities/areas) [head] — парный к плановому where-to-stay-Tbilisi
+- Чт 10.09 — [Статья] Georgian food guide: 20 must-try dishes for travellers · key `georgian food` · /georgian-food-guide/ · категория eda · фото≥5 · 💰туры (food) · кластер EN food & wine [head] — 🛰 сателлит /chto-poprobovat/ (RU обзор; EN food-хаба нет)
+- Пт 11.09 — [Статья] Kutaisi Airport to Tbilisi & Batumi: bus and transfer guide · key `kutaisi airport to tbilisi` · /kutaisi-airport-to-tbilisi-batumi/ · категория transport · фото≥5 · 💰трансфер · кластер EN getting around & A-to-B transport [head] — Wizzair-хаб, очень высокий спрос; RU kutaisi-aeroport опубл., EN нет
+- Чт 10.09 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 07.09 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 13 (14.09–18.09)
+- Пн 14.09 · 📊 Замер GA/GSC — [Статья] Kazbegi (Stepantsminda) guide: Gergeti, Juta and Sno valley · key `kazbegi guide` · /kazbegi-travel-guide/ · категория attractions · фото≥5 · 💰туры/отели · кластер EN cities & resorts [head] — EN-хаб; RU POI stepantsminda/gergeti опубл., EN обзора нет
+- Вт 15.09 — [Статья] Svaneti travel guide: Mestia, Ushguli and tower villages · key `svaneti travel guide` · /svaneti-travel-guide/ · категория attractions · фото≥5 · 💰туры/отели · кластер EN cities & resorts [head] — EN-хаб; mestia/ushguli опубл. как POI
+- Ср 16.09 — [Статья] eSIM and SIM cards in Georgia: best options for tourists 2026 · key `georgia esim` · /georgia-esim-sim-card/ · категория practical · фото≥5 · 💰eSIM · кластер EN practical [mid] — RU-аналог internet-sim опубл., EN нет
+- Чт 17.09 — [Статья] Georgia packing list: what to wear by season · key `georgia packing list` · /georgia-packing-list/ · категория practical · фото≥5 · 💰нет · кластер EN practical [mid]
+- Пт 18.09 — [Статья] How many days do you need in Georgia? Trip length planner · key `how many days in georgia` · /how-many-days-in-georgia/ · категория planirovanie · фото≥5 · 💰туры · кластер EN itineraries & by-interest [mid]
+- Чт 17.09 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 14.09 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 14 (21.09–25.09)
+- Пн 21.09 · 📊 Замер GA/GSC — [Статья] Tbilisi sulphur baths: which to choose and what to expect · key `tbilisi sulfur baths` · /tbilisi-sulfur-baths/ · категория attractions · фото≥5 · 💰туры/спа · кластер EN practical [mid] — 🛰 сателлит /abanotubani/ (район опубл.; транзакционный bath-гайд — отд. интент)
+- Вт 22.09 — [Маршрут] Georgia road trip itinerary: 10–14 days by car · key `georgia road trip itinerary` · /georgia-road-trip-itinerary/ · категория marshruty · фото≥5 · 💰аренда авто/отели · кластер EN itineraries & by-interest [mid]
+- Ср 23.09 — [Маршрут] Georgia without a car: how to travel by public transport · key `georgia without a car` · /georgia-without-a-car-itinerary/ · категория marshruty · фото≥5 · 💰туры/трансфер · кластер EN itineraries & by-interest [mid]
+- Чт 24.09 — [Маршрут] Best day trips from Kutaisi: canyons, caves and waterfalls · key `day trips from kutaisi` · /day-trips-from-kutaisi/ · категория marshruty · фото≥5 · 💰туры · кластер EN day trips & POIs [mid]
+- Пт 25.09 — [Маршрут] Best day trips from Batumi: Makhuntseti, Mtirala, Gonio · key `day trips from batumi` · /day-trips-from-batumi/ · категория marshruty · фото≥5 · 💰туры · кластер EN day trips & POIs [mid]
+- Чт 24.09 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 21.09 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 15 (28.09–02.10)
+- Пн 28.09 · 📊 Замер GA/GSC — [Маршрут] Georgia hiking guide: best treks and trails by region · key `hiking in georgia country` · /hiking-in-georgia/ · категория marshruty · фото≥5 · 💰туры/гиды · кластер EN itineraries & by-interest [mid] — сезон июн–окт
+- Вт 29.09 — [Маршрут] Tbilisi to Kazbegi day trip: how to do it yourself 2026 · key `tbilisi to kazbegi day trip` · /tbilisi-to-kazbegi-day-trip/ · категория marshruty · фото≥5 · 💰туры/трансфер · кластер EN day trips & POIs [mid]
+- Ср 30.09 — [Маршрут] Mtskheta day trip from Tbilisi: Jvari, Svetitskhoveli & how to get there · key `mtskheta day trip` · /mtskheta-day-trip/ · категория marshruty · фото≥5 · 💰туры/трансфер · кластер EN day trips & POIs [mid] — 🛰 сателлит /mtskheta/ + /jvari/ + /svetitskhoveli/ (POI опубл.; EN day-trip связка нет)
+- Чт 01.10 — [Статья] Kakheti travel guide: wine, monasteries and Sighnaghi · key `kakheti georgia` · /kakheti-travel-guide/ · категория attractions · фото≥5 · 💰туры (wine) · кластер EN cities & resorts [mid] — 🛰 сателлит /signagi/+/telavi/+/bodbe/ (POI опубл.; EN регион-обзора нет)
+- Пт 02.10 — [Статья] Georgia Black Sea coast: best beaches and resort towns · key `georgia black sea coast` · /georgia-black-sea-coast/ · категория attractions · фото≥5 · 💰отели · кластер EN cities & resorts [mid] — сезон лето
+- Чт 01.10 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 28.09 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 16 (05.10–09.10)
+- Пн 05.10 · 📊 Замер GA/GSC — [Статья] Borjomi day trip and town guide: park, water, cable car · key `borjomi georgia` · /borjomi-travel-guide-en/ · категория goroda · фото≥10 (город) · 💰отели · кластер EN cities & resorts [mid] — ⚠ только ПОСЛЕ развода дубль-сироты slug `borjomi`/`borjomi-gorod`
+- Вт 06.10 — [Статья] Georgia in winter: skiing, weather and what to do · key `georgia in winter` · /georgia-in-winter/ · категория planirovanie · фото≥5 · 💰отели/ски · кластер EN best time / weather [mid] — публиковать к окт под бронь
+- Ср 07.10 — [Статья] Skiing in Georgia: Gudauri vs Bakuriani and resort guide · key `skiing in georgia` · /skiing-in-georgia/ · категория attractions · фото≥5 · 💰отели/ски-пасс · кластер EN comparisons & is-X-worth [mid] — RU POI gudauri/bakuriani опубл.; сезон окт–ноя
+- Чт 08.10 — [Статья] Where to stay in Tbilisi or Batumi for families and first-timers · key `best area to stay in georgia` · /where-to-stay-in-georgia/ · категория planirovanie · фото≥5 · 💰отели · кластер EN where to stay (cities/areas) [mid]
+- Пт 09.10 — [Статья] Georgian wine guide: qvevri, amber wine and best regions · key `georgian wine` · /georgian-wine-guide/ · категория eda · фото≥5 · 💰туры (wine) · кластер EN food & wine [mid] — 🛰 сателлит /vino-kahetii/ (RU; EN нет)
+- Чт 08.10 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 05.10 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 17 (12.10–16.10)
+- Пн 12.10 · 📊 Замер GA/GSC — [Статья] Khachapuri explained: Adjaruli, Imeruli, Megruli and more · key `khachapuri` · /khachapuri-types/ · категория eda · фото≥5 · 💰нет · кластер EN food & wine [mid]
+- Вт 13.10 — [Статья] Khinkali: what they are and how to eat them like a local · key `khinkali` · /khinkali-guide/ · категория eda · фото≥5 · 💰нет · кластер EN food & wine [mid]
+- Ср 14.10 — [Статья] Marshrutka in Georgia: how minibuses work (routes, fares, tips) · key `marshrutka georgia` · /marshrutka-in-georgia/ · категория transport · фото≥5 · 💰нет · кластер EN getting around & A-to-B transport [mid]
+- Чт 15.10 — [Статья] Trains in Georgia: routes, tickets and the new fast line 2026 · key `trains in georgia` · /trains-in-georgia/ · категория transport · фото≥5 · 💰нет · кластер EN getting around & A-to-B transport [mid] — новый быстрый поезд Тбилиси–Батуми с дек.2025
+- Пт 16.10 — [Статья] Is Georgia worth visiting? An honest 2026 take · key `is georgia worth visiting` · /is-georgia-worth-visiting/ · категория planirovanie · фото≥5 · 💰туры · кластер EN comparisons & is-X-worth [mid]
+- Чт 15.10 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 12.10 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 18 (19.10–23.10)
+- Пн 19.10 · 📊 Замер GA/GSC — [Статья] Getting from Tbilisi to Mestia (Svaneti): all options 2026 · key `tbilisi to mestia` · /tbilisi-to-mestia/ · категория transport · фото≥5 · 💰трансфер · кластер EN getting around & A-to-B transport [mid] — новая дорога через Lentekhi 2024
+- Вт 20.10 — [Статья] Tbilisi to Kutaisi: train, bus and transfer in 2026 · key `tbilisi to kutaisi` · /tbilisi-to-kutaisi/ · категория transport · фото≥5 · 💰трансфер · кластер EN getting around & A-to-B transport [mid]
+- Ср 21.10 — [Статья] Georgia vs Armenia: which to visit (or both)? · key `georgia vs armenia` · /georgia-vs-armenia/ · категория planirovanie · фото≥5 · 💰туры · кластер EN comparisons & is-X-worth [mid]
+- Чт 22.10 — [Статья] Is Georgia safe for solo female travellers? · key `georgia safe for solo female travellers` · /georgia-solo-female-travel/ · категория planirovanie · фото≥5 · 💰страховка · кластер EN practical [long-tail]
+- Пт 23.10 — [Статья] Juta and the Chaukhi: Georgia's Dolomites day hike · key `juta georgia` · /juta-chaukhi-hike/ · категория attractions · фото≥5 · 💰туры/гиды · кластер EN day trips & POIs [long-tail] — реальный пробел, не опубл.
+- Чт 22.10 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 19.10 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 19 (26.10–30.10)
+- Пн 26.10 · 📊 Замер GA/GSC — [Статья] Kobuleti, Georgia: beach resort guide (vs Batumi) · key `kobuleti georgia` · /kobuleti-beach-guide/ · категория goroda · фото≥10 (город) · 💰отели · кластер EN cities & resorts [long-tail] — реальный пробел, не опубл.
+- Вт 27.10 — [Статья] Best time to visit Batumi and the Black Sea: month by month · key `best time to visit batumi` · /best-time-to-visit-batumi/ · категория planirovanie · фото≥5 · 💰отели · кластер EN best time / weather [long-tail]
+- Ср 28.10 — [Статья] Best Georgian wine regions and wineries to visit · key `georgia wine region` · /georgia-wine-regions/ · категория eda · фото≥5 · 💰туры/дегустации · кластер EN food & wine [long-tail]
+- Чт 29.10 — [Статья] Is Tbilisi worth visiting? Best time, how long and highlights · key `is tbilisi worth visiting` · /is-tbilisi-worth-visiting/ · категория planirovanie · фото≥5 · 💰туры/отели · кластер EN comparisons & is-X-worth [long-tail]
+- Пт 30.10 — [Статья] Из аэропорта Кутаиси в Тбилиси и Батуми: автобус, цены 2026 · key `из аэропорта кутаиси в тбилиси` · /kutaisi-aeroport-tbilisi-batumi/ · категория transport · фото≥5 · 💰трансфер · кластер RU transport A-to-B [head] — 🛰 сателлит /kutaisi-aeroport/ (про аэропорт; A-to-B автобус/цены — отд. интент)
+- Чт 29.10 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 26.10 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 20 (02.11–06.11)
+- Пн 02.11 · 📊 Замер GA/GSC — [Статья] Кобулети: пляжный курорт у моря — что посмотреть, отели · key `кобулети грузия отдых` · /kobuleti-otdyh/ · категория goroda · фото≥10 (город) · 💰отели · кластер RU cities & resorts (gaps) [mid] — реальный пробел, не опубл.
+- Вт 03.11 — [Статья] Как добраться из Тбилиси в Местиа (Сванетия) 2026 · key `как добраться из тбилиси в местиа` · /tbilisi-mestia-kak-dobratsya/ · категория transport · фото≥5 · 💰трансфер · кластер RU transport A-to-B [mid] — пробел; новая дорога Лентехи
+- Ср 04.11 — [Статья] Виды хачапури: аджарский, имеретинский, мегрельский — что заказать · key `виды хачапури` · /vidy-hachapuri/ · категория eda · фото≥5 · 💰нет · кластер RU food dishes [mid] — 🛰 сателлит /chto-poprobovat/
+- Чт 05.11 — [Статья] Грузия или Армения: что выбрать для поездки · key `грузия или армения` · /gruziya-ili-armeniya/ · категория planirovanie · фото≥5 · 💰туры · кластер RU comparisons [mid] — парный к EN georgia-vs-armenia
+- Пт 06.11 — [Статья] Серные бани Тбилиси: какие выбрать, цены, как париться · key `серные бани тбилиси` · /sernye-bani-tbilisi/ · категория attractions · фото≥5 · 💰спа/туры · кластер RU practical [mid] — 🛰 сателлит /abanotubani/ (район; транзакц. гайд — отд. интент); парный EN tbilisi-sulfur-baths
+- Чт 05.11 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 02.11 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+## Неделя 21 (09.11–13.11)
+- Пн 09.11 · 📊 Замер GA/GSC — [Статья] Ахалцихе: что посмотреть кроме Рабати, как добраться · key `ахалцихе грузия что посмотреть` · /ahalcihe-chto-posmotret/ · категория goroda · фото≥10 (город) · 💰отели/туры · кластер RU cities & resorts (gaps) [long-tail] — 🛰 сателлит /rabati/ (крепость опубл.; города нет)
+- Вт 10.11 — [Статья] Сайрме: бальнеологический курорт, минеральная вода, столбы · key `сайрме грузия` · /sairme-kurort/ · категория goroda · фото≥10 (город) · 💰отели · кластер RU cities & resorts (gaps) [long-tail] — реальный пробел, не опубл.
+- Ср 11.11 — [Статья] Чиатура и канатки Сталина: как добраться, Кацхи рядом · key `чиатура канатки` · /chiatura-kanatki/ · категория goroda · фото≥10 (город) · 💰туры · кластер RU POIs & day trips [long-tail] — 🛰 сателлит /katskhi-pillar/; Чиатура не опубл.
+- Чт 12.11 — [Маршрут] Долина Джута и Чаухи: треккинг «грузинские Доломиты» · key `джута грузия трекинг` · /dzhuta-chauhi-trekking/ · категория marshruty · фото≥5 · 💰туры/гиды · кластер RU POIs & day trips [long-tail] — реальный пробел; сезон июн–окт
+- Пт 13.11 — [Статья] Чурчхела и грузинские сладости: что это и где купить · key `чурчхела что это` · /churchhela-sladosti/ · категория eda · фото≥5 · 💰нет · кластер RU food dishes [long-tail]
+- Чт 12.11 — 📰 /news (дайджест на согласование: сбор→фильтр→ок→публикация, НЕ daily)
+- Пн 09.11 — 📊 Замер GA/GSC + 📰 /news (дайджест на согласование, НЕ daily)
+
+---
+## Резерв под сигнал GA (вне сетки 5/нед)
+По мере накопления GA/GSC-данных лучшие растущие денежные страницы (страховка/eSIM/бюджет/ски-пасс) получают сателлит/апдейт + усиление внутренней перелинковки. Это НЕ отдельные датированные слоты: берётся из освободившихся окон или ставится поверх темпа по решению владельца после замера. Кандидаты-родители: страховка-въезд, бюджет, eSIM/сим, аренда авто, ски-пасс Гудаури/Бакуриани.
+
+---
+## Метаданные плана
+- **Темп:** 5 статей/нед (Пн–Пт). Неделя 1 короткая (Ср/Чт/Пт) от старта 24.06.2026. Всего **21 неделя**, диапазон **24.06.2026 – 13.11.2026**.
+- **Объём:** 103 датированных тем (все неопубл., слиты из 13-недельного плана + EN-очередь + RU-добор + long-tail backlog 56 тем). 5 placeholder-слотов «🔒 РЕЗЕРВ» из старого плана вынесены в раздел «Резерв под сигнал GA» (без даты — это заглушки под данные, не темы).
+- **Приоритет:** ядро денег/доверия и EN-head пиллары — первыми; внутри backlog EN-first, затем head → mid → long-tail; баланс кластеров внутри недели (не более ~2 тем одного кластера в неделю, где есть альтернатива).
+- **Новости:** Грузия Пн + Чт (Пн совмещён с замером GA/GSC). Сб/Вс свободны.
+- **Сезонность:** горные/треккинговые темы (Тушетия, Местия–Ушгули, Хевсуретия, Казбеги, Джута) — лето–ранняя осень (дороги июн–окт). Зимнее ядро (Гудаури/Бакуриани/ски/Военно-Грузинская дорога зимой, Georgia in winter) органично попадает в октябрь–ноябрь — успевает проиндексироваться под пик брони.
+- Все темы и слаги взяты из SEO-отчёта `gruzia-seo-2026-06-22.md` и Этапа-2 long-tail backlog; новых тем не выдумано.
