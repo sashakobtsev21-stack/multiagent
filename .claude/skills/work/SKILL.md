@@ -55,7 +55,8 @@ description: Утренний дирижёр сети. По команде /work
 По каждому одобренному материалу в его репо:
 - `draft:false` → `npm run qa` = **GO** → один коммит → `git pull --rebase origin main` → `git push origin main` (= деплой).
 - Партнёрки только `/go/`. Языковой паритет соблюдён.
-- Отметь опубликованное в `sites/<repo>/KALENDAR.md` (`[x]` + slug/дата) и синхронизируй hub-копию `docs/calendars/<short>-KALENDAR.md`; обнови `PROGRESS.md`/`HANDOFF.md`, закоммить.
+- Отметь опубликованное в `sites/<repo>/KALENDAR.md` (`[x]` + slug/дата) и синхронизируй hub-копию `docs/calendars/<short>-KALENDAR.md`; обнови `PROGRESS.md`/`HANDOFF.md`, закоммить в репо сайта.
+- **Хаб тоже под git:** после правок hub-копий календарей (`docs/calendars/*`) и любых изменений скиллов/доков хаба — `git -C . add` → `git commit` → `git push` в репо хаба `sashakobtsev21-stack/multiagent` (ветка `main`), тем же заходом. Не оставлять hub-копии только на диске.
 - **«Не ок»**: не публикуй. Если просили правки — внеси, покажи снова (вернись к п.3 по этой позиции). Если отклонено совсем — оставь `draft:true` или удали.
 
 ### 5. Отчёт владельцу
