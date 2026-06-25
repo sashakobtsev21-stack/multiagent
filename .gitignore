@@ -16,6 +16,8 @@ dist/
 
 # --- Grafana: генерируемые данные (status.json пересобирается генератором) ---
 grafana/shared/
+grafana/cloud/gist-id.txt
+grafana/cloud/network-ops-cloud.json
 
 # --- Логи ---
 *.log
