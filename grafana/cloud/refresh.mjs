@@ -23,6 +23,7 @@ fs.writeFileSync(lock, new Date().toISOString());
 
 try {
   execFileSync('node', [path.join(grafanaDir, 'build-status.mjs')], { stdio: 'ignore' });
+  execFileSync('node', [path.join(grafanaDir, 'build-html.mjs')], { stdio: 'ignore' });
   execFileSync('node', [path.join(here, 'make-cloud.mjs')], { stdio: 'ignore' });
 } catch {
   // тихо: post-commit не должен мешать коммиту; если gh недоступен/нет gist-id — просто пропустим
