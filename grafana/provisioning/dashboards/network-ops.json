@@ -41,7 +41,7 @@
           "source": "url",
           "parser": "backend",
           "format": "table",
-          "url": "${baseUrl}/status.json",
+          "url": "${baseUrl}/status.json?cb=${__to}",
           "url_options": { "method": "GET" },
           "root_selector": "summary",
           "columns": [
@@ -88,7 +88,7 @@
           "source": "url",
           "parser": "backend",
           "format": "table",
-          "url": "${baseUrl}/status.json",
+          "url": "${baseUrl}/status.json?cb=${__to}",
           "url_options": { "method": "GET" },
           "root_selector": "sites",
           "columns": [
@@ -177,7 +177,7 @@
           "source": "url",
           "parser": "backend",
           "format": "table",
-          "url": "${baseUrl}/status.json",
+          "url": "${baseUrl}/status.json?cb=${__to}",
           "url_options": { "method": "GET" },
           "root_selector": "sites",
           "columns": [
@@ -254,7 +254,7 @@
           "source": "url",
           "parser": "backend",
           "format": "table",
-          "url": "${baseUrl}/status.json",
+          "url": "${baseUrl}/status.json?cb=${__to}",
           "url_options": { "method": "GET" },
           "root_selector": "runs",
           "columns": [
