@@ -2,33 +2,31 @@
 chcp 65001 >nul
 cd /d "%~dp0.."
 echo ============================================
-echo   Пульт сети путеводителей — запуск
+echo   Network dashboard - start
 echo ============================================
 echo.
-echo [1/2] Собираю свежие данные по сайтам...
+echo [1/2] Building fresh data from your sites...
 node "%~dp0build-status.mjs"
 if errorlevel 1 (
   echo.
-  echo [!] Не удалось собрать данные.
-  echo     Проверь: установлен Node.js и GitHub CLI ^(gh^), и ты залогинен ^(gh auth status^).
+  echo [!] Could not build data. Check Node.js and gh ^(gh auth status^).
   pause
   exit /b 1
 )
 echo.
-echo [2/2] Запускаю Grafana ^(в первый раз скачает образы — пара минут^)...
+echo [2/2] Starting Grafana ^(first run downloads images - a few minutes^)...
 docker compose -f "%~dp0docker-compose.yml" up -d
 if errorlevel 1 (
   echo.
-  echo [!] Grafana не запустилась.
-  echo     Убедись, что Docker Desktop установлен и запущен ^(значок кита вверху, состояние Running^).
+  echo [!] Grafana did not start. Make sure Docker Desktop is installed and running.
   pause
   exit /b 1
 )
 echo.
 echo ============================================
-echo   Готово! Пульт открывается в браузере:
+echo   Done. Dashboard opens in your browser:
 echo   http://localhost:3000
 echo ============================================
 start "" "http://localhost:3000"
-echo Если браузер не открылся сам — зайди вручную на http://localhost:3000
+echo If the browser did not open, go to http://localhost:3000 manually.
 pause

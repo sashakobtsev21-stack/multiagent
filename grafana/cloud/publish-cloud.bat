@@ -2,30 +2,29 @@
 chcp 65001 >nul
 cd /d "%~dp0..\.."
 echo ============================================
-echo   Публикация данных для Grafana Cloud
+echo   Publish data for Grafana Cloud
 echo ============================================
 echo.
-echo [1/2] Собираю свежие данные по сайтам...
+echo [1/2] Building fresh data from your sites...
 node "%~dp0..\build-status.mjs"
 if errorlevel 1 (
   echo.
-  echo [!] Не удалось собрать данные. Проверь Node.js и gh ^(gh auth status^).
+  echo [!] Could not build data. Check Node.js and gh ^(run: gh auth status^).
   pause
   exit /b 1
 )
 echo.
-echo [2/2] Публикую на закрытую ссылку и готовлю файл дашборда...
+echo [2/2] Publishing to a private link and preparing the dashboard file...
 node "%~dp0make-cloud.mjs"
 if errorlevel 1 (
   echo.
-  echo [!] Не удалось опубликовать. Проверь, что выполнен вход: gh auth status
+  echo [!] Publish failed. Check that you are logged in: gh auth status
   pause
   exit /b 1
 )
 echo.
 echo ============================================
-echo   Готово. Дальше — импорт в Grafana Cloud:
-echo   файл  grafana\cloud\network-ops-cloud.json
-echo   ^(пошаговая инструкция — в чате^)
+echo   Done. Next: import this file into Grafana Cloud
+echo   grafana\cloud\network-ops-cloud.json
 echo ============================================
 pause
