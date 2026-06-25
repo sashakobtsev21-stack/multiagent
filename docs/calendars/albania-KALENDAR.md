@@ -12,7 +12,7 @@
 - Пн 22.06 — (до 24.06 — слот не используется)
 - Вт 23.06 — (до 24.06 — слот не используется)
 - Ср 24.06 — ✅ [Статья] Best Things to Do in Tirana · `things to do in tirana` · /cities/things-to-do-in-tirana/ · cities · фото 18 · 💰 trip-hotels/trip-tours · ОПУБЛИКОВАНО (en, qa=GO)
-- Чт 25.06 — ⭐ [Статья] Is Albania Expensive? Real 2026 Daily Costs · `is albania expensive` / `albania budget per day` · /is-albania-expensive/ · info (бюджет-хаб) · фото ≥5 · кластер practical [head] · перелинк: → travel budget, → car rental, → where to stay, → how to get around
+- [x] Чт 25.06 — ⭐ [Статья] Is Albania Expensive? Real 2026 Daily Costs · `is albania expensive` / `albania budget per day` · /planning/is-albania-expensive/ · planning (бюджет-хаб) · фото 5 · кластер practical [head] · перелинк: travel budget, car rental, where to stay, how to get around — ОПУБЛИКОВАНО 2026-06-25 (en, qa=GO).
 - Пт 26.06 — ✅ [Статья] Is Albania Safe to Visit in 2026? · `is albania safe` · /planning/is-albania-safe/ · planning · фото 6 · 💰 safetywing · ОПУБЛИКОВАНО (en, qa=GO)
 - Сб 27.06 — 📰 /news
 - Пн 22.06 / Вт 23.06 — до 24.06: замер GA/GSC и /news не ставим (в прошлое не публикуем); baseline-замер — Пн 29.06 (Нед.2).
