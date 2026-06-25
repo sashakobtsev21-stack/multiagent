@@ -1,0 +1,12 @@
+apiVersion: 1
+
+# Datasource Infinity — читает status.json (JSON по URL) и отдаёт его панелям.
+# Запрос идёт с сервера Grafana (access: proxy), поэтому CORS не нужен.
+datasources:
+  - name: status-infinity
+    uid: infinity
+    type: yesoreyeram-infinity-datasource
+    access: proxy
+    isDefault: true
+    editable: true
+    jsonData: {}

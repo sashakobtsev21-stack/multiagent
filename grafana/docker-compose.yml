@@ -1,0 +1,34 @@
+# Локальный Grafana-стек для пульта сети (приватно, на вашей машине).
+# Запуск из корня хаба:
+#   node grafana/build-status.mjs            # сгенерить свежий status.json
+#   docker compose -f grafana/docker-compose.yml up -d
+#   открыть http://localhost:3000  (вход не нужен — анонимный admin)
+services:
+  grafana:
+    image: grafana/grafana:11.3.0
+    container_name: guidebooks-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+      - GF_USERS_DEFAULT_THEME=light
+    volumes:
+      - ./provisioning:/etc/grafana/provisioning
+    depends_on:
+      - status-server
+    restart: unless-stopped
+
+  # Отдаёт grafana/shared/status.json по http://status-server:8080/status.json
+  status-server:
+    image: halverneus/static-file-server:latest
+    container_name: guidebooks-status
+    environment:
+      - FOLDER=/web
+    volumes:
+      - ./shared:/web:ro
+    ports:
+      - "8081:8080"   # для отладки: curl http://localhost:8081/status.json
+    restart: unless-stopped

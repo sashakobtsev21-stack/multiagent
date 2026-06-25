@@ -1,0 +1,12 @@
+apiVersion: 1
+
+# Авто-загрузка дашбордов из этой папки (network-ops.json лежит рядом).
+providers:
+  - name: network-ops
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards
+      foldersFromFilesStructure: false
