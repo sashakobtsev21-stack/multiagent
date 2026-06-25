@@ -32,34 +32,34 @@ const summary = `<div class="summary">
   ${stat(`${d.summary.pendingTomorrow}`, 'На завтра написать', d.summary.pendingTomorrow ? 'amber' : 'green')}
 </div>`;
 
-const slot = (label, text, count, done) => {
-  if (!count) return `<span><b>${label}</b><span class="muted">—</span></span>`;
+const slotCell = (text, count, done) => {
+  if (!count) return '<span class="muted">—</span>';
   const mk = done ? '<span class="ok">✓</span>' : '<span class="todo">○</span>';
-  return `<span><b>${label}</b>${mk} ${esc(text)}</span>`;
+  return `${mk} ${esc(text)}`;
 };
 
-const siteRow = (s) => {
+const siteRows = d.sites.map((s) => {
   const ok = s.ci === 'success';
-  const ci = ok ? '<span class="badge bg">CI ок</span>'
-    : (s.ci === 'failure' ? '<span class="badge br">CI упал</span>' : `<span class="badge bn">${esc(s.ci)}</span>`);
-  const warn = s.recentFailures > 0 ? `<span class="meta amber">⚠ ${s.recentFailures} падений</span>` : '';
-  return `<div class="site">
-    <div class="srow">
-      <div class="name"><span class="dot ${ok ? 'g' : 'r'}"></span>${FLAG[s.key] || ''} ${esc(s.name)} <span class="langs">${esc(s.langs)}</span></div>
-      <div class="right">${warn}${ci}<span class="meta">деплой ${fmt(s.deployTime)}</span></div>
-    </div>
-    <div class="cal">
-      ${slot('Сегодня', s.todayText, s.todayCount, s.todayDone)}
-      ${slot('Завтра', s.tomorrowText, s.tomorrowCount, s.tomorrowDone)}
-    </div>
-  </div>`;
-};
-
-const runsSorted = [...d.runs].sort((a, b) => new Date(b.time) - new Date(a.time)).slice(0, 15);
-const runRows = runsSorted.map((r) => {
-  const ok = r.result === 'success';
-  return `<tr><td><span class="dot ${ok ? 'g' : 'r'}" style="display:inline-block;margin-right:8px"></span>${ok ? 'success' : 'failure'}</td><td>${esc(r.name)}</td><td class="muted">${esc(r.workflow)}</td><td class="muted">${fmt(r.time)}</td></tr>`;
+  const ci = ok ? '<span class="badge bg">ок</span>'
+    : (s.ci === 'failure' ? '<span class="badge br">упал</span>' : `<span class="badge bn">${esc(s.ci)}</span>`);
+  return `<tr>
+    <td class="nm"><span class="dot ${ok ? 'g' : 'r'}"></span>${FLAG[s.key] || ''} ${esc(s.name)} <span class="langs">${esc(s.langs)}</span></td>
+    <td>${ci}</td>
+    <td class="muted nowrap">${fmt(s.deployTime)}</td>
+    <td>${esc(s.subject)}</td>
+    <td>${slotCell(s.todayText, s.todayCount, s.todayDone)}</td>
+    <td>${slotCell(s.tomorrowText, s.tomorrowCount, s.tomorrowDone)}</td>
+  </tr>`;
 }).join('');
+
+const commitRows = [...(d.commits || [])].sort((a, b) => new Date(b.time) - new Date(a.time)).slice(0, 14)
+  .map((c) => `<tr><td class="muted nowrap">${fmt(c.time)}</td><td class="nowrap">${FLAG[c.site] || ''} ${esc(c.name)}</td><td><span class="hash">${esc(c.hash)}</span> ${esc(c.subject)}</td></tr>`).join('');
+
+const runRows = [...d.runs].sort((a, b) => new Date(b.time) - new Date(a.time)).slice(0, 12)
+  .map((r) => {
+    const ok = r.result === 'success';
+    return `<tr><td class="nowrap"><span class="rdot ${ok ? 'g' : 'r'}">●</span> ${ok ? 'success' : 'failure'}</td><td>${esc(r.name)}</td><td class="muted">${esc(r.workflow)}</td><td class="muted nowrap">${fmt(r.time)}</td></tr>`;
+  }).join('');
 
 const html = `<!doctype html>
 <html lang="ru">
@@ -73,7 +73,7 @@ const html = `<!doctype html>
 --green:#4ade80;--amber:#fbbf24;--red:#f87171}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:30px 18px}
-.wrap{max-width:1060px;margin:0 auto}
+.wrap{max-width:1140px;margin:0 auto}
 .top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:22px}
 h1{font-size:24px;margin:0;font-weight:700;letter-spacing:-.01em}
 .sub{color:var(--muted);font-size:14px;margin-top:5px}
@@ -86,25 +86,21 @@ h1{font-size:24px;margin:0;font-weight:700;letter-spacing:-.01em}
 .green{color:var(--green)}.amber{color:var(--amber)}.red{color:var(--red)}
 h2{font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin:28px 0 12px;font-weight:600}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.site{padding:14px 18px;border-top:1px solid var(--line2)}
-.site:first-child{border-top:none}
-.srow{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.name{font-size:16px;font-weight:600;display:flex;align-items:center;gap:9px}
+table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+th{text-align:left;font-size:11px;color:var(--muted);font-weight:600;padding:12px 14px;text-transform:uppercase;letter-spacing:.3px;border-bottom:1px solid var(--line)}
+td{padding:12px 14px;border-top:1px solid var(--line2);vertical-align:top;overflow-wrap:anywhere}
+tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
+.nm{font-weight:600}
 .langs{font-size:12px;color:var(--muted);font-weight:400}
-.right{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
-.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.nowrap{white-space:nowrap}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;vertical-align:middle}
 .dot.g{background:var(--green)}.dot.r{background:var(--red)}
-.meta{font-size:12px;color:var(--muted);white-space:nowrap}
-.meta.amber{color:var(--amber)}
-.badge{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.rdot.g{color:var(--green)}.rdot.r{color:var(--red)}
+.badge{font-size:12px;font-weight:600;padding:3px 11px;border-radius:999px;white-space:nowrap}
 .bg{background:#16261b;color:var(--green)}.br{background:#2a1618;color:var(--red)}.bn{background:#1c2330;color:var(--soft)}
-.cal{margin-top:10px;display:flex;flex-wrap:wrap;gap:7px 26px;font-size:13px;color:var(--soft)}
-.cal b{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.3px;margin-right:7px}
-.ok{color:var(--green);margin-right:4px}.todo{color:var(--amber);margin-right:4px}
+.ok{color:var(--green);margin-right:3px}.todo{color:var(--amber);margin-right:3px}
 .muted{color:var(--muted)}
-.runs table{width:100%;border-collapse:collapse;font-size:14px}
-.runs th{text-align:left;font-size:11px;color:var(--muted);font-weight:600;padding:11px 16px;text-transform:uppercase;letter-spacing:.3px;border-bottom:1px solid var(--line)}
-.runs td{padding:9px 16px;border-top:1px solid var(--line2)}
+.hash{color:var(--soft);font-family:ui-monospace,Consolas,monospace;font-size:12px}
 .foot{margin-top:22px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .legend span{margin-right:16px}
 </style>
@@ -121,11 +117,24 @@ h2{font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted
   ${summary}
   <h2>Сайты</h2>
   <div class="panel">
-    ${d.sites.map(siteRow).join('')}
+    <table>
+      <colgroup><col style="width:16%"><col style="width:7%"><col style="width:12%"><col style="width:23%"><col style="width:21%"><col style="width:21%"></colgroup>
+      <thead><tr><th>Сайт</th><th>CI</th><th>Деплой</th><th>Коммит</th><th>Сегодня</th><th>Завтра</th></tr></thead>
+      <tbody>${siteRows}</tbody>
+    </table>
+  </div>
+  <h2>Последние коммиты</h2>
+  <div class="panel">
+    <table>
+      <colgroup><col style="width:14%"><col style="width:18%"><col style="width:68%"></colgroup>
+      <thead><tr><th>Время</th><th>Сайт</th><th>Коммит</th></tr></thead>
+      <tbody>${commitRows}</tbody>
+    </table>
   </div>
   <h2>История прогонов CI</h2>
-  <div class="panel runs">
+  <div class="panel">
     <table>
+      <colgroup><col style="width:18%"><col style="width:22%"><col style="width:30%"><col style="width:30%"></colgroup>
       <thead><tr><th>Итог</th><th>Сайт</th><th>Workflow</th><th>Время</th></tr></thead>
       <tbody>${runRows}</tbody>
     </table>
@@ -139,4 +148,4 @@ h2{font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted
 </html>`;
 
 fs.writeFileSync(outFile, html, 'utf8');
-console.log('dashboard.html (тёмная): ' + outFile + ' (' + (html.length / 1024).toFixed(0) + ' КБ)');
+console.log('dashboard.html (тёмная, таблицы): ' + outFile + ' (' + (html.length / 1024).toFixed(0) + ' КБ)');

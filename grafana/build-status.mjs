@@ -58,7 +58,13 @@ function deployInfo(key) {
   const recentFailures = ciRuns.slice(0, 6).filter((r) => r.conclusion === 'failure').length;
   const newsRun = runs.find((r) => /news/i.test(r.workflowName)) || null;
 
+  const logRaw = sh('git', ['-C', repo, 'log', '-6', '--format=%h|%cI|%s']);
+  const commits = logRaw
+    ? logRaw.split('\n').filter(Boolean).map((l) => { const [h, t, ...r] = l.split('|'); return { hash: h, time: t, subject: r.join('|') }; })
+    : [];
+
   return {
+    commits,
     commit,
     deployTime: cTime,
     subject,
@@ -106,6 +112,7 @@ function calendarFor(key, token) {
 
 const sites = [];
 const runsFlat = [];
+const commitsFlat = [];
 for (const s of SITES) {
   const d = deployInfo(s.key);
   const t = calendarFor(s.key, today);
@@ -130,6 +137,7 @@ for (const s of SITES) {
     tomorrowCount: tm.items.length,
   });
   for (const r of d.runs) runsFlat.push({ site: s.key, name: s.name, ...r });
+  for (const c of d.commits) commitsFlat.push({ site: s.key, name: s.name, ...c });
 }
 
 const summary = {
@@ -140,7 +148,7 @@ const summary = {
   pendingTomorrow: sites.filter((s) => s.tomorrowCount > 0 && !s.tomorrowDone).length,
 };
 
-const out = { generatedAt: now.toISOString(), today, tomorrow, summary, sites, runs: runsFlat };
+const out = { generatedAt: now.toISOString(), today, tomorrow, summary, sites, runs: runsFlat, commits: commitsFlat };
 
 const outDir = path.join(__dirname, 'shared');
 fs.mkdirSync(outDir, { recursive: true });
