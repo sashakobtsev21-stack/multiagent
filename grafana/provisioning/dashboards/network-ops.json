@@ -2,15 +2,23 @@
   "uid": "network-ops",
   "title": "Сеть путеводителей — деплои и календарь",
   "schemaVersion": 39,
-  "version": 1,
+  "version": 2,
   "editable": true,
   "refresh": "1m",
   "time": { "from": "now-7d", "to": "now" },
   "templating": {
     "list": [
       {
+        "name": "ds",
+        "label": "Источник данных",
+        "type": "datasource",
+        "query": "yesoreyeram-infinity-datasource",
+        "current": {},
+        "hide": 0
+      },
+      {
         "name": "baseUrl",
-        "label": "URL status.json (без /status.json)",
+        "label": "URL без /status.json",
         "type": "textbox",
         "query": "http://status-server:8080",
         "current": { "text": "http://status-server:8080", "value": "http://status-server:8080" },
@@ -23,12 +31,12 @@
       "id": 1,
       "type": "stat",
       "title": "Сводка на сегодня",
-      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 4 },
-      "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "infinity" },
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 5 },
+      "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "${ds}" },
       "targets": [
         {
           "refId": "A",
-          "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "infinity" },
+          "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "${ds}" },
           "type": "json",
           "source": "url",
           "parser": "backend",
@@ -37,32 +45,31 @@
           "url_options": { "method": "GET" },
           "root_selector": "summary",
           "columns": [
-            { "selector": "deployedToday", "text": "Задеплоено", "type": "number" },
+            { "selector": "deployedToday", "text": "Задеплоено сегодня", "type": "number" },
             { "selector": "ciGreen", "text": "CI зелёные", "type": "number" },
             { "selector": "publishedToday", "text": "Опубликовано сегодня", "type": "number" },
-            { "selector": "pendingTomorrow", "text": "На завтра к написанию", "type": "number" }
+            { "selector": "pendingTomorrow", "text": "На завтра написать", "type": "number" }
           ]
         }
       ],
       "options": {
         "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
         "orientation": "horizontal",
-        "colorMode": "value",
+        "colorMode": "background",
         "graphMode": "none",
         "textMode": "value_and_name",
         "justifyMode": "center"
       },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
-          "thresholds": { "mode": "absolute", "steps": [ { "color": "blue", "value": null } ] }
+          "color": { "mode": "fixed", "fixedColor": "green" },
+          "unit": "none",
+          "decimals": 0
         },
         "overrides": [
           {
-            "matcher": { "id": "byName", "options": "На завтра к написанию" },
-            "properties": [
-              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
-            ]
+            "matcher": { "id": "byName", "options": "На завтра написать" },
+            "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } } ]
           }
         ]
       }
@@ -70,13 +77,13 @@
     {
       "id": 2,
       "type": "table",
-      "title": "Деплои и CI (последний пуш по каждому сайту)",
-      "gridPos": { "x": 0, "y": 4, "w": 24, "h": 9 },
-      "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "infinity" },
+      "title": "Деплои и CI по сайтам",
+      "gridPos": { "x": 0, "y": 5, "w": 24, "h": 8 },
+      "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "${ds}" },
       "targets": [
         {
           "refId": "A",
-          "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "infinity" },
+          "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "${ds}" },
           "type": "json",
           "source": "url",
           "parser": "backend",
@@ -86,38 +93,72 @@
           "root_selector": "sites",
           "columns": [
             { "selector": "name", "text": "Сайт", "type": "string" },
-            { "selector": "langs", "text": "Языки", "type": "string" },
             { "selector": "ci", "text": "CI", "type": "string" },
             { "selector": "deployTime", "text": "Последний деплой", "type": "timestamp" },
             { "selector": "subject", "text": "Коммит", "type": "string" },
-            { "selector": "recentFailures", "text": "Падений CI (посл.6)", "type": "number" },
-            { "selector": "newsRebuild", "text": "Авто-новости", "type": "string" }
+            { "selector": "recentFailures", "text": "Падений CI", "type": "number" },
+            { "selector": "newsRebuild", "text": "Авто-новости", "type": "string" },
+            { "selector": "langs", "text": "Языки", "type": "string" }
           ]
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "indexByName": {
+              "Сайт": 0,
+              "CI": 1,
+              "Последний деплой": 2,
+              "Коммит": 3,
+              "Падений CI": 4,
+              "Авто-новости": 5,
+              "Языки": 6
+            },
+            "excludeByName": {},
+            "renameByName": {}
+          }
         }
       ],
       "options": { "showHeader": true, "cellHeight": "sm" },
       "fieldConfig": {
-        "defaults": { "custom": { "align": "left", "filterable": true } },
+        "defaults": { "custom": { "align": "left", "filterable": true, "minWidth": 90 } },
         "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Сайт" },
+            "properties": [ { "id": "custom.width", "value": 120 }, { "id": "custom.align", "value": "left" } ]
+          },
           {
             "matcher": { "id": "byName", "options": "CI" },
             "properties": [
+              { "id": "custom.width", "value": 90 },
               { "id": "custom.cellOptions", "value": { "type": "color-background", "mode": "basic" } },
               { "id": "mappings", "value": [ { "type": "value", "options": { "success": { "text": "✓ ок", "color": "green", "index": 0 }, "failure": { "text": "✗ упал", "color": "red", "index": 1 } } } ] }
             ]
           },
           {
+            "matcher": { "id": "byName", "options": "Последний деплой" },
+            "properties": [ { "id": "custom.width", "value": 170 } ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Падений CI" },
+            "properties": [
+              { "id": "custom.width", "value": 100 },
+              { "id": "custom.cellOptions", "value": { "type": "color-text" } },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "orange", "value": 1 }, { "color": "red", "value": 4 } ] } }
+            ]
+          },
+          {
             "matcher": { "id": "byName", "options": "Авто-новости" },
             "properties": [
+              { "id": "custom.width", "value": 110 },
+              { "id": "custom.cellOptions", "value": { "type": "color-background", "mode": "basic" } },
               { "id": "mappings", "value": [ { "type": "value", "options": { "success": { "text": "✓", "color": "green", "index": 0 }, "failure": { "text": "✗", "color": "red", "index": 1 } } } ] }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "Падений CI (посл.6)" },
-            "properties": [
-              { "id": "custom.cellOptions", "value": { "type": "color-text" } },
-              { "id": "thresholds", "value": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "orange", "value": 1 }, { "color": "red", "value": 4 } ] } }
-            ]
+            "matcher": { "id": "byName", "options": "Языки" },
+            "properties": [ { "id": "custom.width", "value": 90 } ]
           }
         ]
       }
@@ -125,13 +166,13 @@
     {
       "id": 3,
       "type": "table",
-      "title": "Контент-календарь — сегодня и завтра",
-      "gridPos": { "x": 0, "y": 13, "w": 24, "h": 8 },
-      "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "infinity" },
+      "title": "Контент-календарь — что сегодня и завтра",
+      "gridPos": { "x": 0, "y": 13, "w": 24, "h": 10 },
+      "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "${ds}" },
       "targets": [
         {
           "refId": "A",
-          "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "infinity" },
+          "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "${ds}" },
           "type": "json",
           "source": "url",
           "parser": "backend",
@@ -144,26 +185,56 @@
             { "selector": "todayText", "text": "Сегодня", "type": "string" },
             { "selector": "todayDone", "text": "Готово", "type": "boolean" },
             { "selector": "tomorrowText", "text": "Завтра", "type": "string" },
-            { "selector": "tomorrowDone", "text": "Готово (завтра)", "type": "boolean" }
+            { "selector": "tomorrowDone", "text": "Готово завтра", "type": "boolean" }
           ]
         }
       ],
-      "options": { "showHeader": true, "cellHeight": "md" },
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "indexByName": {
+              "Сайт": 0,
+              "Сегодня": 1,
+              "Готово": 2,
+              "Завтра": 3,
+              "Готово завтра": 4
+            },
+            "excludeByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "options": { "showHeader": true, "cellHeight": "lg" },
       "fieldConfig": {
         "defaults": { "custom": { "align": "left" } },
         "overrides": [
           {
+            "matcher": { "id": "byName", "options": "Сайт" },
+            "properties": [ { "id": "custom.width", "value": 120 } ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Сегодня" },
+            "properties": [ { "id": "custom.cellOptions", "value": { "type": "auto", "wrapText": true } } ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Завтра" },
+            "properties": [ { "id": "custom.cellOptions", "value": { "type": "auto", "wrapText": true } } ]
+          },
+          {
             "matcher": { "id": "byName", "options": "Готово" },
             "properties": [
+              { "id": "custom.width", "value": 110 },
               { "id": "custom.cellOptions", "value": { "type": "color-background", "mode": "basic" } },
               { "id": "mappings", "value": [ { "type": "value", "options": { "true": { "text": "✓ опубл.", "color": "green", "index": 0 }, "false": { "text": "○ нет", "color": "orange", "index": 1 } } } ] }
             ]
           },
           {
-            "matcher": { "id": "byName", "options": "Готово (завтра)" },
+            "matcher": { "id": "byName", "options": "Готово завтра" },
             "properties": [
+              { "id": "custom.width", "value": 140 },
               { "id": "custom.cellOptions", "value": { "type": "color-background", "mode": "basic" } },
-              { "id": "mappings", "value": [ { "type": "value", "options": { "true": { "text": "✓", "color": "green", "index": 0 }, "false": { "text": "○ к написанию", "color": "orange", "index": 1 } } } ] }
+              { "id": "mappings", "value": [ { "type": "value", "options": { "true": { "text": "✓ готово", "color": "green", "index": 0 }, "false": { "text": "○ написать", "color": "orange", "index": 1 } } } ] }
             ]
           }
         ]
@@ -172,13 +243,13 @@
     {
       "id": 4,
       "type": "table",
-      "title": "История прогонов CI (последние)",
-      "gridPos": { "x": 0, "y": 21, "w": 24, "h": 9 },
-      "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "infinity" },
+      "title": "История прогонов CI",
+      "gridPos": { "x": 0, "y": 23, "w": 24, "h": 9 },
+      "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "${ds}" },
       "targets": [
         {
           "refId": "A",
-          "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "infinity" },
+          "datasource": { "type": "yesoreyeram-infinity-datasource", "uid": "${ds}" },
           "type": "json",
           "source": "url",
           "parser": "backend",
@@ -188,10 +259,20 @@
           "root_selector": "runs",
           "columns": [
             { "selector": "name", "text": "Сайт", "type": "string" },
-            { "selector": "workflow", "text": "Workflow", "type": "string" },
             { "selector": "time", "text": "Время", "type": "timestamp" },
-            { "selector": "result", "text": "Итог", "type": "string" }
+            { "selector": "result", "text": "Итог", "type": "string" },
+            { "selector": "workflow", "text": "Workflow", "type": "string" }
           ]
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "indexByName": { "Сайт": 0, "Время": 1, "Итог": 2, "Workflow": 3 },
+            "excludeByName": {},
+            "renameByName": {}
+          }
         }
       ],
       "options": {
@@ -203,8 +284,17 @@
         "defaults": { "custom": { "align": "left", "filterable": true } },
         "overrides": [
           {
+            "matcher": { "id": "byName", "options": "Сайт" },
+            "properties": [ { "id": "custom.width", "value": 140 } ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Время" },
+            "properties": [ { "id": "custom.width", "value": 180 } ]
+          },
+          {
             "matcher": { "id": "byName", "options": "Итог" },
             "properties": [
+              { "id": "custom.width", "value": 140 },
               { "id": "custom.cellOptions", "value": { "type": "color-background", "mode": "basic" } },
               { "id": "mappings", "value": [ { "type": "value", "options": { "success": { "text": "✓ success", "color": "green", "index": 0 }, "failure": { "text": "✗ failure", "color": "red", "index": 1 } } } ] }
             ]
