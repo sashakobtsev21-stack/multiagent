@@ -207,24 +207,6 @@ function scanArticles(repo, key) {
 const sites = [];
 const runsFlat = [];
 const commitsFlat = [];
-// --- Cloudflare: реальная раскатка (Workers deployments API), если есть токен grafana/.cf-token ---
-const CF_ACCT = '5a2cd7ffa43485cd3f8678e96d5ac4af';
-const cfToken = (() => { try { return fs.readFileSync(path.join(__dirname, '.cf-token'), 'utf8').trim(); } catch { return ''; } })();
-async function fetchCfDeploys() {
-  const out = {};
-  if (!cfToken || typeof fetch !== 'function') return out;
-  await Promise.all(SITES.map(async (s) => {
-    try {
-      const r = await fetch(`https://api.cloudflare.com/client/v4/accounts/${CF_ACCT}/workers/scripts/${s.key}-site/deployments`, { headers: { Authorization: `Bearer ${cfToken}` } });
-      const j = await r.json();
-      const ds = (j.result && j.result.deployments) || j.result || [];
-      const last = Array.isArray(ds) ? ds[0] : null;
-      if (last) out[s.key] = { time: last.created_on, id: last.id, source: last.source };
-    } catch {}
-  }));
-  return out;
-}
-const cfDeploys = await fetchCfDeploys();
 
 for (const s of SITES) {
   const d = deployInfo(s.key);
@@ -246,7 +228,6 @@ for (const s of SITES) {
     recentFailures: d.recentFailures,
     newsRebuild: d.newsRebuild,
     deployedToday: d.deployedToday,
-    cfDeploy: cfDeploys[s.key] || null,
     publishedToday: scan.published,
     urlBySlug: scan.urlBySlug,
     yesterdayItems: cellItems(y.items),

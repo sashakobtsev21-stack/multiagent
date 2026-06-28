@@ -14,13 +14,9 @@ node_modules/
 dist/
 .astro/
 
-# --- Grafana: генерируемые данные (status.json пересобирается генератором) ---
+# --- Дашборд: генерируемые артефакты (пересобираются генераторами) ---
 grafana/shared/
 grafana/dashboard.html
-grafana/.cf-token
-grafana/.cf-config
-grafana/cloud/gist-id.txt
-grafana/cloud/network-ops-cloud.json
 
 # --- Логи ---
 *.log

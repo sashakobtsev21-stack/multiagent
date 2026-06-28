@@ -1,60 +1,43 @@
-# Grafana-пульт сети путеводителей
+# Пульт сети путеводителей (локальный HTML-дашборд)
 
-Пульт по 5 сайтам: **деплои/CI** (последний пуш, статус CI, авто-новости, история прогонов) + **контент-календарь** (темы на сегодня/завтра, что готово, что к написанию).
+Самодостаточный дашборд по 5 сайтам: **деплои/CI** (последний пуш, статус CI, авто-новости) + **контент-календарь** (вчера/сегодня/завтра/послезавтра — что опубликовано и что к написанию) + счётчики статей по разделам.
 
-Grafana сама данные не собирает — её кормит генератор `build-status.mjs`, который читает реальный git + GitHub Actions + ваши `KALENDAR.md` и пишет `shared/status.json`. Grafana читает этот JSON через плагин-датасорс **Infinity**.
+> Имя папки `grafana/` историческое (начинали с Grafana). Сейчас **Grafana/Docker не используются** — дашборд это один самодостаточный HTML-файл, открывается двойным кликом офлайн. Данные вшиты в файл при сборке.
 
+## Как устроено
 ```
-┌────────────────────┐   node build-status.mjs   ┌──────────────┐   Infinity    ┌─────────┐
-│ git + GitHub Actions│ ───────────────────────▶ │ shared/      │ ◀──────────── │ Grafana │
-│ + sites/*/KALENDAR  │                           │ status.json  │  (по URL)     │ панели  │
-└────────────────────┘                            └──────────────┘               └─────────┘
+git + GitHub Actions (gh)          node build-status.mjs        node build-html.mjs
++ sites/*/KALENDAR.md      ───────▶  shared/status.json   ─────▶  dashboard.html
++ src/content (статьи/маршруты)                                   (данные вшиты в HTML)
 ```
+- **build-status.mjs** — читает реальный git, `gh run list` (CI), `KALENDAR.md` каждого сайта и `src/content` (статьи+маршруты) → пишет `shared/status.json`.
+- **build-html.mjs** — рендерит из `status.json` тёмный `dashboard.html`.
+
+## Открыть
+- Двойной клик **`open-dashboard.bat`** (пересоберёт свежие данные и откроет в браузере), **или**
+- открыть напрямую `grafana/dashboard.html` (file://) — кнопка **↻ Обновить** перечитывает страницу.
+
+## Авто-обновление (3 механизма)
+1. **После каждого коммита** — git-хук `post-commit` → `refresh.mjs` (тротлинг 45 сек). Ставится один раз: двойной клик `install-refresh-hooks.bat` (или `node install-refresh-hooks.mjs`).
+2. **Каждые 15 минут** — Планировщик Windows «guidebooks-dashboard» → `refresh-dashboard.bat`.
+3. **Сама страница** — meta-refresh раз в 60 сек перечитывает файл.
 
 ## Что нужно
-- **Node.js** (есть — на нём собраны сайты) и **GitHub CLI `gh`** (авторизован: `gh auth status`) — для генератора.
-- **Docker Desktop** — для самого Grafana (либо нативная Grafana, см. ниже).
+- **Node.js** (есть — на нём собраны сайты).
+- **GitHub CLI `gh`**, авторизован (`gh auth status`) — для статуса CI. Без него дашборд соберётся, но колонка CI будет «unknown».
 
-## Быстрый старт (Docker)
-Из **корня хаба** (`C:\Users\Oleksandr\Desktop\multiagent`):
-
-```bash
-# 1) собрать свежие данные
-node grafana/build-status.mjs
-
-# 2) поднять Grafana + файловый сервер
-docker compose -f grafana/docker-compose.yml up -d
-
-# 3) открыть пульт (вход не нужен — анонимный admin)
-#    http://localhost:3000  → дашборд «Сеть путеводителей — деплои и календарь»
-```
-
-Дашборд авто-рефрешится раз в минуту. Чтобы обновить данные — перезапустите шаг 1 (Grafana подхватит новый `status.json` сама).
-
-Остановить: `docker compose -f grafana/docker-compose.yml down`.
-
-## Автообновление данных
-Генератор надо периодически перезапускать. Варианты:
-
-- **Windows Task Scheduler** (каждые 15 мин):
-  ```powershell
-  schtasks /Create /SC MINUTE /MO 15 /TN "guidebooks-status" ^
-    /TR "node \"C:\Users\Oleksandr\Desktop\multiagent\grafana\build-status.mjs\""
-  ```
-- **Вшить в `/work`**: добавить `node grafana/build-status.mjs` в конец утреннего цикла (тогда пульт свеж после каждой публикации).
-- **GitHub Action**: собирать `status.json` в репозитории по cron и коммитить (нужно для Grafana Cloud — см. ниже).
-
-## Без Docker (нативная Grafana на Windows)
-1. Поставить Grafana (zip/installer), запустить `grafana-server.exe`.
-2. Plugins → установить **Infinity** (`yesoreyeram-infinity-datasource`); добавить датасорс с `uid: infinity`.
-3. Dashboards → Import → вставить `provisioning/dashboards/network-ops.json`.
-4. Отдать `status.json` по HTTP, например из корня хаба: `npx serve grafana/shared -l 8088`.
-5. В дашборде задать переменную **baseUrl** = `http://localhost:8088`.
-
-## Grafana Cloud (хостинг, бесплатный тариф)
-Данные должны быть доступны из интернета: пушьте `status.json` в публичный Gist или в репозиторий (или приватно — с GitHub-токеном в настройках Infinity), затем в переменной `baseUrl` укажите его URL. В остальном дашборд тот же.
+## Файлы
+| Файл | Назначение |
+|---|---|
+| `build-status.mjs` | сбор данных → `shared/status.json` |
+| `build-html.mjs` | рендер `dashboard.html` |
+| `refresh.mjs` | пересборка после коммита (git-хук, тротлинг 45 с) |
+| `refresh-dashboard.bat` | тихая пересборка (Планировщик, 15 мин) |
+| `open-dashboard.bat` | пересобрать + открыть в браузере |
+| `install-refresh-hooks.mjs/.bat` | поставить post-commit хуки в хаб + 5 клонов |
+| `dashboard.html` | сам дашборд (генерируется, в git не коммитится) |
+| `shared/status.json` | данные (генерируются, в git не коммитятся) |
 
 ## Оговорки
-- **Cloudflare build status не подключён.** «Как прошёл деплой» показывается по **conclusion CI** (build+qa) как прокси — это надёжный сигнал «собралось/не собралось», но не сам факт раскатки на Cloudflare. Чтобы подтянуть реальный статус билдов Workers — нужен read-only Cloudflare API-токен (Account → Analytics/Workers), тогда генератор добавит поле в `status.json`.
-- Разбор календаря эвристический (по формату строк `KALENDAR.md`): берёт пункты списка с датой сегодня/завтра и маркерами `[Статья]`/`📰`/`📊`; `[x]`/`ОПУБЛИКОВАНО`/`✅`/`SKIP` = готово.
-- `shared/status.json` — генерируемый, в git хаба не коммитится (`.gitignore`).
+- «Как прошёл деплой» = по **conclusion CI** (build+qa) как прокси (надёжный сигнал «собралось/не собралось»); прямой статус Cloudflare-раскатки не подтягивается (столбец убран как лишний).
+- Разбор календаря эвристический (формат строк `KALENDAR.md`): пункт = его **первая** дата; маркер `[Статья]`/`[Маршрут]` важнее `Замер`; будущие дни — только `○` к написанию; замеры в ячейках не показываются. Подробности — память `dashboard-calendar-parser-pitfalls`.
