@@ -132,7 +132,6 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
     <div class="updated">обновлено ${fmt(d.generatedAt)}</div>
   </div>
   ${summary}
-  ${pubTodayHtml}
   <h2>Сайты</h2>
   <div class="panel">
     <table>
@@ -149,6 +148,7 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
       <tbody>${commitRows}</tbody>
     </table>
   </div>
+  ${pubTodayHtml}
   <div class="foot">
     <div class="legend"><span><span class="ok">✓</span> опубликовано / ок</span><span><span class="todo">○</span> к написанию</span></div>
     <div>${d.sites.length} сайтов · страница сама обновляется раз в минуту</div>
