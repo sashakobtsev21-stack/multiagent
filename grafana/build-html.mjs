@@ -52,7 +52,7 @@ const siteRows = d.sites.map((s) => {
   return `<tr>
     <td class="nm"><span class="dot ${ok ? 'g' : 'r'}"></span>${FLAG[s.key] || ''} ${esc(s.name)}<div class="langs">${esc(s.langs)}</div></td>
     <td>${ci}</td>
-    <td class="muted nowrap">${fmt(s.deployTime)}</td>
+    <td class="muted nowrap">${s.cfDeploy ? fmt(s.cfDeploy.time) : fmt(s.deployTime)}</td>
     <td>${artsCell(s)}</td>
     <td>${slotCell(s.yesterdayText, s.yesterdayCount, s.yesterdayDone)}</td>
     <td>${slotCell(s.todayText, s.todayCount, s.todayDone)}</td>
@@ -123,7 +123,7 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
   <div class="panel">
     <table>
       <colgroup><col style="width:10%"><col style="width:5%"><col style="width:9%"><col style="width:16%"><col style="width:15%"><col style="width:15%"><col style="width:15%"><col style="width:15%"></colgroup>
-      <thead><tr><th>Сайт</th><th>CI</th><th>Деплой</th><th>Статьи · разделы</th><th>Вчера</th><th>Сегодня</th><th>Завтра</th><th>Послезавтра</th></tr></thead>
+      <thead><tr><th>Сайт</th><th>CI</th><th>CF деплой</th><th>Статьи · разделы</th><th>Вчера</th><th>Сегодня</th><th>Завтра</th><th>Послезавтра</th></tr></thead>
       <tbody>${siteRows}</tbody>
     </table>
   </div>
