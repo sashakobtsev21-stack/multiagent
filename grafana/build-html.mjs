@@ -28,7 +28,7 @@ const stat = (n, l, cls) => `<div class="stat"><div class="n ${cls}">${n}</div><
 const summary = `<div class="summary">
   ${stat(`${d.summary.deployedToday} / ${d.summary.total}`, 'Задеплоено сегодня', 'green')}
   ${stat(`${d.summary.ciGreen} / ${d.summary.total}`, 'CI зелёные', 'green')}
-  ${stat(`${d.summary.publishedToday} / ${d.summary.total}`, 'Опубликовано сегодня', 'green')}
+  ${stat(`${d.summary.publishedToday}`, 'Опубликовано сегодня (статей)', 'green')}
   ${stat(`${d.summary.pendingTomorrow}`, 'На завтра написать', d.summary.pendingTomorrow ? 'amber' : 'green')}
 </div>`;
 

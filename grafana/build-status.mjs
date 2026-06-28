@@ -241,7 +241,7 @@ const summary = {
   total: SITES.length,
   deployedToday: sites.filter((s) => s.deployedToday).length,
   ciGreen: sites.filter((s) => s.ciGreen).length,
-  publishedToday: sites.filter((s) => s.todayCount > 0 && s.todayDone).length,
+  publishedToday: sites.reduce((a, s) => a + (s.publishedToday || []).length, 0),
   pendingTomorrow: sites.filter((s) => s.tomorrowCount > 0 && !s.tomorrowDone).length,
 };
 
