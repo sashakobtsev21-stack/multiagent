@@ -1,7 +1,9 @@
 # Контент-календарь Черногория — единый план (5 статей/нед, Недели 1–18, с 24.06.2026)
-Фон: /news по графику (сбор → фильтр → превью владельцу → «ок» → публикация; см. «News schedule» ниже — НЕ слепой daily). Замеры GA/GSC — по понедельникам (15 мин).
+Фон: /news = **один еженедельный дайджест, только по субботам** (сбор → фильтр → превью владельцу → «ок» → публикация; см. «News schedule» ниже — НЕ daily, НЕ будни). Замеры GA/GSC — по понедельникам (15 мин).
 
-**Темп:** 5 статейных дней в неделю (**Пн–Пт**); **Сб/Вс свободны**. Опубликованные слоты остаются на своих реальных датах (не переносятся); неопубликованные плотно разложены по 5/нед с ближайшей свободной даты от 24.06.2026 вперёд, приоритет **head → mid → long-tail** с балансом кластеров. Итог: **79 неопубликованных тем ÷ 5/нед = 18 недель** (8 будних дней заняты ранее опубликованными статьями, поэтому окно длиннее ориентира). Все темы исходного 13-недельного плана и бывшего long-tail backlog (47 тем) **вмержены в один поток** — отдельного backlog-раздела больше нет.
+**Темп:** 5 статейных дней в неделю (**Пн–Пт**); **Сб/Вс свободны** (Сб = день еженедельного новостного дайджеста). Опубликованные слоты остаются на своих реальных датах (не переносятся); неопубликованные плотно разложены по 5/нед с ближайшей свободной даты от 24.06.2026 вперёд, приоритет **head → mid → long-tail** с балансом кластеров. Итог: **18 недель** (8 будних дней заняты ранее опубликованными статьями, поэтому окно длиннее ориентира). Все темы исходного 13-недельного плана и бывшего long-tail backlog (47 тем) **вмержены в один поток** — отдельного backlog-раздела больше нет.
+
+> **Календарь v2 (согласовано владельцем 2026-06-28).** Якорь: 24.06.2026 = среда. Три правки относительно v1: (1) **Новости → 1 дайджест/нед, только Сб** (раньше у Черногории было Пн+Ср+Пт); будние новостные строки убраны, замер GA/GSC остался на Пн. (2) **2 тонкие info-микротемы `💰 нет` вмержены в хаб** (раздел **Guide**): `language in montenegro` (W15) и `tipping in montenegro` (W18) — отдельные страницы не плодим, инфо вплетаем секцией. (3) **Освободившиеся будние слоты → коммерция 💰** (отели): Where to Stay in Budva (W15, Пн 28.09) и Where to Stay in Kotor (W18, Ср 21.10) — сателлиты accommodation-хаба (where-to-stay W2). Бюджет 5/нед не изменился (2 тонкие out → 2 коммерческие in). Опубликованное не тронуто.
 
 **Статус публикаций (сверено с `src/content` 23.06.2026):** опубликовано **14 статей плана** (kotor, podgorica, budva, tivat, how-many-days-in-montenegro, durmitor-national-park, best-time-to-visit-montenegro, lake-skadar, ostrog-monastery, cost-of-living-in-montenegro, montenegro-travel-guide, montenegro-travel-insurance, budva-nightlife, renting-a-car-in-montenegro) + **1 маршрут** (bay-of-kotor-coast) + **3 ресторана** (cave-coffee-kotor, konoba-scala-santa, restaurant-galion). Новости вне счётчика плана (exit-festival-montenegro-2026, montenegro-airports-summer-2026 — категория news). Пометка `[x] ОПУБЛИКОВАНО` ниже = слот примирён с фактическим slug.
 
@@ -10,9 +12,10 @@
 > **Примечание о датах опубликованных:** 4 опубликованные статьи (`how-many-days-in-montenegro`, `renting-a-car-in-montenegro`, `best-time-to-visit-montenegro`, `ostrog-monastery`) в исходном плане стояли на воскресных слотах. Поскольку правило «опубликованные не переносить» приоритетно, они оставлены на реальных воскресных датах как факт публикации (фактически все опубликованы 2026-06-22) и НЕ входят в новую буднюю сетку 5/нед — это исторические маркеры, а не статейные дни Пн–Пт.
 
 ## News schedule (Montenegro)
-- **Дни: Пн + Ср + Пт** (Mon + Wed + Fri). НЕ daily.
-- Near-daily — только в виде исключения: летние фестивали (Sea Dance / Kotor Carnival / регаты Боки) или крупное изменение правил (визы/въезд/налоги).
-- Механика: collect → filter → **owner preview → OK → publish**. Если ничего не прошло фильтр — skip (день пропускаем, не публикуем ради публикации).
+- **Один дайджест в неделю, только Сб** (Saturday). НЕ daily, НЕ будни. Будни Пн–Пт — статейные дни, новости туда не ставим.
+- Фильтр критичных: инфра/виза/транспорт-новости 2026 (аэропорты, рейсы, виза/въезд, дороги/паромы, налоги). Несезонный шум не публикуем.
+- Исключение (доп. выпуск вне Сб) — только крупное событие: летние фестивали (Sea Dance / Kotor Carnival / регаты Боки) или резкое изменение правил (визы/въезд/налоги).
+- Механика: collect → filter → **owner preview → OK → publish**. **Пусто = skip** (неделю пропускаем, не публикуем ради публикации).
 - Даты/числа — только из источника текущего года; кросс-фактчек (дата/место/год/реальность) перед превью. План корректируется по GA: растущие хабы усиливаем смежными статьями и перелинковкой; недобирающие темы сдвигаем вниз очереди; сезонные окна не двигаем. Очередь: P0 → P1 → P2. Слаги — английские, из SEO-отчёта.
 
 ## Неделя 1 (22–28.06) — Старт хаба: Котор/Бока + канон itinerary-хаба
@@ -29,10 +32,8 @@
 - [x] ⭐ **P0 head-term (country-level хаб верхней воронки)** · Пт 26.06 — [Статья] Things to Do in Montenegro: Top Experiences & Highlights · `things to do in montenegro` · /attractions/things-to-do-in-montenegro/ · категория attractions · фото 5 · 💰 туры / отели · перелинк: Kotor, Montenegro 7-day itinerary, Durmitor, Budva, Lake Skadar, Ostrog. — ОПУБЛИКОВАНО 2026-06-26 (en+ru), qa=GO.
 
 ## Неделя 2 (29.06–05.07) — Планировочные головы (въезд/жильё/транспорт) + столица
-- Пн 29.06 — 📊 Замер GA/GSC (первый замер: базовые показы/индексация стартовых страниц) + 📰 /news (дайджест)
-- 📰 Ср 01.07 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 03.07 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W2: Пн 29.06 (с замером) + Ср 01.07 + Пт 03.07._
+- Пн 29.06 — 📊 Замер GA/GSC (первый замер: базовые показы/индексация стартовых страниц)
+- 📰 Сб 04.07 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - 🆕 **ВСТАВКА P0 (КРИТИЧЕСКИЙ ПРОБЕЛ — въезд/виза/ETIAS, до октября)** · Пн 29.06 — [Статья] Montenegro Entry Requirements: Visa, ETIAS & Border (2026) · `montenegro entry requirements` · /planning/montenegro-entry-requirements/ · категория **planning** · фото ≥5 · 💰 страховка · перелинк: → Montenegro travel guide (опубл.), → How many days in Montenegro (опубл.), → Best time to visit (опубл.), → Montenegro travel insurance (опубл.). _Высокочастотный планировочный запрос; **ETIAS для шенгена стартует в конце 2026** (Черногория вне ЕС/Шенгена, но турист часто въезжает через Дубровник/HR — пояснить связь визы Шенгена/ETIAS и безвиза в Черногории до 90 дней). YMYL: только официальные источники (gov.me / MUP / EU ETIAS) + видимая дата проверки + дисклеймер, правила не печатать как фикс-факт. Окно — до октября, чтобы статья индексировалась к старту ETIAS._
 - ⭐ **P0 head-term пляжного кластера** · Вт 30.06 — [Статья] Best Beaches in Montenegro (2026) · `best beaches in montenegro` · /best-beaches-in-montenegro/ · категория attractions · фото ≥5 · 💰 отели · перелинк: → Budva (опубл.), → Tivat (опубл.), → Sveti Stefan (W5), → Things to do in Montenegro (W1). _Country-level head-term пляжного кластера; опора beaches-хаба, прежде узких пляжных тем (Sveti Stefan, Budva beaches)._
 - ✅ Ср 01.07 — [Статья] Podgorica Travel Guide: Capital of Montenegro · `podgorica montenegro` · /podgorica-travel-guide/ · категория **cities** (СТОЛИЦА; 15 фото: cover + 14, все CC Wikimedia) · 💰 отели (HotelWidget) / аренда авто · опубликовано 2026-06-22, пара en/ru, `npm run qa` = GO. _(перелинк W1/W6 — на ещё не опубликованные статьи; временно слинковано на montenegro-travel-guide, best-time, car-rental, durmitor + хаб /cities/; доперелинковать на itinerary/airport после публикации.)_
@@ -41,10 +42,8 @@
 - ✅ Вс 05.07 — [Статья] How Many Days in Montenegro? (+ Is It Worth Visiting) · `how many days in montenegro` · /planning/how-many-days-in-montenegro/ · категория **planning** · 6 фото CC · 💰 trip-hotels · **опубликовано 2026-06-22**, пара en/ru, `npm run qa` = GO. _(Опубл. на воскресной дате — исторический маркер, вне будней-сетки. Реализовано в `category=planning` (раздел `/planning/`), а не план. `routes`, слаг `/planning/how-many-days-in-montenegro/`. Лид = прямой ответ (мин. 3–4 дня, идеал 5–7); разделы: стоит ли ехать / сколько дней по интересам / планы 3·5·7 дней / когда ехать / как добраться, без FAQ. Перелинк: маршрут `bay-of-kotor-coast`, Montenegro guide, best-time, Котор, Подгорица, аренда авто + хаб `/planning/`. Доперелинковать на 7-day/5-day/3-day itinerary и best beaches после их публикации.)_
 
 ## Неделя 3 (06–12.07) — Itinerary head + транспортные головы + города-курорты
-- Пн 06.07 — 📊 Замер GA/GSC (растущие страницы Котор/itinerary; правка title/meta по CTR) + 📰 /news (дайджест)
-- 📰 Ср 08.07 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 10.07 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W3: Пн 06.07 (с замером) + Ср 08.07 + Пт 10.07._
+- Пн 06.07 — 📊 Замер GA/GSC (растущие страницы Котор/itinerary; правка title/meta по CTR)
+- 📰 Сб 11.07 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - ⭐ **head (itinerary, self-drive)** · Пн 06.07 — [Статья] Montenegro Road Trip Itinerary: The Ultimate Self-Drive Route · `montenegro road trip` · /montenegro-road-trip/ · категория routes · фото ≥5 · 💰 аренда авто · перелинк: → Montenegro 7-day itinerary (W1, канон-хаб), → Bay of Kotor coast road trip (опубл. маршрут), → Renting a car (опубл.). _Self-drive head-запрос; каноникал/перелинк наверх к 7-day хабу, опирается на опубл. маршрут Bay of Kotor coast._
 - ⭐ **head (transport, аэропорт→Котор)** · Вт 07.07 — [Статья] Tivat Airport to Kotor: Taxi, Transfer & Bus Options · `tivat airport to kotor` · /tivat-airport-to-kotor/ · категория articles · фото ≥5 · 💰 трансфер · перелинк: → Getting around Montenegro (W2, хаб), → Tivat vs Podgorica airport (W6), → Kotor (опубл.). _Высокочастотный «аэропорт→город» трансферный запрос; сателлит getting-around-хаба._
 - ✅ Ср 08.07 — [Статья] Budva, Montenegro: Old Town, Beaches & Nightlife · `budva montenegro` · /cities/budva/ · категория **cities** (город Будва, 13 фото CC Wikimedia — cover + 7 инлайн + 6 gallery) · 💰 trip-hotels / trip-tours · **опубликовано 2026-06-22**, пара en/ru, `npm run qa` = GO. _(Реализовано как статья-ГОРОД `category=cities`, англ. слаг `budva` — по стандарту репо «город = cities», а не план. слаг `/budva-travel-guide/`/`goroda`, как Котор/Подгорица. Добавлена 3-м пиком в витрину главной. Перелинк: Котор ×2, Подгорица, Montenegro guide, best-time, аренда авто, хаб /cities/; доперелинковать на Best beaches / Sveti Stefan / Tivat после их публикации.)_
@@ -53,10 +52,8 @@
 - [x] **ОПУБЛИКОВАНО (slug: `renting-a-car-in-montenegro`)** · Вс 12.07 — [Статья] Car Rental in Montenegro: Tips & Where to Book · `car rental montenegro` · категория **car-rental** · 💰 аренда авто / страховка · перелинк: → Montenegro 7-day itinerary (W1), → Driving in Montenegro (W6). _Опубл. на воскресной дате — исторический маркер, вне будней-сетки. Slug выровнен с опубл.: план. `car-rental-montenegro` → факт `renting-a-car-in-montenegro` (опубл. `category=car-rental`). Канонический slug — `renting-a-car-in-montenegro`._
 
 ## Неделя 4 (13–19.07) — Решение «ехать/деньги» + Бока-достопримечательности + маршрут
-- Пн 13.07 — 📊 Замер GA/GSC (конверсия денежной страницы car rental в GA; новые запросы из GSC) + 📰 /news (дайджест)
-- 📰 Ср 15.07 — /news (дайджест, в этот день также выходит МАРШРУТ) · превью владельцу → «ок» → публикация
-- 📰 Пт 17.07 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W4: Пн 13.07 (с замером) + Ср 15.07 + Пт 17.07._
+- Пн 13.07 — 📊 Замер GA/GSC (конверсия денежной страницы car rental в GA; новые запросы из GSC)
+- 📰 Сб 18.07 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - ⭐ **head (comparison/decision верхней воронки)** · Пн 13.07 — [Статья] Is Montenegro Worth Visiting? An Honest 2026 Take · `is montenegro worth visiting` · /is-montenegro-worth-visiting/ · категория articles · фото ≥5 · 💰 нет · перелинк: → Things to do in Montenegro (W1), → Best beaches in Montenegro (W2), → Montenegro 7-day itinerary (W1). _Head decision-запрос верхней воронки; кормит все головы перелинковкой._
 - ⭐ **head (practical/деньги)** · Вт 14.07 — [Статья] Currency & Money in Montenegro: Euro, ATMs & Card Tips · `montenegro currency` · /montenegro-currency-money/ · категория planning · фото ≥5 · 💰 нет · перелинк: → Is Montenegro expensive (W8), → Cost of living in Montenegro (опубл.), → Montenegro entry requirements (W2). _Practical head-запрос (евро, банкоматы, карты); опора planning/деньги-хаба._
 - ✅ Ср 15.07 — [МАРШРУТ] Bay of Kotor & Coast Road Trip Itinerary · `bay of kotor road trip` · /routes/bay-of-kotor-coast/ · коллекция **routes** (МАРШРУТ — фото КАЖДОЙ остановки) · 💰 trip-carhire / trip-hotels · **опубликовано 2026-06-22**, пара en/ru, `npm run qa` = GO. _(Первый маршрут коллекции `routes`. 6 остановок: Котор → Пераст/Богородица-на-Рифе → Будва → Свети-Стефан → Ловчен/мавзолей Негоша → Цетине опц.; days4/140км/€60; cover + 6 фото остановок + 2 инлайн-фигуры (9 CC-webp); геометрия OSRM запечена. Перелинк: Котор, Будва, Подгорица, аренда авто, best-time, Montenegro guide, хаб /routes/.)_
@@ -64,10 +61,8 @@
 - 🆕 **ВСТАВКА P1 (гео-добор Боки)** · Пт 17.07 — [Статья] Herceg Novi Travel Guide: Old Town, Forts & Riviera · `herceg novi montenegro` · /cities/herceg-novi/ · категория **cities** (город Херцег-Нови, ≥10 фото) · 💰 trip-hotels / trip-tours · перелинк: → Kotor (опубл.), → Things to do in Montenegro (W1), → Bay of Kotor coast road trip (опубл.). _Незакрытый базовый город побережья (есть Kotor/Budva/Tivat/Podgorica) — добираем гео-покрытие Боки._
 
 ## Неделя 5 (20–26.07) — Бока-POI + intra-транспорт + нацпарки (в сезоне)
-- Пн 20.07 — 📊 Замер GA/GSC (растёт ли Бока-хаб; усилить перелинковку на лидеров) + 📰 /news (дайджест)
-- 📰 Ср 22.07 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 24.07 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W5: Пн 20.07 (с замером) + Ср 22.07 + Пт 24.07._
+- Пн 20.07 — 📊 Замер GA/GSC (растёт ли Бока-хаб; усилить перелинковку на лидеров)
+- 📰 Сб 25.07 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - Пн 20.07 — [Статья] Perast & Our Lady of the Rocks: Visiting Guide · `perast montenegro` · /perast-our-lady-of-the-rocks/ · категория attractions · фото ≥5 · 💰 лодочные туры · перелинк: → Bay of Kotor boat tour (W4), → Kotor (опубл.). _⚠ DEDUPE: разводить с backlog-темами `perast-travel-guide` (town-level, W10) и `our-lady-of-the-rocks` islands (W9) — здесь визит на островки; согласовать с владельцем, при объединении FOLD._
 - 🆕 **P1 сателлит getting-around-хаба** · Вт 21.07 — [Статья] Kotor to Budva: Bus, Taxi & Driving (How to Get There) · `kotor to budva bus` · /kotor-to-budva-bus/ · категория attractions (practical, intra-country транспорт) · фото ≥5 · 💰 аренда авто / трансфер · перелинк: → Getting around Montenegro (W2, хаб), → Car rental (опубл.), → Budva (опубл.), → Kotor (опубл.). _Узкий intra-country запрос «город↔город автобус»; сателлит зонтичной getting-around-страницы, якорь для серии Kotor↔X / Budva↔X._
 - [x] **ОПУБЛИКОВАНО (slug: `durmitor-national-park`)** · Ср 22.07 — [Статья] Durmitor National Park & Black Lake: Complete Guide · `durmitor national park` · категория **attractions** (`attractionType=gory-priroda`, `region=northern`) · 💰 аренда авто / туры · перелинк: → Bay of Kotor coast road trip (опубл.), → Tara canyon rafting (W5)
@@ -75,10 +70,8 @@
 - Пт 24.07 — [Статья] Tara Canyon: Rafting, Zipline & Viewpoints · `tara canyon montenegro` · /tara-canyon-rafting/ · категория attractions · фото ≥5 · 💰 туры · перелинк: → Durmitor national park (опубл.), → Best day trips from Kotor (W6). _Сезонное (рафтинг апрель-октябрь) — в сезоне._
 
 ## Неделя 6 (27.07–02.08) — Котор-POI + логистика (вождение/аэропорты) + day trips
-- Пн 27.07 — 📊 Замер GA/GSC (рост Durmitor/parks-хаба; добавить смежную статью если растёт) + 📰 /news (дайджест)
-- 📰 Ср 29.07 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 31.07 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W6: Пн 27.07 (с замером) + Ср 29.07 + Пт 31.07._
+- Пн 27.07 — 📊 Замер GA/GSC (рост Durmitor/parks-хаба; добавить смежную статью если растёт)
+- 📰 Сб 01.08 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - Пн 27.07 — [Статья] Kotor City Walls & Fortress of San Giovanni · `kotor city walls` · /kotor-city-walls-fortress/ · категория attractions · фото ≥5 · 💰 нет · перелинк: → Kotor (опубл.), → Bay of Kotor boat tour (W4)
 - Вт 28.07 — [Статья] Driving in Montenegro: Rules, Roads & Parking · `driving in montenegro` · /driving-in-montenegro/ · категория attractions (practical) · фото ≥5 · 💰 аренда авто · перелинк: → Car rental Montenegro (опубл.), → Bay of Kotor coast road trip (опубл.), → Getting around Montenegro (W2)
 - Ср 29.07 — [Статья] Tivat vs Podgorica Airport: Which to Fly Into · `tivat airport montenegro` · /tivat-vs-podgorica-airport/ · категория attractions (practical) · фото ≥5 · 💰 трансфер / аренда авто · перелинк: → Driving in Montenegro (W6), → Montenegro airport transfers (W7), → Tivat airport to Kotor (W3)
@@ -87,10 +80,8 @@
 - [x] **ОПУБЛИКОВАНО (slug: `best-time-to-visit-montenegro`)** · Вс 02.08 — [Статья] Best Time to Visit Montenegro (Month by Month) · `best time to visit montenegro` · категория **planning** · 💰 отели · перелинк: → Montenegro 7-day itinerary (W1), → Montenegro weather by month (W7). _Опубл. на воскресной дате — исторический маркер, вне будней-сетки. Опубл. как `category=planning` (не план. attractions), слаг `best-time-to-visit-montenegro`._
 
 ## Неделя 7 (03–09.08) — Трансферы + гейтвей из Дубровника + погода
-- Пн 03.08 — 📊 Замер GA/GSC (растущие запросы GSC → в очередь P1/P2; CTR planning-страниц) + 📰 /news (дайджест)
-- 📰 Ср 05.08 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 07.08 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W7: Пн 03.08 (с замером) + Ср 05.08 + Пт 07.08._
+- Пн 03.08 — 📊 Замер GA/GSC (растущие запросы GSC → в очередь P1/P2; CTR planning-страниц)
+- 📰 Сб 08.08 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - Пн 03.08 — [Статья] Airport Transfers in Montenegro (Tivat, Podgorica, Dubrovnik) · `montenegro airport transfer` · /montenegro-airport-transfers/ · категория attractions (practical) · фото ≥5 · 💰 трансфер · перелинк: → Tivat vs Podgorica airport (W6), → Dubrovnik to Kotor (W7)
 - Вт 04.08 — [Статья] Dubrovnik to Kotor: How to Get There · `dubrovnik to kotor` · /dubrovnik-to-kotor/ · категория routes (practical) · фото ≥5 · 💰 трансфер / туры · перелинк: → Montenegro airport transfers (W7), → Dubrovnik to Montenegro day trip (W7). _⚠ DEDUPE: реверс `kotor-to-dubrovnik` (W3) — если страница двунаправленная, FOLD._
 - Ср 05.08 — [Статья] Dubrovnik to Montenegro Day Trip: Bus, Ferry or Tour · `dubrovnik to montenegro day trip` · /dubrovnik-to-montenegro-day-trip/ · категория routes · фото ≥5 · 💰 туры / трансфер · перелинк: → Dubrovnik to Kotor (W7), → Best day trips from Kotor (W6)
@@ -98,10 +89,8 @@
 - Пт 07.08 — [Статья] Montenegro in September: Worth It? (Sea, Crowds, Prices) · `montenegro in september` · /montenegro-in-september/ · категория attractions (seasonal — окно перед сентябрём) · фото ≥5 · 💰 отели · перелинк: → Best time to visit Montenegro (опубл.), → Best beaches in Montenegro (W2). _Сезонное: разогнать к сентябрьскому окну._
 
 ## Неделя 8 (10–16.08) — Itinerary-сателлиты + деньги/связь
-- Пн 10.08 — 📊 Замер GA/GSC (конверсия трансфер/туры в GA; усилить лидера хаба) + 📰 /news (дайджест)
-- 📰 Ср 12.08 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 14.08 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W8: Пн 10.08 (с замером) + Ср 12.08 + Пт 14.08._
+- Пн 10.08 — 📊 Замер GA/GSC (конверсия трансфер/туры в GA; усилить лидера хаба)
+- 📰 Сб 15.08 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - 🔁 **САТЕЛЛИТ itinerary-кластера (fold к 7-day хабу)** · Пн 10.08 — [Статья] 5 Days in Montenegro: Coast & Mountains Itinerary · `montenegro 5 day itinerary` · /montenegro-5-day-itinerary/ · категория routes · фото ≥5 · 💰 аренда авто · перелинк: → **Montenegro 7-day itinerary (W1, канон-хаб — обязательная ссылка)**, → How many days in Montenegro (опубл.), → 3-day (W8). _Сателлит канонического 7-day хаба; каноникал/перелинк наверх; при неподтверждённом объёме fold секцией в 7-day._
 - 🔁 **САТЕЛЛИТ itinerary-кластера (fold к 7-day хабу)** · Вт 11.08 — [Статья] 3 Days in Montenegro: First-Timer's Itinerary · `3 days in montenegro` · /3-days-in-montenegro/ · категория routes · фото ≥5 · 💰 туры / трансфер · перелинк: → **Montenegro 7-day itinerary (W1, канон-хаб — обязательная ссылка)**, → 5-day (W8), → Dubrovnik to Montenegro day trip (W7). _Сателлит канонического 7-day хаба; каноникал/перелинк наверх; при неподтверждённом объёме fold секцией в 7-day._
 - 🆕 **mid (relocation, evergreen + осенний всплеск)** · Ср 12.08 — [Статья] Montenegro Digital Nomad Visa 2026: Requirements & Process · `montenegro digital nomad visa` · /montenegro-digital-nomad-visa/ · категория attractions (relocation) · фото ≥5 · 💰 страховка / long-stay аренда · перелинк: → Cost of living Montenegro (опубл.), → Living in Montenegro nomad (W15). _YMYL: программа заявлена до 31.12.2026; порог дохода — формулой, не фикс-числом; официальные источники + дата проверки._
@@ -109,10 +98,8 @@
 - Пт 14.08 — [Статья] Best eSIM for Montenegro: Plans Compared · `esim montenegro` · /best-esim-montenegro/ · категория attractions (practical) · фото ≥5 · 💰 eSIM · перелинк: → Is Montenegro expensive (W8), → Is Montenegro safe (W9), → SIM cards Montenegro (W14)
 
 ## Неделя 9 (17–23.08) — Сравнения/безопасность + города-сателлиты + POI-острова
-- Пн 17.08 — 📊 Замер GA/GSC (готовность сентябрьского спроса; растущие planning-запросы) + 📰 /news (дайджест)
-- 📰 Ср 19.08 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 21.08 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W9: Пн 17.08 (с замером) + Ср 19.08 + Пт 21.08._
+- Пн 17.08 — 📊 Замер GA/GSC (готовность сентябрьского спроса; растущие planning-запросы)
+- 📰 Сб 22.08 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - Пн 17.08 — [Статья] Montenegro vs Croatia: Which to Visit · `montenegro vs croatia` · /montenegro-vs-croatia/ · категория attractions (comparison) · фото ≥5 · 💰 нет · перелинк: → Dubrovnik to Montenegro day trip (W7), → Montenegro 7-day itinerary (W1)
 - Вт 18.08 — [Статья] Is Montenegro Safe for Tourists? · `is montenegro safe` · /is-montenegro-safe/ · категория attractions (practical) · фото ≥5 · 💰 страховка · перелинк: → Is Montenegro expensive (W8), → Driving in Montenegro (W6)
 - Ср 19.08 — [Статья] Ulcinj Travel Guide: Beaches, Old Town & Velika Plaza · `ulcinj montenegro` · /ulcinj-montenegro/ · категория cities · фото ≥10 (город) · 💰 отели · перелинк: → Best beaches in Montenegro (W2), → Bar Montenegro (W9), → Ada Bojana (W16). _Кластер cities-towns [mid]._
@@ -121,10 +108,8 @@
 - [x] **ОПУБЛИКОВАНО (slug: `ostrog-monastery`)** · Вс 23.08 — [Статья] Ostrog Monastery: How to Visit Montenegro's Cliff Shrine · `ostrog monastery` · /attractions/ostrog-monastery/ · категория **attractions** (`attractionType=hramy-monastyri`, `region=central`; 5 фото CC Wikimedia) · 💰 trip-tours · **опубликовано 2026-06-22**, пара en/ru, `npm run qa` = GO. _(Опубл. на воскресной дате — исторический маркер, вне будней-сетки. Лид = прямой ответ: монастырь в отвесной скале, главная святыня Черногории, мощи Св. Василия. Факты: Wikipedia / montenegro.travel / montenegropulse. Перелинк: ↔ Durmitor, → Подгорица, Montenegro guide, аренда авто + хаб /attractions/. Добавлен в `showcasePicks` главной.)_
 
 ## Неделя 10 (24–30.08) — Города-сателлиты (горы/Бока) + пляжные/пещерные POI
-- Пн 24.08 — 📊 Замер GA/GSC (что из parks/seasonal растёт; добавить смежное по данным) + 📰 /news (дайджест)
-- 📰 Ср 26.08 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 28.08 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W10: Пн 24.08 (с замером) + Ср 26.08 + Пт 28.08._
+- Пн 24.08 — 📊 Замер GA/GSC (что из parks/seasonal растёт; добавить смежное по данным)
+- 📰 Сб 29.08 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - Пн 24.08 — [Статья] Cetinje Travel Guide: Old Royal Capital & Museums · `cetinje montenegro` · /cetinje-montenegro/ · категория cities · фото ≥10 (город) · 💰 туры · перелинк: → Podgorica (опубл.), → Lovcen national park (W6), → Lipa Cave (W16). _Кластер cities-towns [mid]._
 - Вт 25.08 — [Статья] Žabljak & Durmitor Base Town: Where to Stay in the North · `zabljak montenegro` · /zabljak-montenegro/ · категория cities · фото ≥10 (город) · 💰 отели · перелинк: → Durmitor national park (опубл.), → Tara canyon rafting (W5), → Where to stay in Montenegro (W2). _Кластер cities-towns [mid]._
 - Ср 26.08 — [Статья] Perast Travel Guide: Baroque Town on the Bay of Kotor · `perast travel guide` · /perast-travel-guide/ · категория cities · фото ≥10 (город) · 💰 отели · перелинк: → Perast & Our Lady of the Rocks (W5), → Kotor (опубл.), → Bay of Kotor boat tour (W4). _Кластер cities-towns [mid]. ⚠ DEDUPE: разводить с attraction `perast-our-lady-of-the-rocks` (W5, визит на островки) — здесь town-level (где жить/есть)._
@@ -132,10 +117,8 @@
 - Пт 28.08 — [Статья] Blue Cave Montenegro: Boat Tours from Kotor & Herceg Novi · `blue cave montenegro` · /blue-cave-montenegro/ · категория attractions · фото ≥5 · 💰 туры (GetYourGuide) · перелинк: → Bay of Kotor boat tour (W4), → Herceg Novi (W4). _Кластер attractions-pois [mid]._
 
 ## Неделя 11 (31.08–06.09) — POI-острова/парк + itinerary-сателлиты
-- Пн 31.08 — 📊 Замер GA/GSC (всплеск осеннего nomad-спроса; CTR визовой страницы) + 📰 /news (дайджест)
-- 📰 Ср 02.09 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 04.09 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W11: Пн 31.08 (с замером) + Ср 02.09 + Пт 04.09._
+- Пн 31.08 — 📊 Замер GA/GSC (всплеск осеннего nomad-спроса; CTR визовой страницы)
+- 📰 Сб 05.09 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - Пн 31.08 — [Статья] Biogradska Gora National Park: Lake, Forest & Hikes · `biogradska gora national park` · /biogradska-gora-national-park/ · категория attractions · фото ≥5 · 💰 туры · перелинк: → Durmitor national park (опубл.), → Kolašin (W15). _Кластер attractions-pois [mid]._
 - Вт 01.09 — [Статья] Sveti Đorđe & Our Lady of the Rocks: The Islands of Perast · `our lady of the rocks perast` · /our-lady-of-the-rocks/ · категория attractions · фото ≥5 · 💰 туры · перелинк: → Perast & Our Lady of the Rocks (W5), → Bay of Kotor boat tour (W4). _Кластер attractions-pois [mid]. ⚠ DEDUPE: если `perast-our-lady-of-the-rocks` (W5) выходит объединённым — FOLD сюда; не публиковать обе. Согласовать с владельцем._
 - [x] **ОПУБЛИКОВАНО (slug: `cost-of-living-in-montenegro`)** · Ср 02.09 — [Статья] Cost of Living in Montenegro (2026 Budget Breakdown) · `cost of living montenegro` · категория **relocation** · 💰 long-stay аренда / страховка · перелинк: → Montenegro digital nomad visa (W8), → Is Montenegro expensive (W8). _Slug выровнен с опубл.: план. `cost-of-living-montenegro` → факт `cost-of-living-in-montenegro` (опубл. `category=relocation`). Канонический slug — `cost-of-living-in-montenegro`._
@@ -143,10 +126,8 @@
 - Пт 04.09 — [Статья] Montenegro Without a Car: How to Travel by Bus & Tours · `montenegro without a car` · /montenegro-without-a-car/ · категория routes · фото ≥5 · 💰 туры / трансфер · перелинк: → Getting around Montenegro (W2), → Kotor to Budva bus (W5). _Кластер itineraries [mid]._
 
 ## Неделя 12 (07–13.09) — Itinerary-сателлиты + сезон/погода-сателлиты
-- Пн 07.09 — 📊 Замер GA/GSC (конверсия nomad-хаба; растущие запросы → очередь) + 📰 /news (дайджест)
-- 📰 Ср 09.09 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 11.09 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W12: Пн 07.09 (с замером) + Ср 09.09 + Пт 11.09._
+- Пн 07.09 — 📊 Замер GA/GSC (конверсия nomad-хаба; растущие запросы → очередь)
+- 📰 Сб 12.09 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - Пн 07.09 — [Статья] Montenegro Family Itinerary: Best Things to Do with Kids · `montenegro with kids` · /montenegro-with-kids/ · категория routes · фото ≥5 · 💰 отели / туры · перелинк: → Montenegro 7-day itinerary (W1), → Things to do in Montenegro (W1). _Кластер itineraries [mid]._
 - Вт 08.09 — [Статья] Croatia & Montenegro Itinerary: Combined 7–10 Day Trip · `croatia and montenegro itinerary` · /croatia-montenegro-itinerary/ · категория routes · фото ≥5 · 💰 аренда авто / отели · перелинк: → Montenegro 7-day itinerary (W1), → Dubrovnik to Montenegro day trip (W7), → Montenegro vs Croatia (W9). _Кластер itineraries [mid]._
 - Ср 09.09 — [Статья] Montenegro Sea Temperature by Month: When to Swim · `montenegro sea temperature` · /montenegro-sea-temperature/ · категория planning · фото ≥5 · 💰 отели · перелинк: → Montenegro weather by month (W7), → Best time to visit Montenegro (опубл.). _Кластер best-time-weather [mid]; сателлит weather-by-month._
@@ -154,10 +135,8 @@
 - Пт 11.09 — [Статья] Montenegro Travel: One Week Coast & Mountains Budget Breakdown · `montenegro one week cost` · /montenegro-week-trip-budget/ · категория articles · фото ≥5 · 💰 отели / страховка · перелинк: → Is Montenegro expensive (W8), → Cost of living in Montenegro (опубл.), → Montenegro 7-day itinerary (W1). _Кластер budget-cost [mid]; разводить с `is-montenegro-expensive` и опубл. cost-of-living._
 
 ## Неделя 13 (14–20.09) — Транспорт-сателлиты + еда-вертикаль (старт)
-- Пн 14.09 — 📊 Замер GA/GSC (квартальный итог: топ-страницы, лучшие связки, план Q4) + 📰 /news (дайджест)
-- 📰 Ср 16.09 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 18.09 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W13: Пн 14.09 (с замером) + Ср 16.09 + Пт 18.09._
+- Пн 14.09 — 📊 Замер GA/GSC (квартальный итог: топ-страницы, лучшие связки, план Q4)
+- 📰 Сб 19.09 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - Пн 14.09 — [Статья] Podgorica to Kotor: Bus, Transfer & Driving Guide · `podgorica to kotor` · /podgorica-to-kotor/ · категория articles · фото ≥5 · 💰 трансфер / аренда авто · перелинк: → Getting around Montenegro (W2), → Podgorica (опубл.), → Kotor (опубл.). _Кластер transport [mid]._
 - Вт 15.09 — [Статья] Kotor Cruise Port Guide: What to Do on a Day in Port · `kotor cruise port` · /kotor-cruise-port-guide/ · категория articles · фото ≥5 · 💰 туры · перелинк: → Kotor (опубл.), → Bay of Kotor boat tour (W4). _Кластер transport [mid]._
 - Ср 16.09 — [Статья] Budva to Kotor: Bus, Boat & How to Get Between Them · `budva to kotor` · /budva-to-kotor/ · категория articles · фото ≥5 · 💰 трансфер / туры · перелинк: → Kotor to Budva bus (W5), → Getting around Montenegro (W2). _Кластер transport [mid]. ⚠ DEDUPE: реверс `kotor-to-budva-bus` (W5) — если двунаправленная, FOLD._
@@ -165,10 +144,8 @@
 - Пт 18.09 — [Статья] Where to Eat in Kotor: Best Restaurants & Konobas · `where to eat in kotor` · /where-to-eat-in-kotor/ · категория articles · фото ≥5 · 💰 рестораны / туры · перелинк: → Montenegrin food (W13), → Kotor (опубл.); связать с опубл. /konoba-scala-santa/, /restaurant-galion/, /cave-coffee-kotor/. _Кластер food [mid]._
 
 ## Неделя 14 (21–27.09) — Day trips + сравнения-сателлиты + practical
-- Пн 21.09 — 📊 Замер GA/GSC + 📰 /news (дайджест)
-- 📰 Ср 23.09 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 25.09 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W14: Пн 21.09 (с замером) + Ср 23.09 + Пт 25.09._
+- Пн 21.09 — 📊 Замер GA/GSC
+- 📰 Сб 26.09 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - Пн 21.09 — [Статья] Best Day Trips from Budva (Sveti Stefan, Kotor, Skadar) · `day trips from budva` · /day-trips-from-budva/ · категория routes · фото ≥5 · 💰 туры / аренда авто · перелинк: → Best day trips from Kotor (W6), → Budva (опубл.), → Sveti Stefan (W5). _Кластер day-trips [mid]; сиблинг day-trips-from-kotor._
 - Вт 22.09 — [Статья] Montenegro vs Albania: Which Balkan Country to Visit · `montenegro vs albania` · /montenegro-vs-albania/ · категория articles · фото ≥5 · 💰 нет · перелинк: → Montenegro vs Croatia (W9), → Is Montenegro worth visiting (W4). _Кластер comparisons-decision [mid]. ⚠ паритет: нейтральные pros/cons, НЕ «дешевле Албании» (правило STRATEGY)._
 - Ср 23.09 — [Статья] Kotor or Budva: Where Should You Stay in Montenegro? · `kotor or budva` · /kotor-or-budva/ · категория articles · фото ≥5 · 💰 отели · перелинк: → Where to stay in Montenegro (W2, хаб), → Kotor (опубл.), → Budva (опубл.). _Кластер comparisons-decision [mid]; сателлит where-to-stay хаба._
@@ -176,21 +153,18 @@
 - Пт 25.09 — [Статья] SIM Cards & Mobile Data in Montenegro (Telenor, m:tel, One) · `montenegro sim card` · /montenegro-sim-card/ · категория planning · фото ≥5 · 💰 eSIM / связь · перелинк: → Best eSIM for Montenegro (W8), → Getting around Montenegro (W2). _Кластер practical [mid]; сателлит eSIM-страницы (физ-SIM intent)._
 
 ## Неделя 15 (28.09–04.10) — Relocation-добивка (депри) + горные города
-- Пн 28.09 — 📊 Замер GA/GSC + 📰 /news (дайджест)
-- 📰 Ср 30.09 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 02.10 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W15: Пн 28.09 (с замером) + Ср 30.09 + Пт 02.10._
-- Пн 28.09 — [Статья] Do They Speak English in Montenegro? Language & Useful Phrases · `language in montenegro` · /language-in-montenegro/ · категория planning · фото ≥5 · 💰 нет · перелинк: → Montenegro entry requirements (W2), → Is Montenegro safe (W9). _Кластер practical [long-tail]._
+- Пн 28.09 — 📊 Замер GA/GSC
+- 📰 Сб 03.10 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
+- 💰 **КОММЕРЦИЯ (освободившийся слот: where-to-stay сателлит)** · Пн 28.09 — [Статья] Where to Stay in Budva: Best Areas, Beaches & Hotels · `where to stay in budva` · /where-to-stay-in-budva/ · категория attractions (accommodation) · фото ≥5 · 💰 отели · перелинк: → Where to stay in Montenegro (W2, хаб), → Budva (опубл.), → Best beaches in Montenegro (W2), → Kotor or Budva (W14). _Сателлит accommodation-хаба (where-to-stay W2); Будва — главный курортный хаб (SEO Beaches & Budva Riviera). Кормит отельную монетизацию по районам Будвы. Слот освобождён мержем тонкой темы `language in montenegro`._
+- ~~Do They Speak English / Language in Montenegro~~ → **MERGE: раздел в хабе Guide** (тонкая info-микротема `💰 нет`, [long-tail]; язык/полезные фразы вплести секцией в зонтичный практический гид/раздел Guide хаба, отдельную страницу не плодить).
 - ⬇️ **ДЕПРИ / кандидат на трим (низкий объём)** · Вт 29.09 — [Статья] Living in Budva vs Tivat vs Podgorica for Remote Workers · `living in montenegro` · /living-in-montenegro-nomad/ · категория attractions (relocation) · фото ≥5 · 💰 long-stay аренда · перелинк: → Cost of living in Montenegro (опубл.), → Montenegro digital nomad visa (W8) · ⚠️ **депри: низкий объём, нишевый запрос** — публиковать ТОЛЬКО при подтверждённом спросе GSC; иначе fold в cost-of-living (опубл.) секцией. Не двигать вперёд голов/P0.
 - ⬇️ **ДЕПРИ / кандидат на трим (низкий объём)** · Ср 30.09 — [Статья] Coworking & Coliving in Montenegro · `coworking montenegro` · /coworking-coliving-montenegro/ · категория attractions (relocation) · фото ≥5 · 💰 коворкинг / коливинг · перелинк: → Living in Montenegro nomad (W15), → Montenegro digital nomad visa (W8) · ⚠️ **депри: низкий объём, нишевый запрос** — публиковать ТОЛЬКО при подтверждённом спросе GSC; иначе fold в nomad-хаб. Не двигать вперёд голов/P0.
 - ⬇️ **ДЕПРИ / кандидат на трим (низкий объём)** · Чт 01.10 — [Статья] Sailing & Yacht Charter in Montenegro (Bay of Kotor) · `yacht charter montenegro` · /yacht-charter-montenegro/ · категория attractions · фото ≥5 · 💰 яхт-чартер · перелинк: → Tivat (опубл.), → Bay of Kotor boat tour (W4) · ⚠️ **депри: низкий объём, узкий спрос** — высокая монетизация, но мало запросов; публиковать или fold в Tivat/Porto Montenegro секцией. Не двигать вперёд голов/P0.
 - Пт 02.10 — [Статья] Kolašin Travel Guide: Mountain Resort & Biogradska Gora Base · `kolasin montenegro` · /kolasin-montenegro/ · категория cities · фото ≥10 (город) · 💰 отели / ски-пасс · перелинк: → Biogradska Gora national park (W11), → Skiing in Montenegro (W17). _Кластер cities-towns [long-tail]._
 
 ## Неделя 16 (05–11.10) — Long-tail города + POI (пляжи/пещеры/парки)
-- Пн 05.10 — 📊 Замер GA/GSC + 📰 /news (дайджест)
-- 📰 Ср 07.10 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 09.10 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W16: Пн 05.10 (с замером) + Ср 07.10 + Пт 09.10._
+- Пн 05.10 — 📊 Замер GA/GSC
+- 📰 Сб 10.10 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - Пн 05.10 — [Статья] Petrovac Travel Guide: Quiet Riviera Beach Town · `petrovac montenegro` · /petrovac-montenegro/ · категория cities · фото ≥10 (город) · 💰 отели · перелинк: → Budva (опубл.), → Best beaches in Montenegro (W2). _Кластер cities-towns [long-tail]._
 - Вт 06.10 — [Статья] Nikšić Travel Guide: Montenegro's Second City & Lakes · `niksic montenegro` · /niksic-montenegro/ · категория cities · фото ≥10 (город) · 💰 отели · перелинк: → Podgorica (опубл.), → Ostrog monastery (опубл.). _Кластер cities-towns [long-tail]._
 - Ср 07.10 — [Статья] Prokletije National Park: Hiking the Accursed Mountains · `prokletije national park` · /prokletije-national-park/ · категория attractions · фото ≥5 · 💰 туры / гид · перелинк: → Biogradska Gora national park (W11), → Durmitor national park (опубл.). _Кластер attractions-pois [long-tail]._
@@ -198,10 +172,8 @@
 - Пт 09.10 — [Статья] Lipa Cave: Visiting Montenegro's Show Cave near Cetinje · `lipa cave montenegro` · /lipa-cave-montenegro/ · категория attractions · фото ≥5 · 💰 туры / билеты · перелинк: → Cetinje (W10), → Lovcen national park (W6). _Кластер attractions-pois [long-tail]._
 
 ## Неделя 17 (12–18.10) — Long-tail POI/сезон + транспорт-хвост
-- Пн 12.10 — 📊 Замер GA/GSC + 📰 /news (дайджест)
-- 📰 Ср 14.10 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 16.10 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- _Дни новостей W17: Пн 12.10 (с замером) + Ср 14.10 + Пт 16.10._
+- Пн 12.10 — 📊 Замер GA/GSC
+- 📰 Сб 17.10 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
 - Пн 12.10 — [Статья] Luštica Peninsula Guide: Beaches, Bays & Hidden Coves · `lustica peninsula montenegro` · /lustica-peninsula-montenegro/ · категория attractions · фото ≥5 · 💰 отели / туры · перелинк: → Tivat (опубл.), → Best beaches in Montenegro (W2). _Кластер attractions-pois [long-tail]._
 - Вт 13.10 — [Статья] Kotor to Lovćen: Ladder of Kotor Hike & Serpentine Road · `ladder of kotor hike` · /ladder-of-kotor-hike/ · категория attractions · фото ≥5 · 💰 туры / аренда авто · перелинк: → Lovcen national park (W6), → Kotor city walls (W6). _Кластер attractions-pois [long-tail]._
 - Ср 14.10 — [Статья] Best Time to Visit Montenegro for Hiking & the Mountains · `montenegro hiking season` · /best-time-hiking-montenegro/ · категория planning · фото ≥5 · 💰 туры / гид · перелинк: → Best time to visit Montenegro (опубл.), → Durmitor national park (опубл.). _Кластер best-time-weather [long-tail]; сателлит /best-time-to-visit-montenegro/ (опубл.)._
@@ -209,13 +181,13 @@
 - Пт 16.10 — [Статья] Ferry to Montenegro: Bari & Ancona to Bar (Italy Crossings) · `ferry to montenegro` · /ferry-to-montenegro/ · категория articles · фото ≥5 · 💰 паромы / билеты · перелинк: → Bar Montenegro (W9), → Getting around Montenegro (W2). _Кластер transport [long-tail]; пара к Bar city page._
 
 ## Неделя 18 (19–25.10) — Хвост (еда/сравнения/practical) + сезон-зима
-- Пн 19.10 — 📊 Замер GA/GSC (итог окна; план Q4/зима + лето-2027) + 📰 /news (дайджест)
-- 📰 Ср 21.10 — /news (дайджест, в этот день также выходит статья) · превью владельцу → «ок» → публикация
-- 📰 Пт 23.10 — /news (дайджест) · превью владельцу → «ок» → публикация
-- _Дни новостей W18: Пн 19.10 (с замером) + Ср 21.10 + Пт 23.10. (Неделя неполная — 4 статейных дня Пн–Чт; Пт 23.10 — только новости.)_
+- Пн 19.10 — 📊 Замер GA/GSC (итог окна; план Q4/зима + лето-2027)
+- 📰 Сб 24.10 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
+- _W18 — статейные дни Пн 19.10 – Чт 22.10; Пт 23.10 — свободный будний день (резерв/добор). Новости — только Сб 24.10._
 - Пн 19.10 — [Статья] Montenegro Wine Guide: Vranac, Plantaže & Skadar Vineyards · `montenegro wine` · /montenegro-wine-guide/ · категория articles · фото ≥5 · 💰 туры (винные) · перелинк: → Montenegrin food (W13), → Lake Skadar (опубл.). _Кластер food [long-tail]; связать с опубл. /lake-skadar/._
 - Вт 20.10 — [Статья] Is Kotor Worth Visiting? What to Expect (Crowds & Highlights) · `is kotor worth visiting` · /is-kotor-worth-visiting/ · категория articles · фото ≥5 · 💰 туры · перелинк: → Kotor (опубл.), → Is Montenegro worth visiting (W4). _Кластер comparisons-decision [long-tail]; связать с опубл. /kotor/._
-- Ср 21.10 — [Статья] Tipping in Montenegro: How Much & When (Restaurants, Taxis) · `tipping in montenegro` · /tipping-in-montenegro/ · категория planning · фото ≥5 · 💰 нет · перелинк: → Currency & money in Montenegro (W4), → Montenegrin food (W13). _Кластер practical [long-tail]._
+- 💰 **КОММЕРЦИЯ (освободившийся слот: where-to-stay сателлит)** · Ср 21.10 — [Статья] Where to Stay in Kotor: Old Town vs Bay Areas & Hotels · `where to stay in kotor` · /where-to-stay-in-kotor/ · категория attractions (accommodation) · фото ≥5 · 💰 отели · перелинк: → Where to stay in Montenegro (W2, хаб), → Kotor (опубл.), → Kotor or Budva (W14), → Bay of Kotor boat tour (W4). _Сателлит accommodation-хаба (where-to-stay W2); Котор — главный магнит (SEO Kotor/Boka hub), высокий отельный интент (Старый город vs Доброта/Муо/Прчань). Слот освобождён мержем тонкой темы `tipping in montenegro`._
+- ~~Tipping in Montenegro~~ → **MERGE: раздел в хабе Guide** (тонкая info-микротема `💰 нет`, [long-tail]; «сколько и когда давать чаевые» вплести секцией в зонтичный практический гид/раздел Guide хаба либо в Currency & money (W4), отдельную страницу не плодить).
 - Чт 22.10 — [Статья] Montenegro in Winter: Skiing, Christmas & Off-Season Travel · `montenegro in winter` · /montenegro-in-winter/ · категория planning · фото ≥5 · 💰 отели / ски-пасс · перелинк: → Skiing in Montenegro (W17), → Best time to visit Montenegro (опубл.). _Кластер seasonal [mid]; окно публ. окт-ноя 2026 — попадает в окно._
 
 > На будущее (вне 18-недельного окна): зимний ski-контент Жабляк/Дурмитор — поддерживать дек-март (сезон); планировочные кластеры best time / itinerary / beaches / car rental для лета-2027 — обновить/переопубликовать фев-апр 2027; события (Sea Dance, Котор Карнавал, регаты Боки) — точечно через /news под проверенные даты года.
@@ -228,9 +200,9 @@
 
 **Консолидация itinerary-кластера (SEO):** один канонический хаб = **Montenegro 7-day itinerary (W1)**; сателлиты = road-trip (W3), 5-day (W8), 3-day (W8), 10-day (W11), without-a-car (W11), with-kids (W12), croatia+MNE (W12), how-many-days (опубл.) — каждый каноникал/линк наверх к 7-day; при неподтверждённом объёме fold сателлита секцией в 7-day, не плодить тонкие дубли.
 
-**Тематические хабы для перелинковки:** (1) Itinerary-хаб ← 7-day (канон) ← все itinerary-сателлиты + города/маршруты/нацпарки; (2) Kotor/Boka-хаб ← Perast, boat tour, blue cave, day trips, city walls, cruise port, ladder of Kotor; (3) Beaches-хаб ← Budva, Tivat, Sveti Stefan, where-to-stay, Budva beaches, Ulcinj, Petrovac, Ada Bojana, Lustica; (4) Getting-around-хаб ← getting-around (head) ← driving, airports, transfers, kotor↔budva, podgorica↔kotor, budva↔kotor, ferry; (5) Parks-хаб ← Durmitor, Tara, Lovcen, Skadar, Ostrog, Biogradska Gora, Prokletije; (6) Planning/YMYL-хаб ← entry-requirements, best-time, how-many-days, where-to-stay, currency, packing, language, tipping; (7) Food-хаб ← montenegrin-food (хаб) ← where-to-eat-kotor, wine + опубл. рестораны.
+**Тематические хабы для перелинковки:** (1) Itinerary-хаб ← 7-day (канон) ← все itinerary-сателлиты + города/маршруты/нацпарки; (2) Kotor/Boka-хаб ← Perast, boat tour, blue cave, day trips, city walls, cruise port, ladder of Kotor; (3) Beaches/Accommodation-хаб ← Budva, Tivat, Sveti Stefan, where-to-stay (хаб) ← where-to-stay-in-budva (W15), where-to-stay-in-kotor (W18), Budva beaches, Ulcinj, Petrovac, Ada Bojana, Lustica; (4) Getting-around-хаб ← getting-around (head) ← driving, airports, transfers, kotor↔budva, podgorica↔kotor, budva↔kotor, ferry; (5) Parks-хаб ← Durmitor, Tara, Lovcen, Skadar, Ostrog, Biogradska Gora, Prokletije; (6) Planning/YMYL-хаб ← entry-requirements, best-time, how-many-days, where-to-stay, currency, packing + **Guide-раздел хаба** (вмержены language + tipping, см. v2); (7) Food-хаб ← montenegrin-food (хаб) ← where-to-eat-kotor, wine + опубл. рестораны.
 
-**Дедуп/трим (депри, низкий объём):** living-in-budva-vs-tivat (W15), coworking-coliving (W15), yacht-charter (W15) — публиковать при свободном слоте и спросе GSC, иначе fold; никогда не двигать вперёд голов/P0. **DEDUPE-пары (согласовать с владельцем перед публикацией, риск двойной публикации):** perast-our-lady-of-the-rocks (W5) ↔ perast-travel-guide (W10, town-level) ↔ our-lady-of-the-rocks islands (W11); kotor-to-dubrovnik (W3) ↔ dubrovnik-to-kotor (W7); kotor-to-budva-bus (W5) ↔ budva-to-kotor (W13) — при двунаправленной странице FOLD.
+**MERGE в хаб (тонкие info-микротемы `💰 нет`, v2):** `language in montenegro` (бывш. W15) и `tipping in montenegro` (бывш. W18) — отдельные страницы НЕ создаём; вплести секциями в **Guide-раздел хаба** (tipping также уместен в Currency & money W4). Освободившиеся будние слоты заняты коммерцией (where-to-stay Budva/Kotor). **Дедуп/трим (депри, низкий объём):** living-in-budva-vs-tivat (W15), coworking-coliving (W15), yacht-charter (W15) — публиковать при свободном слоте и спросе GSC, иначе fold; никогда не двигать вперёд голов/P0. **DEDUPE-пары (согласовать с владельцем перед публикацией, риск двойной публикации):** perast-our-lady-of-the-rocks (W5) ↔ perast-travel-guide (W10, town-level) ↔ our-lady-of-the-rocks islands (W11); kotor-to-dubrovnik (W3) ↔ dubrovnik-to-kotor (W7); kotor-to-budva-bus (W5) ↔ budva-to-kotor (W13) — при двунаправленной странице FOLD.
 
 **Замеры:** Замер GA/GSC — каждый понедельник, 15 мин (первый замер Пн 29.06). Смотрим: топ-растущие страницы по кликам/показам в GSC, новые запросы без позиций (контент-пробелы), CTR проседающих страниц (правка title/meta), какие денежные связки (авто/туры/eSIM/чартер/отели) конвертят в GA. Правила корректировки: (1) растущий хаб → на следующей неделе добавляем смежную статью того же кластера и усиливаем перелинковку; (2) P0-тема не набирает показов за 3-4 недели → сдвигаем смежные темы вниз очереди, не плодим дубли; (3) растущие запросы из GSC вне плана → в очередь P1/P2 на ближайшее свободное окно; (4) сезонные окна не двигаем по GA. План недели фиксируется в воскресенье вечером на основе понедельничного замера прошлой недели.
 
