@@ -79,41 +79,62 @@ function deployInfo(key) {
 }
 
 // --- разбор календаря на конкретную дату (DD.MM) ---
+// Правила (чтобы дашборд не превращался в кашу):
+//  • пункт принадлежит своей ПЕРВОЙ дате в строке (а не любому совпадению — иначе
+//    «выполнен 28.06» в строке слота 29.06 двоит пункт на два дня);
+//  • маркер [Статья]/[Article]/[Маршрут] определяет тип = article, даже если в строке
+//    дальше затесались «Замер»/«перелинк» (Грузия пишет замер и статью одной строкой);
+//  • для статьи «готово» = только публикационные маркеры ([x]/ОПУБЛИКОВАНО/✅ к статье).
+//    «✅ Замер» относится к ЗАМЕРУ, а не к статье на той же строке;
+//  • дубли в пределах дня схлопываем.
 function calendarFor(key, token) {
   const file = path.join(HUB, 'sites', `${key}-site`, 'KALENDAR.md');
-  if (!fs.existsSync(file)) return { items: [], text: '—', done: false };
+  if (!fs.existsSync(file)) return { items: [] };
   const lines = fs.readFileSync(file, 'utf8').split(/\r?\n/);
   const items = [];
+  const seen = new Set();
   for (const line of lines) {
-    if (!line.includes(token)) continue;
-    const isTask = /\[Статья\]/.test(line) || /\/news/.test(line) || line.includes('📰') || line.includes('📊') || /Замер/.test(line);
-    if (!isTask) continue;
-    // отсечь сноски/аннотации к другим датам — берём только строки-пункты списка
-    if (!/^\s*-\s/.test(line)) continue;
-    const done = /\[x\]/i.test(line) || /ОПУБЛИКОВАНО/i.test(line) || line.includes('✅') || /\bSKIP\b/i.test(line);
-    let type = 'article';
-    if (line.includes('📊') || /Замер/.test(line)) type = 'measure';
-    else if (/\/news/.test(line) || line.includes('📰')) type = 'news';
+    if (!/^\s*-\s/.test(line)) continue; // только пункты списка
+    const firstDate = (line.match(/\b\d{2}\.\d{2}\b/) || [])[0];
+    if (firstDate !== token) continue; // пункт = его первая (слотовая) дата
+    const hasArticle = /\[(?:Статья|Article|Маршрут)\]/.test(line);
+    const isNews = /\/news/.test(line) || line.includes('📰');
+    const isMeasure = line.includes('📊') || /Замер/.test(line);
+    if (!hasArticle && !isNews && !isMeasure) continue; // не задача
+    const type = hasArticle ? 'article' : isNews ? 'news' : 'measure';
+    const measureMark = /[✅✔]\s*Замер/.test(line); // ✅ относится к замеру, не к статье
+    let done;
+    if (type === 'article') {
+      done = /\[x\]/i.test(line) || /ОПУБЛИКОВАНО/i.test(line) || (/[✅✔]/.test(line) && !measureMark);
+    } else {
+      done = /\[x\]/i.test(line) || /ОПУБЛИКОВАНО/i.test(line) || /[✅✔]/.test(line) || /\bSKIP\b/i.test(line);
+    }
     let title = '';
-    const art = line.match(/\[Статья\]\s*([^·—]+)/);
+    const art = line.match(/\[(?:Статья|Article|Маршрут)\]\s*([^·—]+)/);
     if (art) title = art[1].trim();
     else {
-      const slug = line.match(/`([^`]+)`/);
-      title = type === 'news' ? (slug ? slug[1] : 'дайджест новостей') : (slug ? slug[1] : type === 'measure' ? 'Замер GA/GSC' : '');
+      const slugM = line.match(/`([^`]+)`/);
+      title = type === 'news' ? (slugM ? slugM[1] : 'дайджест новостей') : (slugM ? slugM[1] : type === 'measure' ? 'Замер GA/GSC' : '');
     }
     const cat = (line.match(/категори[яи]\s+\*{0,2}([a-zA-Zа-яёА-ЯЁ-]+)/) || [])[1] || '';
-    title = title.replace(/\s+$/,'').slice(0, 60);
+    title = title.replace(/\s+$/, '').slice(0, 60);
     let slug = '';
     const pathM = line.match(/\/((?:[a-z0-9-]+\/)*[a-z0-9-]+)\//);
     if (pathM) { const p = pathM[1].split('/'); slug = p[p.length - 1]; }
+    const sig = `${type}|${title}|${slug}`;
+    if (seen.has(sig)) continue; // дедуп в пределах дня
+    seen.add(sig);
     items.push({ type, title, cat, done, slug });
   }
-  const text = items.length
-    ? items.map((i) => `${i.type === 'news' ? '📰 ' : i.type === 'measure' ? '📊 ' : ''}${i.title}${i.cat ? ` (${i.cat})` : ''}`).join(' · ')
-    : '—';
-  const done = items.length > 0 && items.every((i) => i.done);
-  return { items, text, done };
+  return { items };
 }
+
+// Что показываем в ячейке дня:
+//  • замеры (📊) на дашборде не показываем — это не контент;
+//  • для будущих дней (завтра/послезавтра) показываем только «к написанию» (○),
+//    готовые статьи там быть не должны (план = что предстоит написать).
+const cellItems = (its, { future = false } = {}) =>
+  its.filter((i) => i.type !== 'measure').filter((i) => (future ? !i.done : true));
 
 // --- количество статей по разделам (коллекция articles, без черновиков) ---
 function countArticles(repo) {
@@ -225,13 +246,12 @@ for (const s of SITES) {
     cfDeploy: cfDeploys[s.key] || null,
     publishedToday: scan.published,
     urlBySlug: scan.urlBySlug,
-    yesterdayItems: y.items, todayItems: t.items, tomorrowItems: tm.items, dayAfterItems: da.items,
+    yesterdayItems: cellItems(y.items),
+    todayItems: cellItems(t.items),
+    tomorrowItems: cellItems(tm.items, { future: true }),
+    dayAfterItems: cellItems(da.items, { future: true }),
     articlesTotal: arts.total,
     articlesBySection: arts.bySection,
-    yesterdayText: y.text, yesterdayDone: y.done, yesterdayCount: y.items.length,
-    todayText: t.text, todayDone: t.done, todayCount: t.items.length,
-    tomorrowText: tm.text, tomorrowDone: tm.done, tomorrowCount: tm.items.length,
-    dayAfterText: da.text, dayAfterDone: da.done, dayAfterCount: da.items.length,
   });
   for (const r of d.runs) runsFlat.push({ site: s.key, name: s.name, ...r });
   for (const c of d.commits) commitsFlat.push({ site: s.key, name: s.name, ...c });
@@ -242,7 +262,7 @@ const summary = {
   deployedToday: sites.filter((s) => s.deployedToday).length,
   ciGreen: sites.filter((s) => s.ciGreen).length,
   publishedToday: sites.reduce((a, s) => a + (s.publishedToday || []).length, 0),
-  pendingTomorrow: sites.filter((s) => s.tomorrowCount > 0 && !s.tomorrowDone).length,
+  pendingTomorrow: sites.reduce((a, s) => a + (s.tomorrowItems || []).filter((i) => !i.done && i.type === 'article').length, 0),
 };
 
 const out = { generatedAt: now.toISOString(), yesterday, today, tomorrow, dayAfter, summary, sites, runs: runsFlat, commits: commitsFlat };

@@ -1,5 +1,5 @@
 # Контент-календарь Албания — ускоренное наполнение (3 статьи/будний день, Пн–Пт)
-Темп: **3 статьи/день, Пн–Пт** (ускоренное наполнение до ~80 статей, чтобы догнать Грузию). **Сб — еженедельный новостной дайджест** (/news: сбор → фильтр → превью владельцу → «ок» → публикация). **Вс — свободно.** Слаги — английские, из SEO-отчёта. 💰 = денежная связка. Замеры GA/GSC — по понедельникам.
+Темп: **3 статьи/день, Пн–Пт** (ускоренное наполнение до ~80 статей, чтобы догнать Грузию). **Сб — еженедельный новостной дайджест** (/news: сбор → фильтр → превью владельцу → «ок» → публикация). **Вс — 2 маршрута** (road-trips, коллекция routes, 💰 авто+отели). Слаги — английские, из SEO-отчёта. 💰 = денежная связка. Замеры GA/GSC — по понедельникам.
 Опубликованные материалы (✅ / [x] / ОПУБЛИКОВАНО) закреплены на реальных датах и не переносятся; неопубликованные уложены по **3/будний день** от ближайшей свободной даты (Пн 29.06.2026) вперёд, порядок **коммерция-first** (транспорт A→B → where-to-stay по локациям → сравнения X vs Y → cost-of-living/релокация → остальной хвост head→mid→long-tail). Якорь: 24.06.2026 = среда.
 
 ## News schedule (Албания)
@@ -22,7 +22,7 @@
 - Пн 29.06 — ⭐ [Статья] How to Get Around Albania: Buses, Furgons & Ferries · `how to get around albania` / `albania furgon buses` · /how-to-get-around-albania/ · info (transport) · фото ≥5 · 💰 аренда авто/трансфер · кластер transport-routes [head] · перелинк: ← car rental, → road trip, → 7-day
 - Пн 29.06 — [Статья] Tirana Airport to City Centre: Transfers & Options · `tirana airport to city centre` · /tirana-airport-transfers/ · info/transactional · фото ≥5 · 💰 трансфер/аренда авто · кластер transport-routes [head] · перелинк: ← Tirana things to do, → car rental
 - Пн 29.06 — [Статья] Tirana to Saranda: Bus, Car, Transfer & Travel Times · `tirana to saranda` · /tirana-to-saranda/ · articles · фото≥5 · 💰 trip-transfers/trip-carhire · кластер transport-routes [head]
-- Пн 29.06 — 📊 Замер GA/GSC (15 мин)
+- Пн 29.06 — ✅ Замер GA/GSC — выполнен 28.06 (baseline)
 - Вт 30.06 — [Статья] Saranda to Corfu Ferry: Timetable, Tickets & How to Book · `saranda to corfu ferry` · /saranda-corfu-ferry/ · articles · фото≥5 · 💰 trip-tours (ferry) · кластер transport-routes [head]
 - Вт 30.06 — [Статья] How to Get to Albania: Flights, Airports & Arriving from the UK/Europe · `how to get to albania` · /how-to-get-to-albania/ · articles · фото≥5 · 💰 trip-transfers · кластер transport-routes [head]
 - Вт 30.06 — [Статья] Tirana to Berat: Bus, Furgon, Car & Day Trip Options · `tirana to berat` · /tirana-to-berat/ · articles · фото≥5 · 💰 trip-carhire/trip-transfers · кластер transport-routes [mid]
@@ -36,6 +36,8 @@
 - Пт 03.07 — [Статья] Where to Stay in Saranda: Best Areas, Beachfront & Old Town · `where to stay in saranda` · /where-to-stay-in-saranda/ · planning · фото≥5 · 💰 trip-hotels · кластер where-to-stay [mid]
 - Пт 03.07 — [Статья] Where to Stay on the Albanian Riviera: Best Town for Your Trip · `where to stay albanian riviera` · /where-to-stay-albanian-riviera/ · planning · фото≥5 · 💰 trip-hotels · кластер where-to-stay [mid]
 - 📰 Сб 04.07 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
+- Вс 05.07 — [Маршрут] Albanian Riviera Road Trip: Vlora → Dhermi → Himara → Saranda · `albanian riviera road trip` · /routes/albanian-riviera-road-trip/ · категория routes · фото каждой остановки · 💰 авто+отели (trip-carhire/trip-hotels) · кластер itineraries [head] · перелинк: ← albanian-riviera, ← how-to-rent-a-car, → where-to-stay-albanian-riviera, → llogara-pass-albania, → dhermi/himare/saranda guides
+- Вс 05.07 — [Маршрут] Albania 4-Day Itinerary: Tirana, Berat & the Riviera in a Long Weekend · `albania 4 day itinerary` · /routes/albania-4-day-itinerary/ · категория routes · фото каждой остановки · 💰 авто+отели (trip-carhire/trip-hotels) · кластер itineraries [head] · перелинк: ← albania-7-day-itinerary, ← albania-3-day-itinerary, → how-to-rent-a-car, → where-to-stay-in-albania
 
 ## Неделя 3 (06.07–12.07)
 - Пн 06.07 — [Статья] Best All-Inclusive & Beach Resorts in Albania · `albania all inclusive resorts` · /best-resorts-albania/ · planning · фото≥5 · 💰 trip-hotels · кластер where-to-stay [mid]
@@ -56,6 +58,8 @@
   - _MERGE:_ Is the Tap Water Safe to Drink in Albania? (`albania tap water safe to drink`) → MERGE: раздел в хабе Safety (тонкая инфо-микротема, 💰 нет; в `is-albania-safe` абзацем «Tap water» — реальная боль, уже упомянута в SEO-пробелах)
 - Пт 10.07 — ⭐ [МАРШРУТ] The Perfect 7-Day Albania Itinerary (First-Timers) · `albania 7 day itinerary` · /albania-7-day-itinerary/ · routes · фото каждой остановки · 💰 аренда авто/отели · кластер itineraries [head] · перелинк: ← 10-day road trip, → car rental, → where to stay
 - 📰 Сб 11.07 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
+- Вс 12.07 — [Маршрут] Albania 2-Week Itinerary: The Complete North-to-South Road Trip · `albania 2 week itinerary` · /routes/albania-2-week-itinerary/ · категория routes · фото каждой остановки · 💰 авто+отели (trip-carhire/trip-hotels) · кластер itineraries [head] · перелинк: ← albania-road-trip-itinerary, ← albania-7-day-itinerary, → northern-albania-alps-itinerary, → southern-albania-road-trip, → how-to-rent-a-car
+- Вс 12.07 — [Маршрут] Lake Ohrid Two-Country Trip: Pogradec (Albania) & Ohrid (North Macedonia) · `lake ohrid albania macedonia` · /routes/lake-ohrid-two-country-trip/ · категория routes · фото каждой остановки · 💰 авто+отели (trip-carhire/trip-hotels) · кластер itineraries [mid] · кросс-страна AL+MK · перелинк: ← pogradec-lake-ohrid-albania, ← tirana-to-ohrid, → how-to-rent-a-car, → korce-albania-guide
 
 ## Неделя 4 (13.07–19.07)
 - Пн 13.07 — [Статья] Vlora (Vlore) Travel Guide: Beaches, Old Town & Independence City · `vlora albania` · /vlora-albania-guide/ · cities · фото≥5 (город≥10) · 💰 trip-hotels/trip-tours · кластер cities-towns [head]
@@ -75,6 +79,8 @@
 - Пт 17.07 — [МАРШРУТ] 3 Days in Albania: Tirana, Berat & the South in a Long Weekend · `albania 3 day itinerary` · /albania-3-day-itinerary/ · routes · фото каждой остановки · 💰 trip-hotels · кластер itineraries [mid]
 - Пт 17.07 — [Статья] Llogara Pass & National Park: Albania's Most Scenic Drive · `llogara pass albania` · /llogara-pass-albania/ · attractions · фото≥5 · 💰 trip-tours/trip-carhire · кластер attractions-poi [mid]
 - 📰 Сб 18.07 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
+- Вс 19.07 — [Маршрут] Albania & Montenegro Road Trip: Shkoder, Lake Skadar, Kotor & the Adriatic · `albania montenegro road trip` · /routes/albania-montenegro-road-trip/ · категория routes · фото каждой остановки · 💰 авто+отели (trip-carhire/trip-hotels) · кластер itineraries [mid] · кросс-страна AL+ME · перелинк: ← shkoder-albania-guide, ← albania-vs-montenegro, → how-to-rent-a-car, → northern-albania-alps-itinerary
+- Вс 19.07 — [Маршрут] Saranda to Corfu & Back: Albania–Greece Island Combo Itinerary · `saranda corfu itinerary` · /routes/saranda-corfu-combo/ · категория routes · фото каждой остановки · 💰 авто+отели+паром (trip-hotels/trip-tours) · кластер itineraries [mid] · кросс-граница AL+GR · перелинк: ← saranda-corfu-ferry, ← saranda-albania-guide, ← day-trips-from-saranda, → where-to-stay-in-saranda
 
 ## Неделя 5 (20.07–26.07)
 - Пн 20.07 — [Статья] Kruje (Kruja) Travel Guide: Skanderbeg Castle & Old Bazaar Day Trip · `kruja albania` · /kruje-albania-guide/ · cities · фото≥5 (город≥10) · 💰 trip-tours · кластер cities-towns [mid]
@@ -94,6 +100,8 @@
 - Пт 24.07 — [Статья] Traditional Albanian Food: What to Eat · `albanian food what to eat` · /traditional-albanian-food/ · food · фото ≥5 · 💰 food tours · кластер food-drink [mid] · перелинк: → best restaurants Tirana, ← Tirana things to do
 - Пт 24.07 — [Статья] Where to Eat in Tirana: Best Restaurants · `best restaurants in tirana` · /best-restaurants-tirana/ · food · фото ≥5 · 💰 food tours/бронь · кластер food-drink [mid] · перелинк: ← traditional albanian food, ← Tirana things to do
 - 📰 Сб 25.07 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
+- Вс 26.07 — [Маршрут] Balkan Grand Loop: Albania → North Macedonia → Montenegro → Croatia · `balkan road trip itinerary` · /routes/balkan-grand-loop/ · категория routes · фото каждой остановки · 💰 авто+отели (trip-carhire/trip-hotels) · кластер itineraries [mid] · кросс-страна AL+MK+ME+HR · перелинк: ← albania-road-trip-itinerary, ← lake-ohrid-two-country-trip, ← albania-montenegro-road-trip, → how-to-rent-a-car
+- Вс 26.07 — [Маршрут] Albania Coast-to-Mountains Road Trip: Riviera to the Accursed Mountains · `albania coast to mountains road trip` · /routes/albania-coast-to-mountains-road-trip/ · категория routes · фото каждой остановки · 💰 авто+отели (trip-carhire/trip-hotels) · кластер itineraries [mid] · перелинк: ← albanian-riviera-road-trip, ← northern-albania-alps-itinerary, ← llogara-pass-albania, → how-to-rent-a-car
 
 ## Неделя 6 (27.07–02.08)
 - Пн 27.07 — [Статья] Is Albania Safe for Solo Female Travelers? · `albania safe for solo female travelers` · /albania-solo-female-travel-safety/ · info · фото ≥5 · 💰 страховка · кластер practical [mid] · перелинк: ← is albania safe, ← travel insurance
@@ -113,6 +121,8 @@
 - Пт 31.07 — [Статья] Porto Palermo Castle & Bay: Ali Pasha's Fortress near Himare · `porto palermo albania` · /porto-palermo-castle/ · attractions · фото≥5 · 💰 trip-tours/trip-transfers · кластер attractions-poi [long-tail]
 - Пт 31.07 — [Статья] Albanian Wine Guide: Regions, Grapes & Where to Taste · `albanian wine` · /albanian-wine-guide/ · food · фото≥5 · 💰 trip-tours (wine) · кластер food-drink [long-tail]
 - 📰 Сб 01.08 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
+- Вс 02.08 — [Маршрут] Tirana to Saranda Road Trip: The Scenic Southern Drive with Stops · `tirana to saranda road trip` · /routes/tirana-to-saranda-road-trip/ · категория routes · фото каждой остановки · 💰 авто+отели (trip-carhire/trip-hotels) · кластер itineraries [mid] · перелинк: ← tirana-to-saranda, ← albanian-riviera-road-trip, ← llogara-pass-albania, → where-to-stay-in-saranda (NB: маршрут-гайд с остановками, не транспорт-страница A→B)
+- Вс 02.08 — [Маршрут] Albania & Kosovo Road Trip: Tirana, Prizren & the Western Balkans · `albania kosovo road trip` · /routes/albania-kosovo-road-trip/ · категория routes · фото каждой остановки · 💰 авто+отели (trip-carhire/trip-hotels) · кластер itineraries [long-tail] · кросс-страна AL+XK · перелинк: ← shkoder-albania-guide, ← how-to-rent-a-car, → things-to-do-in-tirana
 
 ## Неделя 7 (03.08–09.08)
 - Пн 03.08 — [Статья] Best Seafood & Where to Eat on the Albanian Riviera · `where to eat in saranda` · /where-to-eat-albanian-riviera/ · food · фото≥5 · 💰 trip-tours (food) · кластер food-drink [long-tail]
@@ -123,13 +133,15 @@
 
 ---
 ## Итоги перепаковки плана (28.06.2026, ускоренный темп — согласовано владельцем)
-- **Темп:** **3 статьи/будний день (Пн–Пт)** — ускоренное наполнение до ~80 статей (догнать Грузию). **Сб** — еженедельный новостной дайджест (/news). **Вс** — свободно. Замер GA/GSC — Пн.
+- **Темп:** **3 статьи/будний день (Пн–Пт)** — ускоренное наполнение до ~80 статей (догнать Грузию). **Сб** — еженедельный новостной дайджест (/news). **Вс** — **2 маршрута** (road-trips, коллекция routes, 💰 авто+отели), с Вс 05.07. Замер GA/GSC — Пн (baseline-замер выполнен 28.06).
 - **Якорь:** 24.06.2026 = среда (без изменений). Неопубликованные пере-датированы от ближайшей свободной даты **Пн 29.06.2026** по **Пн 03.08**.
 - **Пере-датировано неопубликованных тем:** 74 (74). Уложены по 3/будний день; дни с уже опубликованными статьями (01.07, 08.07, 10.07, 31.07 — по 1 ✅) добраны 2 новыми до 3. Последний день (03.08) — 3 статьи.
 - **Будних дней использовано:** 26 (29.06.2026 – 03.08.2026).
 - **Порядок — коммерция-first (rule 3):** (1) транспорт A→B bus/furgon/ferry/transfer 💰 — how-to-get-around, аэропорт-трансфер, Tirana→Saranda/Berat/Durres/Shkoder/Ohrid, паромы Corfu/Italy, Koman; (2) where-to-stay по локациям 💰 — Tirana/Saranda/Riviera/resorts; (3) сравнения X vs Y — vs Greece/Croatia/Montenegro, Himara-Saranda-Ksamil, Saranda vs Vlora, worth-visiting; (4) cost-of-living/релокация — travel budget, cost of living, digital nomad, visa-free US; (5) остальной хвост head→mid→long-tail в исходном порядке. **Страховка повторно НЕ добавлялась** (усилена 28.06).
-- **Опубликовано (не переносится, на реальных датах):** 9 строк — Tirana 24.06, is-expensive 25.06, is-safe 26.06, **where-to-stay + travel-insurance 28.06** (реальная дата публикации; перенесены со слотов 29.06/22.09 на 28.06 и помечены [x]), Saranda 01.07, road-trip 08.07, Berat 10.07, Gjirokaster 31.07. Плюс сироты/досрочные без даты (Butrint, Ksamil, Albanian Riviera, how-to-rent-a-car, do-you-need-insurance, digital-nomad-visa, albania-visa, best-time-to-visit, tirana-nightlife + рестораны) — числятся опубликованными, /work их НЕ создаёт заново.
+- **Опубликовано (не переносится, на реальных датах):** 9 строк — Tirana 24.06, is-expensive 25.06, is-safe 26.06, **where-to-stay + travel-insurance 28.06** (реальная дата публикации `publishedAt: 2026-06-28`; стоят `[x]` на строке 28.06, НЕ на будних слотах 29.06+), Saranda 01.07, road-trip 08.07, Berat 10.07, Gjirokaster 31.07. **На 29.06 и позже — НИ ОДНОЙ готовой статьи из to-write бэклога; единственные `✅` на будущих датах (Saranda 01.07, road-trip 08.07, Berat 10.07, Gjirokaster 31.07) — это реально опубликованные live-файлы `draft:false`, закреплены на своих датах и НЕ переносятся (иначе календарь разойдётся с реальностью; /work их НЕ создаёт заново).** Плюс сироты/досрочные без даты (Butrint, Ksamil, Albanian Riviera, how-to-rent-a-car, do-you-need-insurance, digital-nomad-visa, albania-visa, best-time-to-visit, tirana-nightlife + рестораны) — числятся опубликованными, /work их НЕ создаёт заново.
+- **Замер GA/GSC (baseline):** выполнен **28.06** (сегодня); строка Пн 29.06 помечена `✅ Замер GA/GSC — выполнен 28.06 (baseline)`. Будущие замеры (06.07, 13.07, 20.07, 27.07, 03.08) — по понедельникам, ○ к выполнению.
+- **Маршруты по Вс (routes, 💰 авто+отели):** по **2 на каждое воскресенье** с **Вс 05.07**: 05.07 (Albanian Riviera road trip + Albania 4-day), 12.07 (Albania 2-week + Lake Ohrid AL+MK), 19.07 (Albania+Montenegro + Saranda–Corfu combo), 26.07 (Balkan Grand Loop AL+MK+ME+HR + coast-to-mountains), 02.08 (Tirana→Saranda road trip + Albania+Kosovo). Источник идей — балканские петли (Riviera/South loop/Theth-Valbona/Lake Ohrid/Grand Loop). 28.06 — особое Вс (день публикации where-to-stay+insurance), маршрутов не несёт.
 - **Депри (НЕ удалены, в хвосте):** albania-itinerary-by-bus (каннибализация itinerary), albania-esim-remote-work (дубль eSIM; ведущий best-esim-for-albania).
 - **MERGE (тонкие темы, не отдельные слоты):** albania-plug-adapter → хаб Packing (в albania-packing-list); albania-tap-water-safe → хаб Safety (в is-albania-safe; едет суб-буллетом при visa-free US). Не воскрешать как отдельные статьи.
-- **Валидатор день↔дата:** 0 ошибок — все 74 новых дат + 9 опубликованных строк на Пн–Пт, выверены скриптом от якоря 24.06.2026=среда; каждый использованный будний день (кроме последнего) = ровно 3 статьи.
+- **Валидатор день↔дата:** 0 ошибок — все дат-строки (109 шт.: статьи, маршруты, замеры, /news) выверены скриптом от якоря 24.06.2026=среда; каждый будний день 29.06–03.08 = ровно 3 контент-слота (статья+маршрут), каждое Вс 05.07–02.08 = ровно 2 маршрута.
 - **План скользящий:** после первых замеров GA/GSC приоритет хвоста пересматривается; сезонные окна (Ривьера/хайкинг mid-Jun–mid-Sep) двигать под спрос.
