@@ -53,8 +53,11 @@ const artsCell = (s) => {
 
 const siteRows = d.sites.map((s) => {
   const ok = s.ci === 'success';
+  const inProg = /progress|queued|requested|waiting|pending|running|in_progress/i.test(s.ci || '');
   const ci = ok ? '<span class="badge bg">ок</span>'
-    : (s.ci === 'failure' ? '<span class="badge br">упал</span>' : `<span class="badge bn">${esc(s.ci)}</span>`);
+    : s.ci === 'failure' ? '<span class="badge br">упал</span>'
+    : inProg ? '<span class="badge bp">⏳ идёт деплой</span>'
+    : `<span class="badge bn">${esc(s.ci)}</span>`;
   return `<tr>
     <td class="nm"><span class="dot ${ok ? 'g' : 'r'}"></span>${FLAG[s.key] || ''} ${esc(s.name)}<div class="langs">${esc(s.langs)}</div></td>
     <td>${ci}</td>
@@ -81,7 +84,7 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="refresh" content="60">
+<meta http-equiv="refresh" content="30">
 <title>Пульт сети — ${esc(d.today)}</title>
 <style>
 :root{--bg:#0b0f16;--panel:#0f141c;--line:#222a37;--line2:#1c2330;--ink:#e7eaf0;--muted:#7e8696;--soft:#aab2c0;
@@ -116,6 +119,8 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
 .dot.g{background:var(--green)}.dot.r{background:var(--red)}
 .badge{font-size:12px;font-weight:600;padding:3px 11px;border-radius:999px;white-space:nowrap}
 .bg{background:#16261b;color:var(--green)}.br{background:#2a1618;color:var(--red)}.bn{background:#1c2330;color:var(--soft)}
+.bp{background:#2a2410;color:var(--amber);animation:pulse 1.3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 .ok{color:var(--green);margin-right:3px}.todo{color:var(--amber);margin-right:3px}
 .slotlist{display:flex;flex-direction:column;gap:6px}
 .slotrow{padding:5px 8px;background:rgba(255,255,255,.022);border:1px solid var(--line2);border-radius:7px;line-height:1.4}
@@ -135,7 +140,7 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
       <div class="sub">Деплои и контент-календарь · вчера ${esc(d.yesterday)} · сегодня ${esc(d.today)} · завтра ${esc(d.tomorrow)} · послезавтра ${esc(d.dayAfter)}</div>
     </div>
     <div class="upd-wrap">
-      <span class="updated">обновлено ${fmt(d.generatedAt)}</span>
+      <span class="updated">обновлено ${new Date(d.generatedAt).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>
       <button class="refresh" onclick="location.reload()" title="Перечитать свежие данные (пересборка идёт автоматически каждые 15 мин и после каждого коммита/work)">↻ Обновить</button>
     </div>
   </div>
@@ -159,7 +164,7 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
   ${pubTodayHtml}
   <div class="foot">
     <div class="legend"><span><span class="ok">✓</span> опубликовано / ок</span><span><span class="todo">○</span> к написанию</span></div>
-    <div>${d.sites.length} сайтов · страница сама обновляется раз в минуту</div>
+    <div>${d.sites.length} сайтов · данные ~2 мин + мгновенно после коммита/деплоя · страница 30 сек</div>
   </div>
 </div>
 </body>

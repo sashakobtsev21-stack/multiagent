@@ -19,8 +19,8 @@ git + GitHub Actions (gh)          node build-status.mjs        node build-html.
 
 ## Авто-обновление (3 механизма)
 1. **После каждого коммита** — git-хук `post-commit` → `refresh.mjs` (тротлинг 45 сек). Ставится один раз: двойной клик `install-refresh-hooks.bat` (или `node install-refresh-hooks.mjs`).
-2. **Каждые 15 минут** — Планировщик Windows «guidebooks-dashboard» → `refresh-dashboard.bat`.
-3. **Сама страница** — meta-refresh раз в 60 сек перечитывает файл.
+2. **Каждые 2 минуты** — Планировщик Windows «guidebooks-dashboard» → `refresh-hidden.vbs` (запускает `refresh-dashboard.bat` СКРЫТО, без вспышки консоли). Ловит «во время деплоя» (статус CI queued→in_progress→done, бейдж «⏳ идёт деплой») и серверные авто-коммиты.
+3. **Сама страница** — meta-refresh раз в 30 сек перечитывает файл; кнопка «↻ Обновить» — сразу.
 
 ## Что нужно
 - **Node.js** (есть — на нём собраны сайты).
