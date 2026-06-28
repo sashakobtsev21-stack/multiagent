@@ -103,7 +103,10 @@ function calendarFor(key, token) {
     }
     const cat = (line.match(/категори[яи]\s+\*{0,2}([a-zA-Zа-яёА-ЯЁ-]+)/) || [])[1] || '';
     title = title.replace(/\s+$/,'').slice(0, 60);
-    items.push({ type, title, cat, done });
+    let slug = '';
+    const pathM = line.match(/\/((?:[a-z0-9-]+\/)*[a-z0-9-]+)\//);
+    if (pathM) { const p = pathM[1].split('/'); slug = p[p.length - 1]; }
+    items.push({ type, title, cat, done, slug });
   }
   const text = items.length
     ? items.map((i) => `${i.type === 'news' ? '📰 ' : i.type === 'measure' ? '📊 ' : ''}${i.title}${i.cat ? ` (${i.cat})` : ''}`).join(' · ')
@@ -142,9 +145,11 @@ function countArticles(repo) {
 
 // --- опубликованное СЕГОДНЯ (ссылки для дашборда) ---
 const DOMAIN = { gruzia: 'georgiaguidebook.com', albania: 'albaniaguidebook.com', montenegro: 'montenegroguidebook.com', croatia: 'croatiaguidebook.com', macedonia: 'macedoniaguidebook.com' };
-function publishedToday(repo, key) {
+function scanArticles(repo, key) {
+  const out = { published: [], urlBySlug: {} };
   const base = path.join(repo, 'src', 'content', 'articles');
-  if (!fs.existsSync(base)) return [];
+  if (!fs.existsSync(base)) return out;
+  const dom = DOMAIN[key];
   const bySlug = {};
   for (const lang of fs.readdirSync(base)) {
     const dd = path.join(base, lang);
@@ -155,22 +160,24 @@ function publishedToday(repo, key) {
       const txt = fs.readFileSync(path.join(dd, f), 'utf8');
       const fm = (txt.match(/^---\r?\n([\s\S]*?)\r?\n---/) || [])[1] || '';
       if (/^draft:\s*true/m.test(fm)) continue;
-      const pub = (fm.match(/^publishedAt:\s*'?"?([0-9-]+)/m) || [])[1];
-      if (pub !== todayIso) continue;
       const slug = (fm.match(/^slug:\s*'?"?([^'"\n\r]+)/m) || [])[1] || f.replace(/\.md$/, '');
       const cat = (fm.match(/^category:\s*'?"?([A-Za-z0-9_-]+)/m) || [])[1] || '';
       const title = (fm.match(/^title:\s*['"]?(.+?)['"]?\s*$/m) || [])[1] || slug;
-      if (!bySlug[slug]) bySlug[slug] = { slug, cat, isNews: cat === 'news' || cat === 'novosti', langs: {}, title };
+      const pub = (fm.match(/^publishedAt:\s*'?"?([0-9-]+)/m) || [])[1] || '';
+      if (!bySlug[slug]) bySlug[slug] = { slug, cat, isNews: cat === 'news' || cat === 'novosti', langs: {}, title, pub };
       bySlug[slug].langs[lang] = true;
       if (lang === 'en') bySlug[slug].title = title;
+      if (pub) bySlug[slug].pub = pub;
     }
   }
-  const dom = DOMAIN[key];
-  return Object.values(bySlug).map((s) => {
+  for (const s of Object.values(bySlug)) {
     const lang = s.langs.en ? 'en' : Object.keys(s.langs)[0];
     const prefix = lang === 'en' ? '' : '/' + lang;
-    return { title: s.title, url: `https://${dom}${prefix}/${s.cat}/${s.slug}/`, isNews: s.isNews };
-  });
+    const url = `https://${dom}${prefix}/${s.cat}/${s.slug}/`;
+    out.urlBySlug[s.slug] = url;
+    if (s.pub === todayIso) out.published.push({ title: s.title, url, isNews: s.isNews });
+  }
+  return out;
 }
 
 const sites = [];
@@ -202,6 +209,7 @@ for (const s of SITES) {
   const tm = calendarFor(s.key, tomorrow);
   const da = calendarFor(s.key, dayAfter);
   const arts = countArticles(path.join(HUB, 'sites', `${s.key}-site`));
+  const scan = scanArticles(path.join(HUB, 'sites', `${s.key}-site`), s.key);
   sites.push({
     key: s.key,
     name: s.name,
@@ -215,7 +223,9 @@ for (const s of SITES) {
     newsRebuild: d.newsRebuild,
     deployedToday: d.deployedToday,
     cfDeploy: cfDeploys[s.key] || null,
-    publishedToday: publishedToday(path.join(HUB, 'sites', `${s.key}-site`), s.key),
+    publishedToday: scan.published,
+    urlBySlug: scan.urlBySlug,
+    yesterdayItems: y.items, todayItems: t.items, tomorrowItems: tm.items, dayAfterItems: da.items,
     articlesTotal: arts.total,
     articlesBySection: arts.bySection,
     yesterdayText: y.text, yesterdayDone: y.done, yesterdayCount: y.items.length,

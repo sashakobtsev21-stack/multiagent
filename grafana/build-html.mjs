@@ -32,10 +32,16 @@ const summary = `<div class="summary">
   ${stat(`${d.summary.pendingTomorrow}`, 'На завтра написать', d.summary.pendingTomorrow ? 'amber' : 'green')}
 </div>`;
 
-const slotCell = (text, count, done) => {
-  if (!count) return '<span class="muted">—</span>';
-  const mk = done ? '<span class="ok">✓</span>' : '<span class="todo">○</span>';
-  return `${mk} ${esc(text)}`;
+const slotCell = (items, urlBySlug) => {
+  if (!items || !items.length) return '<span class="muted">—</span>';
+  return items.map((it) => {
+    const mk = it.done ? '<span class="ok">✓</span>' : '<span class="todo">○</span>';
+    const title = esc(it.title);
+    const link = (it.done && it.slug && urlBySlug && urlBySlug[it.slug])
+      ? `<a href="${urlBySlug[it.slug]}" target="_blank" rel="noopener" style="color:#7fb4f5;text-decoration:none">${title}</a>`
+      : title;
+    return `${mk} ${link}`;
+  }).join(' · ');
 };
 
 const artsCell = (s) => {
@@ -54,10 +60,10 @@ const siteRows = d.sites.map((s) => {
     <td>${ci}</td>
     <td class="muted nowrap">${s.cfDeploy ? fmt(s.cfDeploy.time) : fmt(s.deployTime)}</td>
     <td>${artsCell(s)}</td>
-    <td>${slotCell(s.yesterdayText, s.yesterdayCount, s.yesterdayDone)}</td>
-    <td>${slotCell(s.todayText, s.todayCount, s.todayDone)}</td>
-    <td>${slotCell(s.tomorrowText, s.tomorrowCount, s.tomorrowDone)}</td>
-    <td>${slotCell(s.dayAfterText, s.dayAfterCount, s.dayAfterDone)}</td>
+    <td>${slotCell(s.yesterdayItems, s.urlBySlug)}</td>
+    <td>${slotCell(s.todayItems, s.urlBySlug)}</td>
+    <td>${slotCell(s.tomorrowItems, s.urlBySlug)}</td>
+    <td>${slotCell(s.dayAfterItems, s.urlBySlug)}</td>
   </tr>`;
 }).join('');
 
