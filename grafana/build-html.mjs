@@ -93,7 +93,11 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,
 .top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:22px}
 h1{font-size:24px;margin:0;font-weight:700;letter-spacing:-.01em}
 .sub{color:var(--muted);font-size:14px;margin-top:5px}
+.upd-wrap{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
 .updated{font-size:13px;color:var(--soft);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px;white-space:nowrap}
+.refresh{font:600 13px/1 inherit;color:var(--ink);background:#16261b;border:1px solid #1f3a29;border-radius:999px;padding:8px 15px;cursor:pointer;white-space:nowrap;transition:background .12s,border-color .12s}
+.refresh:hover{background:#1c3324;border-color:#2c5238}
+.refresh:active{transform:translateY(1px)}
 .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:26px}
 @media(max-width:720px){.summary{grid-template-columns:repeat(2,1fr)}}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
@@ -129,7 +133,10 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
       <h1>Сеть путеводителей</h1>
       <div class="sub">Деплои и контент-календарь · вчера ${esc(d.yesterday)} · сегодня ${esc(d.today)} · завтра ${esc(d.tomorrow)} · послезавтра ${esc(d.dayAfter)}</div>
     </div>
-    <div class="updated">обновлено ${fmt(d.generatedAt)}</div>
+    <div class="upd-wrap">
+      <span class="updated">обновлено ${fmt(d.generatedAt)}</span>
+      <button class="refresh" onclick="location.reload()" title="Перечитать свежие данные (пересборка идёт автоматически каждые 15 мин и после каждого коммита/work)">↻ Обновить</button>
+    </div>
   </div>
   ${summary}
   <h2>Сайты</h2>
