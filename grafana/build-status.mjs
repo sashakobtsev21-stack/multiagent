@@ -33,9 +33,11 @@ const ddmm = (d) => `${pad(d.getDate())}.${pad(d.getMonth() + 1)}`;
 const isoDay = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 
 const now = new Date();
+const DAY = 86400000;
+const yesterday = ddmm(new Date(now.getTime() - DAY));
 const today = ddmm(now);
-const tomorrowDate = new Date(now.getTime() + 86400000);
-const tomorrow = ddmm(tomorrowDate);
+const tomorrow = ddmm(new Date(now.getTime() + DAY));
+const dayAfter = ddmm(new Date(now.getTime() + 2 * DAY));
 const todayIso = isoDay(now);
 
 // --- деплои / CI из GitHub Actions + git ---
@@ -110,13 +112,44 @@ function calendarFor(key, token) {
   return { items, text, done };
 }
 
+// --- количество статей по разделам (коллекция articles, без черновиков) ---
+function countArticles(repo) {
+  const base = path.join(repo, 'src', 'content', 'articles');
+  const out = { total: 0, bySection: {} };
+  if (!fs.existsSync(base)) return out;
+  // берём самый полный языковой каталог (для Грузии это ru/uk, для остальных en)
+  let dir = null, max = -1;
+  for (const l of ['en', 'ru', 'uk']) {
+    const dd = path.join(base, l);
+    if (fs.existsSync(dd)) {
+      const c = fs.readdirSync(dd).filter((f) => f.endsWith('.md')).length;
+      if (c > max) { max = c; dir = dd; }
+    }
+  }
+  if (!dir) return out;
+  for (const f of fs.readdirSync(dir)) {
+    if (!f.endsWith('.md')) continue;
+    const txt = fs.readFileSync(path.join(dir, f), 'utf8');
+    const m = txt.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    const fm = m ? m[1] : '';
+    if (/^draft:\s*true/m.test(fm)) continue; // черновики не считаем
+    const cat = (fm.match(/^category:\s*['"]?([A-Za-z0-9_-]+)['"]?/m) || [])[1] || 'прочее';
+    out.bySection[cat] = (out.bySection[cat] || 0) + 1;
+    out.total++;
+  }
+  return out;
+}
+
 const sites = [];
 const runsFlat = [];
 const commitsFlat = [];
 for (const s of SITES) {
   const d = deployInfo(s.key);
+  const y = calendarFor(s.key, yesterday);
   const t = calendarFor(s.key, today);
   const tm = calendarFor(s.key, tomorrow);
+  const da = calendarFor(s.key, dayAfter);
+  const arts = countArticles(path.join(HUB, 'sites', `${s.key}-site`));
   sites.push({
     key: s.key,
     name: s.name,
@@ -129,12 +162,12 @@ for (const s of SITES) {
     recentFailures: d.recentFailures,
     newsRebuild: d.newsRebuild,
     deployedToday: d.deployedToday,
-    todayText: t.text,
-    todayDone: t.done,
-    todayCount: t.items.length,
-    tomorrowText: tm.text,
-    tomorrowDone: tm.done,
-    tomorrowCount: tm.items.length,
+    articlesTotal: arts.total,
+    articlesBySection: arts.bySection,
+    yesterdayText: y.text, yesterdayDone: y.done, yesterdayCount: y.items.length,
+    todayText: t.text, todayDone: t.done, todayCount: t.items.length,
+    tomorrowText: tm.text, tomorrowDone: tm.done, tomorrowCount: tm.items.length,
+    dayAfterText: da.text, dayAfterDone: da.done, dayAfterCount: da.items.length,
   });
   for (const r of d.runs) runsFlat.push({ site: s.key, name: s.name, ...r });
   for (const c of d.commits) commitsFlat.push({ site: s.key, name: s.name, ...c });
@@ -148,7 +181,7 @@ const summary = {
   pendingTomorrow: sites.filter((s) => s.tomorrowCount > 0 && !s.tomorrowDone).length,
 };
 
-const out = { generatedAt: now.toISOString(), today, tomorrow, summary, sites, runs: runsFlat, commits: commitsFlat };
+const out = { generatedAt: now.toISOString(), yesterday, today, tomorrow, dayAfter, summary, sites, runs: runsFlat, commits: commitsFlat };
 
 const outDir = path.join(__dirname, 'shared');
 fs.mkdirSync(outDir, { recursive: true });
