@@ -168,27 +168,30 @@ function countArticles(repo) {
 const DOMAIN = { gruzia: 'georgiaguidebook.com', albania: 'albaniaguidebook.com', montenegro: 'montenegroguidebook.com', croatia: 'croatiaguidebook.com', macedonia: 'macedoniaguidebook.com' };
 function scanArticles(repo, key) {
   const out = { published: [], urlBySlug: {} };
-  const base = path.join(repo, 'src', 'content', 'articles');
-  if (!fs.existsSync(base)) return out;
   const dom = DOMAIN[key];
   const bySlug = {};
-  for (const lang of fs.readdirSync(base)) {
-    const dd = path.join(base, lang);
-    let st; try { st = fs.statSync(dd); } catch { continue; }
-    if (!st.isDirectory()) continue;
-    for (const f of fs.readdirSync(dd)) {
-      if (!f.endsWith('.md')) continue;
-      const txt = fs.readFileSync(path.join(dd, f), 'utf8');
-      const fm = (txt.match(/^---\r?\n([\s\S]*?)\r?\n---/) || [])[1] || '';
-      if (/^draft:\s*true/m.test(fm)) continue;
-      const slug = (fm.match(/^slug:\s*'?"?([^'"\n\r]+)/m) || [])[1] || f.replace(/\.md$/, '');
-      const cat = (fm.match(/^category:\s*'?"?([A-Za-z0-9_-]+)/m) || [])[1] || '';
-      const title = (fm.match(/^title:\s*['"]?(.+?)['"]?\s*$/m) || [])[1] || slug;
-      const pub = (fm.match(/^publishedAt:\s*'?"?([0-9-]+)/m) || [])[1] || '';
-      if (!bySlug[slug]) bySlug[slug] = { slug, cat, isNews: cat === 'news' || cat === 'novosti', langs: {}, title, pub };
-      bySlug[slug].langs[lang] = true;
-      if (lang === 'en') bySlug[slug].title = title;
-      if (pub) bySlug[slug].pub = pub;
+  // статьи И маршруты (у маршрутов свой /routes/-URL; без них ссылки в ячейках пропадают)
+  for (const coll of ['articles', 'routes']) {
+    const base = path.join(repo, 'src', 'content', coll);
+    if (!fs.existsSync(base)) continue;
+    for (const lang of fs.readdirSync(base)) {
+      const dd = path.join(base, lang);
+      let st; try { st = fs.statSync(dd); } catch { continue; }
+      if (!st.isDirectory()) continue;
+      for (const f of fs.readdirSync(dd)) {
+        if (!f.endsWith('.md')) continue;
+        const txt = fs.readFileSync(path.join(dd, f), 'utf8');
+        const fm = (txt.match(/^---\r?\n([\s\S]*?)\r?\n---/) || [])[1] || '';
+        if (/^draft:\s*true/m.test(fm)) continue;
+        const slug = (fm.match(/^slug:\s*'?"?([^'"\n\r]+)/m) || [])[1] || f.replace(/\.md$/, '');
+        const cat = (fm.match(/^category:\s*'?"?([A-Za-z0-9_-]+)/m) || [])[1] || (coll === 'routes' ? 'routes' : '');
+        const title = (fm.match(/^title:\s*['"]?(.+?)['"]?\s*$/m) || [])[1] || slug;
+        const pub = (fm.match(/^publishedAt:\s*'?"?([0-9-]+)/m) || [])[1] || '';
+        if (!bySlug[slug]) bySlug[slug] = { slug, cat, isNews: cat === 'news' || cat === 'novosti', langs: {}, title, pub };
+        bySlug[slug].langs[lang] = true;
+        if (lang === 'en') bySlug[slug].title = title;
+        if (pub) bySlug[slug].pub = pub;
+      }
     }
   }
   for (const s of Object.values(bySlug)) {

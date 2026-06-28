@@ -26,7 +26,6 @@
 - Вт 30.06 — [Статья] Saranda to Corfu Ferry: Timetable, Tickets & How to Book · `saranda to corfu ferry` · /saranda-corfu-ferry/ · articles · фото≥5 · 💰 trip-tours (ferry) · кластер transport-routes [head]
 - Вт 30.06 — [Статья] How to Get to Albania: Flights, Airports & Arriving from the UK/Europe · `how to get to albania` · /how-to-get-to-albania/ · articles · фото≥5 · 💰 trip-transfers · кластер transport-routes [head]
 - Вт 30.06 — [Статья] Tirana to Berat: Bus, Furgon, Car & Day Trip Options · `tirana to berat` · /tirana-to-berat/ · articles · фото≥5 · 💰 trip-carhire/trip-transfers · кластер transport-routes [mid]
-- Ср 01.07 — ✅ [Статья] Saranda Travel Guide: Beaches, Butrint & Blue Eye Day Trips · `saranda albania` · /cities/saranda-albania-guide/ · cities · фото 14 · 💰 trip-hotels/trip-tours · ОПУБЛИКОВАНО (en, qa=GO)
 - Ср 01.07 — [Статья] Tirana to Durres: Bus, Train & Beach Day Trip · `tirana to durres` · /tirana-to-durres/ · articles · фото≥5 · 💰 trip-transfers · кластер transport-routes [mid]
 - Ср 01.07 — [Статья] Ferry from Italy to Albania: Bari, Brindisi & Ancona to Durres/Vlore · `ferry italy to albania` · /italy-to-albania-ferry/ · articles · фото≥5 · 💰 trip-tours (ferry) · кластер transport-routes [mid]
 - Чт 02.07 — [Статья] Lake Koman Ferry: How to Ride Albania's Fjord · `lake koman ferry` · /lake-koman-ferry/ · attractions · фото ≥5 · 💰 туры/трансфер · кластер transport-routes [mid]
@@ -53,7 +52,6 @@
 - Чт 09.07 — [Статья] Albania Travel Budget: How Much Money per Day · `albania travel budget` · /albania-travel-budget/ · info · фото ≥5 · 💰 аренда авто/отели · кластер practical [head] · перелинк: ← is albania expensive, → cost of living
 - Чт 09.07 — [Статья] Cost of Living in Albania for Expats & Nomads · `cost of living in albania` · /cost-of-living-albania/ · info · фото ≥5 · 💰 жильё long-stay/страховка · кластер practical [mid]
 - Чт 09.07 — [Статья] Living in Tirana as a Digital Nomad: Cost & Coworking · `tirana digital nomad` · /tirana-digital-nomad-guide/ · mixed · фото ≥5 · 💰 жильё long-stay/eSIM · кластер practical [mid]
-- Пт 10.07 — ✅ [Статья] Berat, Albania: City of a Thousand Windows Guide · `berat albania` · /cities/berat-albania-guide/ · cities · фото 12 · 💰 trip-hotels/trip-tours · ОПУБЛИКОВАНО (en, qa=GO)
 - Пт 10.07 — [Статья] Albania 1-Year Visa-Free for US Citizens: How It Works · `albania visa free 1 year us citizens` · /albania-1-year-visa-free-us-citizens/ · planning · фото≥5 · 💰 страховка/жильё long-stay (safetywing + trip-hotels) · кластер practical [head] · перелинк: ← albania visa, ← digital nomad visa · _слот освобождён мержем tap water; источник: SEO P0-безвиз US (уникальный хук)_
   - _MERGE:_ Is the Tap Water Safe to Drink in Albania? (`albania tap water safe to drink`) → MERGE: раздел в хабе Safety (тонкая инфо-микротема, 💰 нет; в `is-albania-safe` абзацем «Tap water» — реальная боль, уже упомянута в SEO-пробелах)
 - Пт 10.07 — ⭐ [МАРШРУТ] The Perfect 7-Day Albania Itinerary (First-Timers) · `albania 7 day itinerary` · /albania-7-day-itinerary/ · routes · фото каждой остановки · 💰 аренда авто/отели · кластер itineraries [head] · перелинк: ← 10-day road trip, → car rental, → where to stay
@@ -117,7 +115,6 @@
 - Чт 30.07 — [МАРШРУТ] Best Day Trips from Vlora: Riviera, Llogara, Sazan & Apollonia · `day trips from vlore` · /day-trips-from-vlora/ · routes · фото каждой остановки · 💰 trip-tours · кластер day-trips [long-tail]
 - Чт 30.07 — [Статья] Karaburun-Sazan Marine Park: Boat Tours, Caves & Haxhi Ali Cave · `karaburun sazan boat tour` · /karaburun-sazan-marine-park/ · attractions · фото≥5 · 💰 trip-tours · кластер attractions-poi [long-tail]
 - Чт 30.07 — [МАРШРУТ] Day Trip from Tirana to Berat: Is It Doable & How to Plan It · `berat day trip from tirana` · /berat-day-trip-from-tirana/ · routes · фото каждой остановки · 💰 trip-tours · кластер day-trips [long-tail]
-- Пт 31.07 — ✅ [Статья] Gjirokaster Travel Guide: The Stone City · `gjirokaster albania` · /cities/gjirokaster-albania-guide/ · cities · фото 13 · 💰 trip-hotels/trip-tours · ОПУБЛИКОВАНО (en, qa=GO)
 - Пт 31.07 — [Статья] Porto Palermo Castle & Bay: Ali Pasha's Fortress near Himare · `porto palermo albania` · /porto-palermo-castle/ · attractions · фото≥5 · 💰 trip-tours/trip-transfers · кластер attractions-poi [long-tail]
 - Пт 31.07 — [Статья] Albanian Wine Guide: Regions, Grapes & Where to Taste · `albanian wine` · /albanian-wine-guide/ · food · фото≥5 · 💰 trip-tours (wine) · кластер food-drink [long-tail]
 - 📰 Сб 01.08 — /news (еженедельный дайджест: фильтр критичных инфра/виза/транспорт новостей 2026 → превью → «ок»; пусто = skip)
@@ -145,3 +142,13 @@
 - **MERGE (тонкие темы, не отдельные слоты):** albania-plug-adapter → хаб Packing (в albania-packing-list); albania-tap-water-safe → хаб Safety (в is-albania-safe; едет суб-буллетом при visa-free US). Не воскрешать как отдельные статьи.
 - **Валидатор день↔дата:** 0 ошибок — все дат-строки (109 шт.: статьи, маршруты, замеры, /news) выверены скриптом от якоря 24.06.2026=среда; каждый будний день 29.06–03.08 = ровно 3 контент-слота (статья+маршрут), каждое Вс 05.07–02.08 = ровно 2 маршрута.
 - **План скользящий:** после первых замеров GA/GSC приоритет хвоста пересматривается; сезонные окна (Ривьера/хайкинг mid-Jun–mid-Sep) двигать под спрос.
+
+## ✅ Опубликовано досрочно (вне плановой сетки, на реальных датах)
+
+> Эти статьи уже опубликованы (написаны раньше планового слота) и убраны из будущей сетки,
+> чтобы на будущих датах были только пункты «к написанию» (○). Дашборд их как задачи не показывает;
+> учитываются в общем счётчике статей. Перенесено автоматически 2026-06-29.
+
+- ✅ Saranda Travel Guide: Beaches, Butrint & Blue Eye Day Trips — опубл. 2026-06-22 (`saranda-albania-guide`) [был слот 01.07]
+- ✅ Berat, Albania: City of a Thousand Windows Guide — опубл. 2026-06-22 (`berat-albania-guide`) [был слот 10.07]
+- ✅ Gjirokaster Travel Guide: The Stone City — опубл. 2026-06-23 (`gjirokaster-albania-guide`) [был слот 31.07]

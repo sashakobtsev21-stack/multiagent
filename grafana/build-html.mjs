@@ -34,14 +34,14 @@ const summary = `<div class="summary">
 
 const slotCell = (items, urlBySlug) => {
   if (!items || !items.length) return '<span class="muted">—</span>';
-  return items.map((it) => {
+  return '<div class="slotlist">' + items.map((it) => {
     const mk = it.done ? '<span class="ok">✓</span>' : '<span class="todo">○</span>';
     const title = esc(it.title);
     const link = (it.done && it.slug && urlBySlug && urlBySlug[it.slug])
       ? `<a href="${urlBySlug[it.slug]}" target="_blank" rel="noopener" style="color:#7fb4f5;text-decoration:none">${title}</a>`
       : title;
-    return `${mk} ${link}`;
-  }).join(' · ');
+    return `<div class="slotrow">${mk} ${link}</div>`;
+  }).join('') + '</div>';
 };
 
 const artsCell = (s) => {
@@ -58,7 +58,6 @@ const siteRows = d.sites.map((s) => {
   return `<tr>
     <td class="nm"><span class="dot ${ok ? 'g' : 'r'}"></span>${FLAG[s.key] || ''} ${esc(s.name)}<div class="langs">${esc(s.langs)}</div></td>
     <td>${ci}</td>
-    <td class="muted nowrap">${s.cfDeploy ? fmt(s.cfDeploy.time) : fmt(s.deployTime)}</td>
     <td>${artsCell(s)}</td>
     <td>${slotCell(s.yesterdayItems, s.urlBySlug)}</td>
     <td>${slotCell(s.todayItems, s.urlBySlug)}</td>
@@ -118,6 +117,8 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
 .badge{font-size:12px;font-weight:600;padding:3px 11px;border-radius:999px;white-space:nowrap}
 .bg{background:#16261b;color:var(--green)}.br{background:#2a1618;color:var(--red)}.bn{background:#1c2330;color:var(--soft)}
 .ok{color:var(--green);margin-right:3px}.todo{color:var(--amber);margin-right:3px}
+.slotlist{display:flex;flex-direction:column;gap:6px}
+.slotrow{padding:5px 8px;background:rgba(255,255,255,.022);border:1px solid var(--line2);border-radius:7px;line-height:1.4}
 .muted{color:var(--muted)}
 .artn{font-size:20px;font-weight:700}
 .artbreak{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.5}
@@ -142,8 +143,8 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
   <h2>Сайты</h2>
   <div class="panel">
     <table>
-      <colgroup><col style="width:10%"><col style="width:5%"><col style="width:9%"><col style="width:16%"><col style="width:15%"><col style="width:15%"><col style="width:15%"><col style="width:15%"></colgroup>
-      <thead><tr><th>Сайт</th><th>CI</th><th>CF деплой</th><th>Статьи · разделы</th><th>Вчера</th><th>Сегодня</th><th>Завтра</th><th>Послезавтра</th></tr></thead>
+      <colgroup><col style="width:12%"><col style="width:6%"><col style="width:18%"><col style="width:16%"><col style="width:16%"><col style="width:16%"><col style="width:16%"></colgroup>
+      <thead><tr><th>Сайт</th><th>CI</th><th>Статьи · разделы</th><th>Вчера</th><th>Сегодня</th><th>Завтра</th><th>Послезавтра</th></tr></thead>
       <tbody>${siteRows}</tbody>
     </table>
   </div>
