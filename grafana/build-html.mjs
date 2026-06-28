@@ -61,6 +61,13 @@ const siteRows = d.sites.map((s) => {
   </tr>`;
 }).join('');
 
+const pubToday = d.sites.flatMap((s) => (s.publishedToday || []).map((p) => ({ ...p, key: s.key })));
+const pubTodayHtml = pubToday.length ? `
+  <h2>Опубликовано сегодня (${pubToday.length})</h2>
+  <div class="panel" style="padding:6px 16px">
+    ${pubToday.map((p) => `<div style="padding:8px 0;border-top:1px solid var(--line2)"><span class="badge ${p.isNews ? 'bn' : 'bg'}" style="margin-right:9px">${p.isNews ? '📰 новость' : '📄 статья'}</span><a href="${p.url}" target="_blank" rel="noopener" style="color:#7fb4f5;text-decoration:none">${FLAG[p.key] || ''} ${esc(p.title)}</a></div>`).join('')}
+  </div>` : '';
+
 const commitRows = [...(d.commits || [])].sort((a, b) => new Date(b.time) - new Date(a.time)).slice(0, 16)
   .map((c) => `<tr><td class="muted nowrap">${fmt(c.time)}</td><td class="nowrap">${FLAG[c.site] || ''} ${esc(c.name)}</td><td><span class="hash">${esc(c.hash)}</span> ${esc(c.subject)}</td></tr>`).join('');
 
@@ -119,6 +126,7 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
     <div class="updated">обновлено ${fmt(d.generatedAt)}</div>
   </div>
   ${summary}
+  ${pubTodayHtml}
   <h2>Сайты</h2>
   <div class="panel">
     <table>

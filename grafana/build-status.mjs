@@ -140,6 +140,39 @@ function countArticles(repo) {
   return out;
 }
 
+// --- опубликованное СЕГОДНЯ (ссылки для дашборда) ---
+const DOMAIN = { gruzia: 'georgiaguidebook.com', albania: 'albaniaguidebook.com', montenegro: 'montenegroguidebook.com', croatia: 'croatiaguidebook.com', macedonia: 'macedoniaguidebook.com' };
+function publishedToday(repo, key) {
+  const base = path.join(repo, 'src', 'content', 'articles');
+  if (!fs.existsSync(base)) return [];
+  const bySlug = {};
+  for (const lang of fs.readdirSync(base)) {
+    const dd = path.join(base, lang);
+    let st; try { st = fs.statSync(dd); } catch { continue; }
+    if (!st.isDirectory()) continue;
+    for (const f of fs.readdirSync(dd)) {
+      if (!f.endsWith('.md')) continue;
+      const txt = fs.readFileSync(path.join(dd, f), 'utf8');
+      const fm = (txt.match(/^---\r?\n([\s\S]*?)\r?\n---/) || [])[1] || '';
+      if (/^draft:\s*true/m.test(fm)) continue;
+      const pub = (fm.match(/^publishedAt:\s*'?"?([0-9-]+)/m) || [])[1];
+      if (pub !== todayIso) continue;
+      const slug = (fm.match(/^slug:\s*'?"?([^'"\n\r]+)/m) || [])[1] || f.replace(/\.md$/, '');
+      const cat = (fm.match(/^category:\s*'?"?([A-Za-z0-9_-]+)/m) || [])[1] || '';
+      const title = (fm.match(/^title:\s*['"]?(.+?)['"]?\s*$/m) || [])[1] || slug;
+      if (!bySlug[slug]) bySlug[slug] = { slug, cat, isNews: cat === 'news' || cat === 'novosti', langs: {}, title };
+      bySlug[slug].langs[lang] = true;
+      if (lang === 'en') bySlug[slug].title = title;
+    }
+  }
+  const dom = DOMAIN[key];
+  return Object.values(bySlug).map((s) => {
+    const lang = s.langs.en ? 'en' : Object.keys(s.langs)[0];
+    const prefix = lang === 'en' ? '' : '/' + lang;
+    return { title: s.title, url: `https://${dom}${prefix}/${s.cat}/${s.slug}/`, isNews: s.isNews };
+  });
+}
+
 const sites = [];
 const runsFlat = [];
 const commitsFlat = [];
@@ -182,6 +215,7 @@ for (const s of SITES) {
     newsRebuild: d.newsRebuild,
     deployedToday: d.deployedToday,
     cfDeploy: cfDeploys[s.key] || null,
+    publishedToday: publishedToday(path.join(HUB, 'sites', `${s.key}-site`), s.key),
     articlesTotal: arts.total,
     articlesBySection: arts.bySection,
     yesterdayText: y.text, yesterdayDone: y.done, yesterdayCount: y.items.length,
