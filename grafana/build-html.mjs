@@ -131,6 +131,12 @@ const dd = (s) => s.slice(8) + '.' + s.slice(5, 7); // YYYY-MM-DD → DD.MM
 const dRange = daily.length ? `${dd(daily[0].date)} → ${dd(daily[daily.length - 1].date)}` : '';
 const peak = (k) => Math.max(0, ...daily.map((x) => x[k]));
 const t1color = (p) => (p >= 40 ? '#4ade80' : p >= 20 ? '#fbbf24' : '#f87171');
+// вертикальные столбики по дням (CSS, чёткие; tooltip дата+значение при наведении)
+const vbars = (rows, key, color) => {
+  const max = Math.max(1, ...rows.map((r) => r[key]));
+  const cols = rows.map((r) => `<span class="vbar" style="height:${Math.max(2, r[key] / max * 100).toFixed(0)}%;background:${color}" title="${dd(r.date)}: ${r[key]}"></span>`).join('');
+  return `<div class="vbars">${cols}</div><div class="vbars-x"><span>${rows.length ? dd(rows[0].date) : ''}</span><span>${rows.length ? dd(rows[rows.length - 1].date) : ''}</span></div>`;
+};
 const tier1Bars = seoSites.map((s) => {
   const p = s.seo.ga4.tier1Pct || 0;
   return `<div class="barrow"><span class="barlbl">${FLAG[s.key] || ''} ${esc(s.name)}</span><span class="bartrack"><span class="barfill" style="width:${p}%;background:${t1color(p)}"></span></span><span class="barval">${p}%</span></div>`;
@@ -138,8 +144,8 @@ const tier1Bars = seoSites.map((s) => {
 const chartsSection = sn ? `
   <h2>Графики</h2>
   <div class="charts">
-    <div class="panel chart"><div class="chart-h">📈 Показы в поиске — всего <b>${sn.impressions28}</b> за 28д</div>${svgLine(daily.map((x) => x.impr), 320, 56, '#4ade80')}<div class="chart-f">${dRange} · пик за день: ${peak('impr')}</div></div>
-    <div class="panel chart"><div class="chart-h">📈 Сессии на сайтах (GA4) — <b>${sn.sessions7}</b> за 7д</div>${svgLine(daily.map((x) => x.sessions), 320, 56, '#7fb4f5')}<div class="chart-f">${dRange} · пик за день: ${peak('sessions')}</div></div>
+    <div class="panel chart"><div class="chart-h">📊 Показы в поиске по дням — всего <b>${sn.impressions28}</b> за 28д · пик/день ${peak('impr')}</div>${vbars(daily, 'impr', '#4ade80')}</div>
+    <div class="panel chart"><div class="chart-h">📊 Сессии по дням (GA4) — <b>${sn.sessions7}</b> за 7д · пик/день ${peak('sessions')}</div>${vbars(daily, 'sessions', '#7fb4f5')}</div>
     <div class="panel chart"><div class="chart-h">📊 Клики из поиска по сайтам (28д)</div>${svgBars(seoSites.map((s) => ({ label: (FLAG[s.key] || '') + ' ' + esc(s.name), value: s.seo.gsc.clicks28 || 0 })), '#4ade80')}</div>
     <div class="panel chart"><div class="chart-h">📊 Сессии по сайтам (28д)</div>${svgBars(seoSites.map((s) => ({ label: (FLAG[s.key] || '') + ' ' + esc(s.name), value: s.seo.ga4.sessions28 || 0 })), '#7fb4f5')}</div>
     <div class="panel chart" style="grid-column:1/-1"><div class="chart-h">🌍 Доля Tier-1 трафика (дорогой западный) по сайтам — <span style="color:#4ade80">зелёный ≥40%</span> · <span style="color:#fbbf24">жёлтый 20–40%</span> · <span style="color:#f87171">красный &lt;20%</span></div><div class="bars">${tier1Bars}</div></div>
@@ -205,6 +211,10 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
 .barfill{display:block;height:100%;border-radius:6px}
 .barval{width:44px;flex:none;text-align:right;color:var(--soft);font-variant-numeric:tabular-nums}
 .chart-f{font-size:11px;color:var(--muted);margin-top:7px}
+.vbars{display:flex;align-items:flex-end;gap:2px;height:62px}
+.vbar{flex:1;min-height:2px;border-radius:2px 2px 0 0;cursor:default}
+.vbar:hover{opacity:.65}
+.vbars-x{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:5px}
 .hash{color:var(--soft);font-family:ui-monospace,Consolas,monospace;font-size:12px}
 .foot{margin-top:22px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .legend span{margin-right:16px}
