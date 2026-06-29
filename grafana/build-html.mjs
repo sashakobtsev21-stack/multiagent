@@ -25,10 +25,11 @@ const fmt = (iso) => {
 
 const stat = (n, l, cls) => `<div class="stat"><div class="n ${cls}">${n}</div><div class="l">${l}</div></div>`;
 
+const totalArticles = d.sites.reduce((a, s) => a + (s.articlesTotal || 0), 0);
 const summary = `<div class="summary">
   ${stat(`${(d.seoNetwork && d.seoNetwork.clicks28) || 0}`, 'Клики из поиска (28д)', 'green')}
   ${stat(`${d.summary.ciGreen} / ${d.summary.total}`, 'CI зелёные', d.summary.ciGreen === d.summary.total ? 'green' : 'red')}
-  ${stat(`${d.summary.publishedToday}`, 'Опубликовано сегодня (статей)', 'green')}
+  ${stat(`${totalArticles}`, 'Всего статей в сети', '')}
   ${stat(`${d.summary.pendingTomorrow}`, 'На завтра написать', d.summary.pendingTomorrow ? 'amber' : 'green')}
 </div>`;
 
@@ -71,12 +72,6 @@ const siteRows = d.sites.map((s) => {
   </tr>`;
 }).join('');
 
-const pubToday = d.sites.flatMap((s) => (s.publishedToday || []).map((p) => ({ ...p, key: s.key })));
-const pubTodayHtml = pubToday.length ? `
-  <h2>Опубликовано сегодня (${pubToday.length})</h2>
-  <div class="panel" style="padding:6px 16px">
-    ${pubToday.map((p) => `<div style="padding:8px 0;border-top:1px solid var(--line2)"><span class="badge ${p.isNews ? 'bn' : 'bg'}" style="margin-right:9px">${p.isNews ? '📰 новость' : '📄 статья'}</span><a href="${p.url}" target="_blank" rel="noopener" style="color:#7fb4f5;text-decoration:none">${FLAG[p.key] || ''} ${esc(p.title)}</a></div>`).join('')}
-  </div>` : '';
 
 const commitRows = [...(d.commits || [])].sort((a, b) => new Date(b.time) - new Date(a.time)).slice(0, 16)
   .map((c) => {
@@ -149,24 +144,6 @@ const tier1Bars = seoSites.map((s) => {
   const p = s.seo.ga4.tier1Pct || 0;
   return `<div class="barrow"><span class="barlbl">${FLAG[s.key] || ''} ${esc(s.name)}</span><span class="bartrack"><span class="barfill" style="width:${p}%;background:${t1color(p)}"></span></span><span class="barval">${p}%</span></div>`;
 }).join('');
-// --- динамика сети (рост контента по дням) — из publishedAt, не зависит от GSC/GA ---
-const cd = d.contentDelta || {};
-const hist = d.history || [];
-const wow = (cd.last7 || 0) - (cd.prev7 || 0);
-const wowStr = (wow >= 0 ? '+' : '') + wow;
-const histPub = hist.slice(-21);
-const dynamicsSection = hist.length ? `
-  <h2>Динамика сети — рост контента</h2>
-  <div class="summary">
-    ${stat('+' + (cd.today || 0), 'Опубликовано сегодня', 'green')}
-    ${stat('+' + (cd.last7 || 0), 'Вышло за 7 дней', 'green')}
-    ${stat(wowStr, '7 дней vs прошлые 7', wow >= 0 ? 'green' : 'amber')}
-    ${stat(cd.totalDated || 0, 'Всего статей в сети', '')}
-  </div>
-  <div class="charts">
-    <div class="panel chart"><div class="chart-h">📈 Рост сети — всего статей накопительно (30 дней) · сейчас <b>${cd.totalDated || 0}</b></div>${svgLine(hist.map((h) => h.cumulative), 600, 74, '#7fb4f5')}<div class="vbars-x"><span>${hist.length ? dd(hist[0].date) : ''}</span><span>${hist.length ? dd(hist[hist.length - 1].date) : ''}</span></div></div>
-    <div class="panel chart"><div class="chart-h">📊 Опубликовано по дням (21 день) · пик ${Math.max(0, ...histPub.map((h) => h.published))}/день</div>${vbars(histPub, 'published', '#4ade80')}</div>
-  </div>` : '';
 
 const chartsSection = sn ? `
   <h2>Графики</h2>
@@ -199,17 +176,12 @@ const guide = `
       <h4>Плитки сверху</h4>
       <p><b>Клики из поиска (28д)</b> — сколько раз за 28 дней люди кликнули на сайты в результатах Google и зашли.</p>
       <p><b>CI зелёные</b> — у скольких из 5 сайтов последняя автосборка прошла без ошибок. Зелёная — всё ок; краснеет — что-то сломалось.</p>
-      <p><b>Опубликовано сегодня</b> — сколько новых статей вышло за сегодня.</p>
+      <p><b>Всего статей в сети</b> — суммарно опубликованных статей по всем 5 сайтам (= сумма колонки «Статьи · разделы»). Считается коллекция статей (включая города-статьи и новости); маршруты/итинерари — отдельно, в это число не входят.</p>
       <p><b>На завтра написать</b> — сколько статей запланировано на завтра по календарю.</p>
       <h4>Таблица «Сайты»</h4>
       <p><b>CI</b> — статус последней автосборки/деплоя сайта: <b style="color:#4ade80">✓ ок</b> — собралось и выложилось · <b style="color:#fbbf24">⏳ деплой</b> — идёт сборка прямо сейчас (точка мигает, статьи появятся ссылками через 1–2 мин) · <b style="color:#f87171">✕ упал</b> — сборка со сбоем.</p>
       <p><b>Статьи · разделы</b> — всего статей на сайте, с разбивкой по разделам.</p>
-      <p><b>Вчера / Сегодня / Завтра / Послезавтра</b> — план по дням: <b>✓</b> = опубликовано (кликабельно), <b>○</b> = ещё к написанию.</p>
-      <h4>Динамика сети — рост контента</h4>
-      <p><b>Опубликовано сегодня / за 7 дней</b> — сколько новых статей вышло по всей сети (из даты публикации каждой статьи).</p>
-      <p><b>7 дней vs прошлые 7</b> — ускоряемся или замедляемся: зелёный плюс = на этой неделе вышло больше, чем на прошлой.</p>
-      <p><b>Рост сети (линия)</b> — общее число статей нарастающим итогом за 30 дней (кривая вверх = сеть растёт).</p>
-      <p><b>Опубликовано по дням (столбики)</b> — сколько статей выходило каждый день за 3 недели.</p>
+      <p><b>Вчера / Сегодня / Завтра / Послезавтра</b> — план по дням: <b>✓</b> = опубликовано (кликабельно), <b>○</b> = ещё к написанию. Будни — по 3 темы/день на EN-сайтах (Грузия — 1/день).</p>
       <h4>Последние коммиты</h4>
       <p>Список последних изменений на сайтах (что и когда). <b>Кликни по строке</b> — откроется сам коммит на GitHub.</p>
     </div>
@@ -344,7 +316,6 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
       <tbody>${siteRows}</tbody>
     </table>
   </div>
-  ${dynamicsSection}
   ${seoSection}
   ${indexSection}
   ${chartsSection}
@@ -356,7 +327,6 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
       <tbody>${commitRows}</tbody>
     </table>
   </div>
-  ${pubTodayHtml}
   ${guide}
   <div class="foot">
     <div class="legend"><span><span class="ok">✓</span> опубликовано / ок</span><span><span class="todo">○</span> к написанию</span></div>
