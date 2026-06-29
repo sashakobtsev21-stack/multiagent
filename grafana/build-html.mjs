@@ -26,8 +26,8 @@ const fmt = (iso) => {
 const stat = (n, l, cls) => `<div class="stat"><div class="n ${cls}">${n}</div><div class="l">${l}</div></div>`;
 
 const summary = `<div class="summary">
-  ${stat(`${d.summary.deployedToday} / ${d.summary.total}`, 'Задеплоено сегодня', 'green')}
-  ${stat(`${d.summary.ciGreen} / ${d.summary.total}`, 'CI зелёные', 'green')}
+  ${stat(`${(d.seoNetwork && d.seoNetwork.clicks28) || 0}`, 'Клики из поиска (28д)', 'green')}
+  ${stat(`${d.summary.ciGreen} / ${d.summary.total}`, 'CI зелёные', d.summary.ciGreen === d.summary.total ? 'green' : 'red')}
   ${stat(`${d.summary.publishedToday}`, 'Опубликовано сегодня (статей)', 'green')}
   ${stat(`${d.summary.pendingTomorrow}`, 'На завтра написать', d.summary.pendingTomorrow ? 'amber' : 'green')}
 </div>`;
@@ -111,6 +111,31 @@ const seoSection = sn ? `
     </table>
   </div>` : '';
 
+// --- мини-графики: inline SVG (тренды) + CSS-бары (сравнение). Без внешних библиотек — работает офлайн ---
+const svgLine = (pts, w, h, color) => {
+  if (!pts.length) return '<div class="muted" style="padding:14px">нет данных</div>';
+  const max = Math.max(1, ...pts), n = pts.length;
+  const X = (i) => (n <= 1 ? w / 2 : (i / (n - 1)) * (w - 6) + 3);
+  const Y = (v) => h - 3 - (v / max) * (h - 6);
+  const line = pts.map((v, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+  const area = `M${X(0).toFixed(1)},${(h - 3).toFixed(1)} ` + pts.map((v, i) => `L${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ') + ` L${X(n - 1).toFixed(1)},${(h - 3).toFixed(1)} Z`;
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" height="${h}" preserveAspectRatio="none"><path d="${area}" fill="${color}" opacity=".13"/><path d="${line}" fill="none" stroke="${color}" stroke-width="1.7" vector-effect="non-scaling-stroke"/></svg>`;
+};
+const svgBars = (items, color) => `<div class="bars">${items.map((i) => {
+  const max = Math.max(1, ...items.map((x) => x.value));
+  return `<div class="barrow"><span class="barlbl">${i.label}</span><span class="bartrack"><span class="barfill" style="width:${(i.value / max * 100).toFixed(0)}%;background:${color}"></span></span><span class="barval">${i.value}</span></div>`;
+}).join('')}</div>`;
+const seoSites = d.sites.filter((s) => s.seo);
+const daily = (sn && sn.daily) || [];
+const chartsSection = sn ? `
+  <h2>Графики</h2>
+  <div class="charts">
+    <div class="panel chart"><div class="chart-h">Показы в поиске · ${daily.length} дн · всего <b>${sn.impressions28}</b></div>${svgLine(daily.map((x) => x.impr), 320, 64, '#4ade80')}</div>
+    <div class="panel chart"><div class="chart-h">Сессии (GA4) · ${daily.length} дн · <b>${sn.sessions7}</b> за 7д</div>${svgLine(daily.map((x) => x.sessions), 320, 64, '#7fb4f5')}</div>
+    <div class="panel chart"><div class="chart-h">Клики из поиска по сайтам (28д)</div>${svgBars(seoSites.map((s) => ({ label: (FLAG[s.key] || '') + ' ' + esc(s.name), value: s.seo.gsc.clicks28 || 0 })), '#4ade80')}</div>
+    <div class="panel chart"><div class="chart-h">Сессии по сайтам (28д)</div>${svgBars(seoSites.map((s) => ({ label: (FLAG[s.key] || '') + ' ' + esc(s.name), value: s.seo.ga4.sessions28 || 0 })), '#7fb4f5')}</div>
+  </div>` : '';
+
 const html = `<!doctype html>
 <html lang="ru">
 <head>
@@ -159,6 +184,17 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
 .muted{color:var(--muted)}
 .artn{font-size:20px;font-weight:700}
 .artbreak{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+.charts{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-bottom:10px}
+@media(max-width:720px){.charts{grid-template-columns:1fr}}
+.chart{padding:13px 15px}
+.chart-h{font-size:12.5px;color:var(--muted);margin-bottom:9px}
+.chart-h b{color:var(--ink);font-size:14px}
+.bars{display:flex;flex-direction:column;gap:7px}
+.barrow{display:flex;align-items:center;gap:9px;font-size:12.5px}
+.barlbl{width:128px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bartrack{flex:1;height:9px;background:var(--line2);border-radius:6px;overflow:hidden}
+.barfill{display:block;height:100%;border-radius:6px}
+.barval{width:44px;flex:none;text-align:right;color:var(--soft);font-variant-numeric:tabular-nums}
 .hash{color:var(--soft);font-family:ui-monospace,Consolas,monospace;font-size:12px}
 .foot{margin-top:22px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .legend span{margin-right:16px}
@@ -186,6 +222,7 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
     </table>
   </div>
   ${seoSection}
+  ${chartsSection}
   <h2>Последние коммиты</h2>
   <div class="panel">
     <table>

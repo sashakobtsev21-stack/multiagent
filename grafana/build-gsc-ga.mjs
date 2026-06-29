@@ -71,6 +71,8 @@ const ga4 = (propId, body) =>
 
 const out = { generatedAt: new Date().toISOString(), sites: {}, network: { clicks28: 0, impressions28: 0, sessions7: 0, users28: 0 } };
 const start28 = isoAgo(28), end = isoAgo(1);
+const daily = {}; // дата → {clicks, impr, sessions} (сумма по сети, для графиков-трендов)
+const ga4date = (s) => s.slice(0, 4) + '-' + s.slice(4, 6) + '-' + s.slice(6, 8);
 
 for (const [key, s] of Object.entries(cfg.sites || {})) {
   const site = { ga4: {}, gsc: {} };
@@ -90,6 +92,8 @@ for (const [key, s] of Object.entries(cfg.sites || {})) {
     let submitted = 0, indexed = 0;
     for (const m of sm.sitemap || []) for (const c of m.contents || []) { submitted += +(c.submitted || 0); indexed += +(c.indexed || 0); }
     site.gsc.sitemap = { count: (sm.sitemap || []).length, submitted, indexed };
+    const gd = await gsc(siteUrl, { startDate: start28, endDate: end, dimensions: ['date'], rowLimit: 100 });
+    for (const r of gd.rows || []) { const k = r.keys[0]; daily[k] = daily[k] || { clicks: 0, impr: 0, sessions: 0 }; daily[k].clicks += r.clicks; daily[k].impr += r.impressions; }
   } catch (e) { site.gsc.error = String(e).slice(0, 120); }
 
   try {
@@ -106,6 +110,8 @@ for (const [key, s] of Object.entries(cfg.sites || {})) {
     for (const x of co.rows || []) { const v = +x.metricValues[0].value; totalS += v; if (TIER1.has(x.dimensionValues[0].value)) tier1 += v; }
     site.ga4.tier1Pct = totalS ? Math.round((tier1 / totalS) * 100) : 0;
     site.ga4.topCountries = (co.rows || []).slice(0, 5).map((x) => ({ c: x.dimensionValues[0].value, sessions: +x.metricValues[0].value }));
+    const ad = await ga4(s.ga4, { dateRanges: [{ startDate: '28daysAgo', endDate: 'today' }], dimensions: [{ name: 'date' }], metrics: [{ name: 'sessions' }], limit: 40 });
+    for (const r of ad.rows || []) { const k = ga4date(r.dimensionValues[0].value); daily[k] = daily[k] || { clicks: 0, impr: 0, sessions: 0 }; daily[k].sessions += +r.metricValues[0].value; }
   } catch (e) { site.ga4.error = String(e).slice(0, 120); }
 
   out.sites[key] = site;
@@ -115,6 +121,7 @@ for (const [key, s] of Object.entries(cfg.sites || {})) {
   out.network.users28 += site.ga4.users28 || 0;
 }
 
+out.network.daily = Object.keys(daily).sort().map((d) => ({ date: d, clicks: daily[d].clicks, impr: daily[d].impr, sessions: daily[d].sessions }));
 fs.mkdirSync(path.dirname(outFile), { recursive: true });
 fs.writeFileSync(outFile, JSON.stringify(out, null, 2), 'utf8');
 console.log('gsc-ga.json: сеть — клики', out.network.clicks28, '· показы', out.network.impressions28, '· сессий(7д)', out.network.sessions7, '· пользоват.(28д)', out.network.users28);
