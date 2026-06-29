@@ -249,7 +249,15 @@ const summary = {
   pendingTomorrow: sites.reduce((a, s) => a + (s.tomorrowItems || []).filter((i) => !i.done && i.type === 'article').length, 0),
 };
 
-const out = { generatedAt: now.toISOString(), yesterday, today, tomorrow, dayAfter, summary, sites, runs: runsFlat, commits: commitsFlat };
+// --- SEO/трафик из gsc-ga.json (его готовит build-gsc-ga.mjs), если файл есть ---
+let seoNetwork = null;
+try {
+  const sg = JSON.parse(fs.readFileSync(path.join(__dirname, 'shared', 'gsc-ga.json'), 'utf8'));
+  seoNetwork = { ...sg.network, generatedAt: sg.generatedAt };
+  for (const s of sites) if (sg.sites && sg.sites[s.key]) s.seo = sg.sites[s.key];
+} catch {}
+
+const out = { generatedAt: now.toISOString(), yesterday, today, tomorrow, dayAfter, summary, seoNetwork, sites, runs: runsFlat, commits: commitsFlat };
 
 const outDir = path.join(__dirname, 'shared');
 fs.mkdirSync(outDir, { recursive: true });

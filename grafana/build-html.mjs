@@ -79,6 +79,38 @@ const pubTodayHtml = pubToday.length ? `
 const commitRows = [...(d.commits || [])].sort((a, b) => new Date(b.time) - new Date(a.time)).slice(0, 16)
   .map((c) => `<tr><td class="muted nowrap">${fmt(c.time)}</td><td class="nowrap">${FLAG[c.site] || ''} ${esc(c.name)}</td><td><span class="hash">${esc(c.hash)}</span> ${esc(c.subject)}</td></tr>`).join('');
 
+// --- SEO/трафик (GSC + GA4), если есть seoNetwork ---
+const seoRows = d.sites.filter((s) => s.seo).map((s) => {
+  const g = s.seo.gsc || {}, a = s.seo.ga4 || {};
+  const tq = g.topQueries && g.topQueries[0] ? g.topQueries[0].q : '—';
+  const t1 = a.tier1Pct || 0;
+  return `<tr>
+    <td class="nm">${FLAG[s.key] || ''} ${esc(s.name)}</td>
+    <td><b>${g.clicks28 ?? 0}</b></td>
+    <td class="muted">${g.impressions28 ?? 0}</td>
+    <td>${g.position28 ?? '—'}</td>
+    <td>${a.sessions28 ?? 0}</td>
+    <td class="${t1 >= 40 ? 'green' : ''}">${t1}%</td>
+    <td class="muted">${esc(tq)}</td>
+  </tr>`;
+}).join('');
+const sn = d.seoNetwork;
+const seoSection = sn ? `
+  <h2>Трафик и индексация · Google (GSC + GA4)</h2>
+  <div class="summary">
+    ${stat(sn.clicks28 ?? 0, 'Клики из поиска (28д)', 'green')}
+    ${stat(sn.impressions28 ?? 0, 'Показы в поиске (28д)', 'green')}
+    ${stat(sn.sessions7 ?? 0, 'Сессии (7 дней)', 'green')}
+    ${stat(sn.users28 ?? 0, 'Пользователи (28д)', 'green')}
+  </div>
+  <div class="panel">
+    <table>
+      <colgroup><col style="width:20%"><col style="width:11%"><col style="width:12%"><col style="width:13%"><col style="width:13%"><col style="width:10%"><col style="width:21%"></colgroup>
+      <thead><tr><th>Сайт</th><th>Клики (GSC)</th><th>Показы</th><th>Ср. позиция</th><th>Сессии (28д)</th><th>Tier-1</th><th>Топ-запрос</th></tr></thead>
+      <tbody>${seoRows}</tbody>
+    </table>
+  </div>` : '';
+
 const html = `<!doctype html>
 <html lang="ru">
 <head>
@@ -153,6 +185,7 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
       <tbody>${siteRows}</tbody>
     </table>
   </div>
+  ${seoSection}
   <h2>Последние коммиты</h2>
   <div class="panel">
     <table>
