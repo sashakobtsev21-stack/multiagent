@@ -151,6 +151,18 @@ const chartsSection = sn ? `
     <div class="panel chart" style="grid-column:1/-1"><div class="chart-h">🌍 Доля Tier-1 трафика (дорогой западный) по сайтам — <span style="color:#4ade80">зелёный ≥40%</span> · <span style="color:#fbbf24">жёлтый 20–40%</span> · <span style="color:#f87171">красный &lt;20%</span></div><div class="bars">${tier1Bars}</div></div>
   </div>` : '';
 
+// --- индексация: страниц в выдаче (proxy) + всего в sitemap ---
+const indexSection = sn ? `
+  <h2>Индексация в Google</h2>
+  <div class="panel">
+    <table>
+      <colgroup><col style="width:34%"><col style="width:33%"><col style="width:33%"></colgroup>
+      <thead><tr><th>Сайт</th><th>Страниц в выдаче (≥1 показ, 28д)</th><th>Всего страниц (в sitemap)</th></tr></thead>
+      <tbody>${seoSites.map((s) => { const g = s.seo.gsc || {}, sm = g.sitemap || {}; return `<tr><td class="nm">${FLAG[s.key] || ''} ${esc(s.name)}</td><td><b>${g.pagesWithImpr ?? 0}</b></td><td class="muted">${sm.submitted ?? 0}</td></tr>`; }).join('')}</tbody>
+    </table>
+  </div>
+  <div class="chart-f" style="margin:7px 2px 0">«В выдаче» = страницы, реально показанные в Google за 28 дн (proxy «работает в индексе»). Точного числа «в индексе» Google через API не отдаёт (поле sitemap.indexed устарело → 0; точная цифра — в интерфейсе GSC, отчёт «Страницы»).</div>` : '';
+
 const html = `<!doctype html>
 <html lang="ru">
 <head>
@@ -244,6 +256,7 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
     </table>
   </div>
   ${seoSection}
+  ${indexSection}
   ${chartsSection}
   <h2>Последние коммиты</h2>
   <div class="panel">
