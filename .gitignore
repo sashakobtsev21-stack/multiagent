@@ -18,6 +18,13 @@ dist/
 grafana/shared/
 grafana/dashboard.html
 
+# --- СЕКРЕТЫ: ключи/токены — НИКОГДА не коммитить ---
+grafana/.gsc-ga-key.json
+grafana/.gsc-ga-config.json
+grafana/.cf-token
+*-key.json
+*.serviceaccount.json
+
 # --- Логи ---
 *.log
 
