@@ -53,13 +53,15 @@ const artsCell = (s) => {
 
 const siteRows = d.sites.map((s) => {
   const ok = s.ci === 'success';
-  const inProg = /progress|queued|requested|waiting|pending|running|in_progress/i.test(s.ci || '');
-  const ci = ok ? '<span class="badge bg">ок</span>'
-    : s.ci === 'failure' ? '<span class="badge br">упал</span>'
-    : inProg ? '<span class="badge bp">⏳ идёт деплой</span>'
+  const fail = s.ci === 'failure';
+  const inProg = !ok && !fail && /progress|queued|requested|waiting|pending|running|in_progress/i.test(s.ci || '');
+  const dotCls = ok ? 'g' : fail ? 'r' : inProg ? 'p' : 'n';
+  const ci = ok ? '<span class="badge bg">✓ ок</span>'
+    : fail ? '<span class="badge br">✕ упал</span>'
+    : inProg ? '<span class="badge bp"><i class="spin"></i>деплой</span>'
     : `<span class="badge bn">${esc(s.ci)}</span>`;
   return `<tr>
-    <td class="nm"><span class="dot ${ok ? 'g' : 'r'}"></span>${FLAG[s.key] || ''} ${esc(s.name)}<div class="langs">${esc(s.langs)}</div></td>
+    <td class="nm"><span class="dot ${dotCls}"></span>${FLAG[s.key] || ''} ${esc(s.name)}<div class="langs">${esc(s.langs)}</div></td>
     <td>${ci}</td>
     <td>${artsCell(s)}</td>
     <td>${slotCell(s.yesterdayItems, s.urlBySlug)}</td>
@@ -147,6 +149,25 @@ const tier1Bars = seoSites.map((s) => {
   const p = s.seo.ga4.tier1Pct || 0;
   return `<div class="barrow"><span class="barlbl">${FLAG[s.key] || ''} ${esc(s.name)}</span><span class="bartrack"><span class="barfill" style="width:${p}%;background:${t1color(p)}"></span></span><span class="barval">${p}%</span></div>`;
 }).join('');
+// --- динамика сети (рост контента по дням) — из publishedAt, не зависит от GSC/GA ---
+const cd = d.contentDelta || {};
+const hist = d.history || [];
+const wow = (cd.last7 || 0) - (cd.prev7 || 0);
+const wowStr = (wow >= 0 ? '+' : '') + wow;
+const histPub = hist.slice(-21);
+const dynamicsSection = hist.length ? `
+  <h2>Динамика сети — рост контента</h2>
+  <div class="summary">
+    ${stat('+' + (cd.today || 0), 'Опубликовано сегодня', 'green')}
+    ${stat('+' + (cd.last7 || 0), 'Вышло за 7 дней', 'green')}
+    ${stat(wowStr, '7 дней vs прошлые 7', wow >= 0 ? 'green' : 'amber')}
+    ${stat(cd.totalDated || 0, 'Всего статей в сети', '')}
+  </div>
+  <div class="charts">
+    <div class="panel chart"><div class="chart-h">📈 Рост сети — всего статей накопительно (30 дней) · сейчас <b>${cd.totalDated || 0}</b></div>${svgLine(hist.map((h) => h.cumulative), 600, 74, '#7fb4f5')}<div class="vbars-x"><span>${hist.length ? dd(hist[0].date) : ''}</span><span>${hist.length ? dd(hist[hist.length - 1].date) : ''}</span></div></div>
+    <div class="panel chart"><div class="chart-h">📊 Опубликовано по дням (21 день) · пик ${Math.max(0, ...histPub.map((h) => h.published))}/день</div>${vbars(histPub, 'published', '#4ade80')}</div>
+  </div>` : '';
+
 const chartsSection = sn ? `
   <h2>Графики</h2>
   <div class="charts">
@@ -181,9 +202,14 @@ const guide = `
       <p><b>Опубликовано сегодня</b> — сколько новых статей вышло за сегодня.</p>
       <p><b>На завтра написать</b> — сколько статей запланировано на завтра по календарю.</p>
       <h4>Таблица «Сайты»</h4>
-      <p><b>CI</b> — статус сборки сайта (ок / упал).</p>
+      <p><b>CI</b> — статус последней автосборки/деплоя сайта: <b style="color:#4ade80">✓ ок</b> — собралось и выложилось · <b style="color:#fbbf24">⏳ деплой</b> — идёт сборка прямо сейчас (точка мигает, статьи появятся ссылками через 1–2 мин) · <b style="color:#f87171">✕ упал</b> — сборка со сбоем.</p>
       <p><b>Статьи · разделы</b> — всего статей на сайте, с разбивкой по разделам.</p>
       <p><b>Вчера / Сегодня / Завтра / Послезавтра</b> — план по дням: <b>✓</b> = опубликовано (кликабельно), <b>○</b> = ещё к написанию.</p>
+      <h4>Динамика сети — рост контента</h4>
+      <p><b>Опубликовано сегодня / за 7 дней</b> — сколько новых статей вышло по всей сети (из даты публикации каждой статьи).</p>
+      <p><b>7 дней vs прошлые 7</b> — ускоряемся или замедляемся: зелёный плюс = на этой неделе вышло больше, чем на прошлой.</p>
+      <p><b>Рост сети (линия)</b> — общее число статей нарастающим итогом за 30 дней (кривая вверх = сеть растёт).</p>
+      <p><b>Опубликовано по дням (столбики)</b> — сколько статей выходило каждый день за 3 недели.</p>
       <h4>Последние коммиты</h4>
       <p>Список последних изменений на сайтах (что и когда). <b>Кликни по строке</b> — откроется сам коммит на GitHub.</p>
     </div>
@@ -246,11 +272,15 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
 .langs{font-size:11px;color:var(--muted);font-weight:400;margin-top:2px}
 .nowrap{white-space:nowrap}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;vertical-align:middle}
-.dot.g{background:var(--green)}.dot.r{background:var(--red)}
-.badge{font-size:12px;font-weight:600;padding:3px 11px;border-radius:999px;white-space:nowrap}
+.dot.g{background:var(--green)}.dot.r{background:var(--red)}.dot.n{background:var(--muted)}
+.dot.p{background:var(--amber);animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(251,191,36,.45)}50%{opacity:.6;box-shadow:0 0 0 5px rgba(251,191,36,0)}}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:3px 11px;border-radius:999px;white-space:nowrap;vertical-align:middle}
 .bg{background:#16261b;color:var(--green)}.br{background:#2a1618;color:var(--red)}.bn{background:#1c2330;color:var(--soft)}
-.bp{background:#2a2410;color:var(--amber);animation:pulse 1.3s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.bp{color:var(--amber);background:linear-gradient(100deg,#251f0d 0%,#46380f 50%,#251f0d 100%);background-size:220% 100%;animation:shimmer 1.5s linear infinite}
+@keyframes shimmer{0%{background-position:140% 0}100%{background-position:-140% 0}}
+.spin{width:9px;height:9px;border:2px solid rgba(251,191,36,.3);border-top-color:var(--amber);border-radius:50%;animation:spin .7s linear infinite;flex:none}
+@keyframes spin{to{transform:rotate(360deg)}}
 .ok{color:var(--green);margin-right:3px}.todo{color:var(--amber);margin-right:3px}
 .slotlist{display:flex;flex-direction:column;gap:6px}
 .slotrow{padding:5px 8px;background:rgba(255,255,255,.022);border:1px solid var(--line2);border-radius:7px;line-height:1.4}
@@ -309,11 +339,12 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
   <h2>Сайты</h2>
   <div class="panel">
     <table>
-      <colgroup><col style="width:12%"><col style="width:6%"><col style="width:18%"><col style="width:16%"><col style="width:16%"><col style="width:16%"><col style="width:16%"></colgroup>
+      <colgroup><col style="width:12%"><col style="width:11%"><col style="width:13%"><col style="width:16%"><col style="width:16%"><col style="width:16%"><col style="width:16%"></colgroup>
       <thead><tr><th>Сайт</th><th>CI</th><th>Статьи · разделы</th><th>Вчера</th><th>Сегодня</th><th>Завтра</th><th>Послезавтра</th></tr></thead>
       <tbody>${siteRows}</tbody>
     </table>
   </div>
+  ${dynamicsSection}
   ${seoSection}
   ${indexSection}
   ${chartsSection}

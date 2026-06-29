@@ -99,8 +99,19 @@ function calendarFor(key, token) {
   const seen = new Set();
   for (const line of lines) {
     if (!/^\s*-\s/.test(line)) continue; // только пункты списка
-    const firstDate = (line.match(/\b\d{2}\.\d{2}\b/) || [])[0];
-    if (firstDate !== token) continue; // пункт = его первая (слотовая) дата
+    // слотовая дата строки. ПРИОРИТЕТ — дата `ОПУБЛИКОВАНО YYYY-MM-DD` (реальная дата
+    // публикации): опубликованная строка часто не имеет префикса `Вт 30.06 —` и при этом
+    // упоминает ДРУГИЕ DD.MM в аннотациях (напр. «слот 01.07 FOLDED сюда») — без приоритета
+    // ISO пункт уезжал бы на чужой день и пропадал с дашборда. Иначе — первая DD.MM в строке;
+    // если и её нет — любая ISO-дата YYYY-MM-DD → DD.MM.
+    let firstDate;
+    const pubIso = line.match(/ОПУБЛИКОВАНО\s+\d{4}-(\d{2})-(\d{2})/i);
+    if (pubIso) firstDate = `${pubIso[2]}.${pubIso[1]}`;
+    else {
+      firstDate = (line.match(/\b\d{2}\.\d{2}\b/) || [])[0];
+      if (!firstDate) { const iso = line.match(/\b\d{4}-(\d{2})-(\d{2})\b/); if (iso) firstDate = `${iso[2]}.${iso[1]}`; }
+    }
+    if (firstDate !== token) continue; // пункт = его слотовая дата
     const hasArticle = /\[(?:Статья|Article|Маршрут)\]/.test(line);
     const isNews = /\/news/.test(line) || line.includes('📰');
     const isMeasure = line.includes('📊') || /Замер/.test(line);
@@ -171,7 +182,7 @@ function countArticles(repo) {
 // --- опубликованное СЕГОДНЯ (ссылки для дашборда) ---
 const DOMAIN = { gruzia: 'georgiaguidebook.com', albania: 'albaniaguidebook.com', montenegro: 'montenegroguidebook.com', croatia: 'croatiaguidebook.com', macedonia: 'macedoniaguidebook.com' };
 function scanArticles(repo, key) {
-  const out = { published: [], urlBySlug: {} };
+  const out = { published: [], urlBySlug: {}, pubs: [] };
   const dom = DOMAIN[key];
   const bySlug = {};
   // статьи И маршруты (у маршрутов свой /routes/-URL; без них ссылки в ячейках пропадают)
@@ -203,6 +214,7 @@ function scanArticles(repo, key) {
     const prefix = lang === 'en' ? '' : '/' + lang;
     const url = `https://${dom}${prefix}/${s.cat}/${s.slug}/`;
     out.urlBySlug[s.slug] = url;
+    if (s.pub) out.pubs.push(s.pub); // дата публикации (для тренда роста сети)
     if (s.pub === todayIso) out.published.push({ title: s.title, url, isNews: s.isNews });
   }
   return out;
@@ -211,6 +223,7 @@ function scanArticles(repo, key) {
 const sites = [];
 const runsFlat = [];
 const commitsFlat = [];
+const allPubs = []; // даты публикаций по всей сети (из publishedAt) — для тренда роста
 
 for (const s of SITES) {
   const d = deployInfo(s.key);
@@ -243,7 +256,32 @@ for (const s of SITES) {
   });
   for (const r of d.runs) runsFlat.push({ site: s.key, name: s.name, ...r });
   for (const c of d.commits) commitsFlat.push({ site: s.key, name: s.name, ...c });
+  for (const p of scan.pubs) allPubs.push(p);
 }
+
+// --- история роста сети по дням (из publishedAt всех статей) ---
+// published[d] = сколько вышло в этот день; cumulative[d] = всего статей на конец дня.
+function buildHistory(pubs, days = 30) {
+  const perDay = {};
+  for (const p of pubs) perDay[p] = (perDay[p] || 0) + 1;
+  const series = [];
+  for (let i = days - 1; i >= 0; i--) {
+    const date = isoDay(new Date(now.getTime() - i * DAY));
+    const published = perDay[date] || 0;
+    const cumulative = pubs.filter((p) => p <= date).length;
+    series.push({ date, published, cumulative });
+  }
+  return series;
+}
+const history = buildHistory(allPubs, 30);
+const sumRange = (n, off = 0) => history.slice(history.length - n - off, history.length - off).reduce((a, x) => a + x.published, 0);
+const contentDelta = {
+  totalDated: allPubs.length,
+  today: sumRange(1),
+  last7: sumRange(7),
+  prev7: sumRange(7, 7),
+  last30: sumRange(30),
+};
 
 const summary = {
   total: SITES.length,
@@ -261,7 +299,7 @@ try {
   for (const s of sites) if (sg.sites && sg.sites[s.key]) s.seo = sg.sites[s.key];
 } catch {}
 
-const out = { generatedAt: now.toISOString(), yesterday, today, tomorrow, dayAfter, summary, seoNetwork, sites, runs: runsFlat, commits: commitsFlat };
+const out = { generatedAt: now.toISOString(), yesterday, today, tomorrow, dayAfter, summary, contentDelta, history, seoNetwork, sites, runs: runsFlat, commits: commitsFlat };
 
 const outDir = path.join(__dirname, 'shared');
 fs.mkdirSync(outDir, { recursive: true });
