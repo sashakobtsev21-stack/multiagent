@@ -134,7 +134,7 @@ const t1color = (p) => (p >= 40 ? '#4ade80' : p >= 20 ? '#fbbf24' : '#f87171');
 // вертикальные столбики по дням (CSS, чёткие; tooltip дата+значение при наведении)
 const vbars = (rows, key, color) => {
   const max = Math.max(1, ...rows.map((r) => r[key]));
-  const cols = rows.map((r) => `<span class="vbar" style="height:${Math.max(2, r[key] / max * 100).toFixed(0)}%;background:${color}" title="${dd(r.date)}: ${r[key]}"></span>`).join('');
+  const cols = rows.map((r) => `<span class="vcol" data-t="${dd(r.date)}" data-v="${r[key]}"><i class="vbar" style="height:${Math.max(2, r[key] / max * 100).toFixed(0)}%;background:${color}"></i></span>`).join('');
   return `<div class="vbars">${cols}</div><div class="vbars-x"><span>${rows.length ? dd(rows[0].date) : ''}</span><span>${rows.length ? dd(rows[rows.length - 1].date) : ''}</span></div>`;
 };
 const tier1Bars = seoSites.map((s) => {
@@ -211,10 +211,12 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
 .barfill{display:block;height:100%;border-radius:6px}
 .barval{width:44px;flex:none;text-align:right;color:var(--soft);font-variant-numeric:tabular-nums}
 .chart-f{font-size:11px;color:var(--muted);margin-top:7px}
-.vbars{display:flex;align-items:flex-end;gap:2px;height:62px}
-.vbar{flex:1;min-height:2px;border-radius:2px 2px 0 0;cursor:default}
-.vbar:hover{opacity:.65}
+.vbars{display:flex;align-items:stretch;gap:2px;height:62px}
+.vcol{flex:1;display:flex;align-items:flex-end;cursor:default}
+.vcol:hover .vbar{opacity:.6}
+.vbar{width:100%;min-height:2px;border-radius:2px 2px 0 0;display:block}
 .vbars-x{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:5px}
+#tt{position:fixed;display:none;background:#0f141c;border:1px solid var(--line);color:var(--ink);font-size:12px;font-weight:600;padding:4px 9px;border-radius:6px;pointer-events:none;z-index:99;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.5)}
 .hash{color:var(--soft);font-family:ui-monospace,Consolas,monospace;font-size:12px}
 .foot{margin-top:22px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .legend span{margin-right:16px}
@@ -257,6 +259,13 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
     <div>${d.sites.length} сайтов · данные ~2 мин + мгновенно после коммита/деплоя · страница 30 сек</div>
   </div>
 </div>
+<div id="tt"></div>
+<script>
+(function(){var tt=document.getElementById('tt');
+document.addEventListener('mouseover',function(e){var c=e.target.closest&&e.target.closest('.vcol');if(c){tt.textContent=c.dataset.t+': '+c.dataset.v;tt.style.display='block';}});
+document.addEventListener('mousemove',function(e){if(tt.style.display==='block'){var x=e.clientX+12,y=e.clientY+12;if(x>window.innerWidth-90){x=e.clientX-90;}tt.style.left=x+'px';tt.style.top=y+'px';}});
+document.addEventListener('mouseout',function(e){if(e.target.closest&&e.target.closest('.vcol')){tt.style.display='none';}});})();
+</script>
 </body>
 </html>`;
 
