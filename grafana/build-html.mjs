@@ -127,6 +127,8 @@ const svgBars = (items, color) => `<div class="bars">${items.map((i) => {
 }).join('')}</div>`;
 const seoSites = d.sites.filter((s) => s.seo);
 const daily = (sn && sn.daily) || [];
+// показы GSC отстают ~2 дня → последние дни нулевые; обрезаем хвост, чтобы график не показывал ложный «обрыв»
+const imprDaily = (() => { const a = daily.slice(); while (a.length > 1 && a[a.length - 1].impr === 0) a.pop(); return a; })();
 const dd = (s) => s.slice(8) + '.' + s.slice(5, 7); // YYYY-MM-DD → DD.MM
 const dRange = daily.length ? `${dd(daily[0].date)} → ${dd(daily[daily.length - 1].date)}` : '';
 const peak = (k) => Math.max(0, ...daily.map((x) => x[k]));
@@ -144,7 +146,7 @@ const tier1Bars = seoSites.map((s) => {
 const chartsSection = sn ? `
   <h2>Графики</h2>
   <div class="charts">
-    <div class="panel chart"><div class="chart-h">📊 Показы в поиске по дням — всего <b>${sn.impressions28}</b> за 28д · пик/день ${peak('impr')}</div>${vbars(daily, 'impr', '#4ade80')}</div>
+    <div class="panel chart"><div class="chart-h">📊 Показы в поиске по дням — всего <b>${sn.impressions28}</b> за 28д · пик/день ${peak('impr')} <span class="muted" style="font-weight:400">· GSC отстаёт ~2 дня</span></div>${vbars(imprDaily, 'impr', '#4ade80')}</div>
     <div class="panel chart"><div class="chart-h">📊 Сессии по дням (GA4) — <b>${sn.sessions7}</b> за 7д · пик/день ${peak('sessions')}</div>${vbars(daily, 'sessions', '#7fb4f5')}</div>
     <div class="panel chart"><div class="chart-h">📊 Клики из поиска по сайтам (28д)</div>${svgBars(seoSites.map((s) => ({ label: (FLAG[s.key] || '') + ' ' + esc(s.name), value: s.seo.gsc.clicks28 || 0 })), '#4ade80')}</div>
     <div class="panel chart"><div class="chart-h">📊 Сессии по сайтам (28д)</div>${svgBars(seoSites.map((s) => ({ label: (FLAG[s.key] || '') + ' ' + esc(s.name), value: s.seo.ga4.sessions28 || 0 })), '#7fb4f5')}</div>
