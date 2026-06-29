@@ -77,7 +77,11 @@ const pubTodayHtml = pubToday.length ? `
   </div>` : '';
 
 const commitRows = [...(d.commits || [])].sort((a, b) => new Date(b.time) - new Date(a.time)).slice(0, 16)
-  .map((c) => `<tr><td class="muted nowrap">${fmt(c.time)}</td><td class="nowrap">${FLAG[c.site] || ''} ${esc(c.name)}</td><td><span class="hash">${esc(c.hash)}</span> ${esc(c.subject)}</td></tr>`).join('');
+  .map((c) => {
+    const inner = `<span class="hash">${esc(c.hash)}</span> ${esc(c.subject)}`;
+    const cell = c.url ? `<a href="${c.url}" target="_blank" rel="noopener" class="commitlink">${inner}</a>` : inner;
+    return `<tr><td class="muted nowrap">${fmt(c.time)}</td><td class="nowrap">${FLAG[c.site] || ''} ${esc(c.name)}</td><td>${cell}</td></tr>`;
+  }).join('');
 
 // --- SEO/трафик (GSC + GA4), если есть seoNetwork ---
 const seoRows = d.sites.filter((s) => s.seo).map((s) => {
@@ -165,6 +169,46 @@ const indexSection = sn ? `
   </div>
   <div class="chart-f" style="margin:7px 2px 0">«В выдаче» = страницы, реально показанные в Google за 28 дн (proxy «работает в индексе»). Точного числа «в индексе» Google через API не отдаёт (поле sitemap.indexed устарело → 0; точная цифра — в интерфейсе GSC, отчёт «Страницы»).</div>` : '';
 
+// --- гайд «для чайников» (разворачиваемый блок внизу) ---
+const guide = `
+<details class="guide">
+  <summary>📖 Гайд: что значит каждый показатель (для чайников)</summary>
+  <div class="guide-body">
+    <div>
+      <h4>Плитки сверху</h4>
+      <p><b>Клики из поиска (28д)</b> — сколько раз за 28 дней люди кликнули на сайты в результатах Google и зашли.</p>
+      <p><b>CI зелёные</b> — у скольких из 5 сайтов последняя автосборка прошла без ошибок. Зелёная — всё ок; краснеет — что-то сломалось.</p>
+      <p><b>Опубликовано сегодня</b> — сколько новых статей вышло за сегодня.</p>
+      <p><b>На завтра написать</b> — сколько статей запланировано на завтра по календарю.</p>
+      <h4>Таблица «Сайты»</h4>
+      <p><b>CI</b> — статус сборки сайта (ок / упал).</p>
+      <p><b>Статьи · разделы</b> — всего статей на сайте, с разбивкой по разделам.</p>
+      <p><b>Вчера / Сегодня / Завтра / Послезавтра</b> — план по дням: <b>✓</b> = опубликовано (кликабельно), <b>○</b> = ещё к написанию.</p>
+      <h4>Последние коммиты</h4>
+      <p>Список последних изменений на сайтах (что и когда). <b>Кликни по строке</b> — откроется сам коммит на GitHub.</p>
+    </div>
+    <div>
+      <h4>Трафик и индексация (данные Google)</h4>
+      <p><b>Клики</b> — переходы из поиска Google (28 дн).</p>
+      <p><b>Показы</b> — сколько раз сайт показался в результатах поиска (увидели ссылку, без клика).</p>
+      <p><b>Ср. позиция</b> — средняя позиция в выдаче. 1 = самый верх; чем меньше число, тем выше.</p>
+      <p><b>Сессии (28д)</b> — визитов на сайт (из Google Analytics). Один визит = одна сессия.</p>
+      <p><b>Tier-1</b> — доля дорогого западного трафика (США / UK / ЕС / Австралия…). Больше = дороже реклама.</p>
+      <p><b>Топ-запрос</b> — по какому запросу сайт чаще всего показывается в Google.</p>
+      <h4>Индексация в Google</h4>
+      <p><b>Страниц в выдаче</b> — сколько страниц реально показывались в Google (≥1 показ за 28 дн).</p>
+      <p><b>Всего страниц (в sitemap)</b> — сколько страниц сайт декларирует Google.</p>
+      <h4>Графики</h4>
+      <p><b>Показы по дням</b> — столбик = показы за день. GSC отстаёт ~2 дня → последние дни пустые (это задержка данных, не падение).</p>
+      <p><b>Сессии по дням</b> — визиты за день (свежие, без задержки).</p>
+      <p><b>Клики / Сессии по сайтам</b> — сравнение сайтов между собой.</p>
+      <p><b>Доля Tier-1</b> — у каждого сайта: 🟢 ≥40% хорошо · 🟡 20–40% · 🔴 &lt;20%.</p>
+      <h4>Воронка (как связаны цифры)</h4>
+      <p>Увидели в поиске (<b>показ</b>) → кликнули (<b>клик</b>) → зашли на сайт (<b>сессия</b>).</p>
+    </div>
+  </div>
+</details>`;
+
 const html = `<!doctype html>
 <html lang="ru">
 <head>
@@ -231,6 +275,19 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
 .vbar{width:100%;min-height:2px;border-radius:2px 2px 0 0;display:block}
 .vbars-x{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:5px}
 #tt{position:fixed;display:none;background:#0f141c;border:1px solid var(--line);color:var(--ink);font-size:12px;font-weight:600;padding:4px 9px;border-radius:6px;pointer-events:none;z-index:99;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+.commitlink{color:inherit;text-decoration:none}
+.commitlink:hover,.commitlink:hover .hash{color:#7fb4f5}
+.commitlink:hover{text-decoration:underline}
+.guide{margin-top:26px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:0 18px}
+.guide summary{cursor:pointer;padding:16px 2px;font-size:14px;font-weight:600;color:var(--ink);list-style:none}
+.guide summary::-webkit-details-marker{display:none}
+.guide summary::before{content:'▸  ';color:var(--muted)}
+.guide[open] summary::before{content:'▾  '}
+.guide-body{display:grid;grid-template-columns:1fr 1fr;gap:0 30px;padding:2px 0 18px;font-size:13px;line-height:1.55}
+@media(max-width:720px){.guide-body{grid-template-columns:1fr}}
+.guide-body h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.3px;color:#7fb4f5;margin:13px 0 3px;font-weight:600}
+.guide-body p{margin:3px 0;color:var(--soft)}
+.guide-body b{color:var(--ink)}
 .hash{color:var(--soft);font-family:ui-monospace,Consolas,monospace;font-size:12px}
 .foot{margin-top:22px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .legend span{margin-right:16px}
@@ -269,6 +326,7 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.018)}
     </table>
   </div>
   ${pubTodayHtml}
+  ${guide}
   <div class="foot">
     <div class="legend"><span><span class="ok">✓</span> опубликовано / ок</span><span><span class="todo">○</span> к написанию</span></div>
     <div>${d.sites.length} сайтов · данные ~2 мин + мгновенно после коммита/деплоя · страница 30 сек</div>

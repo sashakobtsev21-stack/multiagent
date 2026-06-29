@@ -28,6 +28,9 @@ const sh = (cmd, args, cwd) => {
   }
 };
 
+// web-база GitHub из remote-URL (для кликабельных ссылок на коммиты)
+const repoWeb = (remote) => { const m = (remote || '').match(/github\.com[:/]([^/]+)\/([^/.]+)/); return m ? `https://github.com/${m[1]}/${m[2]}` : ''; };
+
 const pad = (n) => String(n).padStart(2, '0');
 const ddmm = (d) => `${pad(d.getDate())}.${pad(d.getMonth() + 1)}`;
 const isoDay = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
@@ -60,9 +63,10 @@ function deployInfo(key) {
   const recentFailures = ciRuns.slice(0, 6).filter((r) => r.conclusion === 'failure').length;
   const newsRun = runs.find((r) => /news/i.test(r.workflowName)) || null;
 
+  const web = repoWeb(sh('git', ['-C', repo, 'remote', 'get-url', 'origin']));
   const logRaw = sh('git', ['-C', repo, 'log', '-6', '--format=%h|%cI|%s']);
   const commits = logRaw
-    ? logRaw.split('\n').filter(Boolean).map((l) => { const [h, t, ...r] = l.split('|'); return { hash: h, time: t, subject: r.join('|') }; })
+    ? logRaw.split('\n').filter(Boolean).map((l) => { const [h, t, ...r] = l.split('|'); return { hash: h, time: t, subject: r.join('|'), url: web ? `${web}/commit/${h}` : '' }; })
     : [];
 
   return {
