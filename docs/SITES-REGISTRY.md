@@ -47,7 +47,7 @@
 |---|---|---|---|
 | Репо (public) | bosnia-site | armenia-site | serbia-site |
 | Домен (кандидат, НЕ куплен) | bosniaguidebook.com | armeniaguidebook.com | serbiaguidebook.com |
-| Языки | en (навсегда) | en (+ ru-релокация фаст-фоллоу; ru-движок дормант) | en (+ ru-релокация фаст-фоллоу; ru-движок дормант) |
+| Языки | en (навсегда) | **en + ru — полный билингв** (весь сайт; решение владельца 2026-07-01; сейчас технически EN-only, ru-движок дормант → раздормантить при наполнении) | en (+ ru-релокация фаст-фоллоу; ru-движок дормант) |
 | Донор скаффолда | albania | montenegro | montenegro |
 | Старт-корпус (план) | ~38 тем | ~38 тем | ~40 тем |
 | Статус | tech-ready ✅ full `qa`=GO, privacy-page, 0 контента | tech-ready ✅ (+убран висячий /rss.xml) | tech-ready ✅ (+доделана en-only миграция) |
