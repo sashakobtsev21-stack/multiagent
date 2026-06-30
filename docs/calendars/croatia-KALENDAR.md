@@ -146,7 +146,7 @@
 
 ## Опубликовано вне плана (сироты — учтены, не плодить дубли)
 - [x] [Статья] Croatia Travel Insurance: Do You Need It? (2026) · /insurance/croatia-travel-insurance/ · `category=insurance` · ✅ ОПУБЛИКОВАНО (slug `croatia-travel-insurance`). **УСИЛЕНО 2026-06-28** под GSC-спрос `croatia travel insurance` (100+ показов, поз. 64–76; хаб /insurance/ 187 показов): точный запрос в title/H1/первом H2/meta/desc; +2 раздела (типы полисов — сравнение; диапазоны цен с «check current», без выдуманных сумм); объём en ~1.9k / ru ~1.65k слов (паритет, числа сверены); **сиротство снято** — добавлены обратные deep-ссылки из croatia-digital-nomad-visa, croatia-trip-cost, renting-a-car-in-croatia (en+ru) + уже было из cost-of-living-nomads; updatedAt=2026-06-28; YMYL-дисклеймер на месте. Покрывает insurance-интент. Отдельную страховую статью НЕ дублировать.
-- [x] [Статья] Split Nightlife: Bars, Clubs & Going Out · /split-nightlife/ · `category=entertainment` · ✅ ОПУБЛИКОВАНО (slug `split-nightlife`). Supporting к split-travel-guide; Ultra/party-интент. Не дублировать.
+- [x] [Статья] Split Nightlife: Bars, Clubs & Going Out · /split-nightlife/ · `category=entertainment` · ✅ ОПУБЛИКОВАНО 2026-06-23 (slug `split-nightlife`). Supporting к split-travel-guide; Ultra/party-интент. Не дублировать.
 
 ---
 

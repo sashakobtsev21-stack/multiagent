@@ -133,7 +133,7 @@
 
 ---
 ## Опубликовано вне дневного плана (сироты — учтены, чтобы /work не плодил дубли)
-- ✅ [x] **skopje-nightlife** · [Статья] Skopje Nightlife · **/entertainment/skopje-nightlife/** · категория entertainment · ОПУБЛИКОВАНО (перелинк → Things to Do in Skopje, → Skopje Old Bazaar)
+- ✅ [x] **skopje-nightlife** · [Статья] Skopje Nightlife · **/entertainment/skopje-nightlife/** · категория entertainment · ОПУБЛИКОВАНО 2026-06-23 (перелинк → Things to Do in Skopje, → Skopje Old Bazaar)
 - ✅ [x] **destan** · [Место/ресторан] Destan · **/food/destan/** · коллекция restaurants · city: Skopje · `cuisineKey:grill` · ОПУБЛИКОВАНО (родитель-хаб: Macedonian Food)
 - ✅ [x] **skopski-merak** · [Место/ресторан] Skopski Merak · **/food/skopski-merak/** · коллекция restaurants · city: Skopje · `cuisineKey:macedonian` · ОПУБЛИКОВАНО (родитель-хаб: Macedonian Food)
 - ✅ [x] **vinoteka-temov** · [Место/ресторан] Vinoteka Temov · **/food/vinoteka-temov/** · коллекция restaurants · city: Skopje · `cuisineKey:wine` · ОПУБЛИКОВАНО (родитель-хаб: Macedonian Food + NM Wine/Tikves)
