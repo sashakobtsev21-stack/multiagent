@@ -1,0 +1,26 @@
+# Единые окончания строк: LF везде — в репозитории И в рабочем дереве.
+# eol=lf перекрывает core.autocrlf на Windows, устраняя CRLF↔LF churn,
+# предупреждения «LF will be replaced by CRLF» и ложные «modified»,
+# которые блокировали git pull --rebase.
+* text=auto eol=lf
+
+# Бинарные ассеты — никогда не трогать окончания строк.
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.webp   binary
+*.avif   binary
+*.ico    binary
+*.bmp    binary
+*.woff   binary
+*.woff2  binary
+*.ttf    binary
+*.eot    binary
+*.otf    binary
+*.pdf    binary
+*.zip    binary
+*.gz     binary
+*.jar    binary
+*.mp4    binary
+*.webm   binary
