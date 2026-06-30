@@ -111,6 +111,10 @@ function calendarFor(key, token) {
       firstDate = (line.match(/\b\d{2}\.\d{2}\b/) || [])[0];
       if (!firstDate) { const iso = line.match(/\b\d{4}-(\d{2})-(\d{2})\b/); if (iso) firstDate = `${iso[2]}.${iso[1]}`; }
     }
+    // #5 hardening: СЛОТ (статус ○/[x]/✅/ОПУБЛИКОВАНО или день недели) с задачей, но без распознанной даты → молча выпадет. Бэклог-идеи (без статуса/дня) не трогаем.
+    const looksTask = /\[(?:Статья|Article|Маршрут)\]/.test(line) || /\/news/.test(line) || line.includes('📰') || line.includes('📊') || /Замер/.test(line);
+    const looksSlot = /[○✅✔]|\[[ xX]\]|ОПУБЛИКОВАНО|\b(?:Пн|Вт|Ср|Чт|Пт|Сб|Вс)\b/.test(line);
+    if (looksTask && looksSlot && !firstDate) console.warn(`[calendar:${key}] слот-задача без распознанной даты, выпадет с дашборда: ${line.trim().slice(0, 80)}`);
     if (firstDate !== token) continue; // пункт = его слотовая дата
     const hasArticle = /\[(?:Статья|Article|Маршрут)\]/.test(line);
     const isNews = /\/news/.test(line) || line.includes('📰');
@@ -133,6 +137,8 @@ function calendarFor(key, token) {
     }
     const cat = (line.match(/категори[яи]\s+\*{0,2}([a-zA-Zа-яёА-ЯЁ-]+)/) || [])[1] || '';
     title = title.replace(/\s+$/, '').slice(0, 60);
+    // #5 hardening: опубликованная статья без `ОПУБЛИКОВАНО YYYY-MM-DD` → дата может быть плановым слотом (future-date смелл)
+    if (type === 'article' && done && !/ОПУБЛИКОВАНО\s+\d{4}-\d{2}-\d{2}/i.test(line)) console.warn(`[calendar:${key}] опубликованная статья без ISO-даты (дата может быть плановым слотом): ${title}`);
     let slug = '';
     const pathM = line.match(/\/((?:[a-z0-9-]+\/)*[a-z0-9-]+)\//);
     if (pathM) { const p = pathM[1].split('/'); slug = p[p.length - 1]; }
