@@ -16,7 +16,7 @@ node "${refresh}" >/dev/null 2>&1
 exit 0
 `;
 
-const repoRel = ['', 'sites/gruzia-site', 'sites/albania-site', 'sites/montenegro-site', 'sites/croatia-site', 'sites/macedonia-site'];
+const repoRel = ['', 'sites/gruzia-site', 'sites/albania-site', 'sites/montenegro-site', 'sites/croatia-site', 'sites/macedonia-site', 'sites/bosnia-site', 'sites/armenia-site', 'sites/serbia-site'];
 
 let n = 0;
 for (const rel of repoRel) {

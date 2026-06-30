@@ -18,6 +18,9 @@ const SITES = [
   { key: 'montenegro', name: 'Черногория', langs: 'en/ru' },
   { key: 'croatia', name: 'Хорватия', langs: 'en/ru' },
   { key: 'macedonia', name: 'Македония', langs: 'en' },
+  { key: 'bosnia', name: 'Босния', langs: 'en' },
+  { key: 'armenia', name: 'Армения', langs: 'en' },
+  { key: 'serbia', name: 'Сербия', langs: 'en' },
 ];
 
 const sh = (cmd, args, cwd) => {
@@ -186,7 +189,7 @@ function countArticles(repo) {
 }
 
 // --- опубликованное СЕГОДНЯ (ссылки для дашборда) ---
-const DOMAIN = { gruzia: 'georgiaguidebook.com', albania: 'albaniaguidebook.com', montenegro: 'montenegroguidebook.com', croatia: 'croatiaguidebook.com', macedonia: 'macedoniaguidebook.com' };
+const DOMAIN = { gruzia: 'georgiaguidebook.com', albania: 'albaniaguidebook.com', montenegro: 'montenegroguidebook.com', croatia: 'croatiaguidebook.com', macedonia: 'macedoniaguidebook.com', bosnia: 'bosniaguidebook.com', armenia: 'armeniaguidebook.com', serbia: 'serbiaguidebook.com' };
 function scanArticles(repo, key) {
   const out = { published: [], urlBySlug: {}, pubs: [] };
   const dom = DOMAIN[key];

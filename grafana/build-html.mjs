@@ -15,7 +15,7 @@ if (!fs.existsSync(dataFile)) {
 }
 const d = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
 
-const FLAG = { gruzia: '🇬🇪', albania: '🇦🇱', montenegro: '🇲🇪', croatia: '🇭🇷', macedonia: '🇲🇰' };
+const FLAG = { gruzia: '🇬🇪', albania: '🇦🇱', montenegro: '🇲🇪', croatia: '🇭🇷', macedonia: '🇲🇰', bosnia: '🇧🇦', armenia: '🇦🇲', serbia: '🇷🇸' };
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const fmt = (iso) => {
   const t = new Date(iso);
